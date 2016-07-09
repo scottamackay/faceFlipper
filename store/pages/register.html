@@ -1,16 +1,31 @@
 <div class="content" ng-controller="registerController as register">
   <h2 class="title2">Sign up</h2>
   <!-- <p>Me got forms too:</p> -->
+  <form ng-submit="register.register();">
+    <div class="box-white">
+      <p>
+        <label for="field1">Firstname</label>
+        <input id="field1" ng-model="register.user.firstname" type="text" />
+      </p>
+      <p>
+        <label for="field2">Lastname</label>
+        <input id="field2" ng-model="register.user.lastname" type="text" />
+      </p>
+      <p>
+        <label for="field3">Email</label>
+        <input id="field3" ng-model="register.user.email" type="text" />
+      </p>
+      <p>
+        <label for="field4">Password</label>
+        <input id="field4" ng-model="register.user.password" type="password" />
+      </p>
+    </div>
 
-  <div class="box-white">
-    <p><label for="field1">Firstname</label><input id="field1" ng-model="register.firstname" type="text"/></p>
-    <p><label for="field2">Lastname</label><input id="field2" ng-model="register.lastname" type="text"/></p>
-    <p><label for="field3">Email</label><input id="field3" ng-model="register.email" type="text"/></p>
-    <p><label for="field4">Password</label><input id="field4" ng-model="register.password" type="password"/></p>
-  </div>
+    <p>
+      <input type="submit" class="button" value="Sign up" />
+    </p>
+    <p class="note">Do you already have an account? <a ui-sref='login'>Sign in</a></p>
+  </form>
 
-  <p><input type="submit" class="button" value="Sign up" /></p>
-  <p class="note">Back to <a ui-sref='login'>Sign in</a></p>
-
-
-</div><!--content-->
+</div>
+<!--content-->

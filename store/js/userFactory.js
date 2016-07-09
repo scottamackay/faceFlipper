@@ -1,7 +1,7 @@
 // create the module and name it userApp
-angular.module('userApp', ['ngRoute', 'ui.router', 'ngNotificationsBar', 'webcam'])
-  .factory('User', ['$rootScope', '$http', '$q', '$timeout', '$location', 'notifications',
-    function($rootScope, $http, $q, $timeout, $location, notifications) {
+angular.module('userApp', ['ngRoute', 'ui.router', 'ngNotificationsBar', 'webcam', 'ngFileUpload'])
+  .factory('User', ['$rootScope', '$http', '$q', '$timeout', '$location', 'Upload', 'notifications',
+    function($rootScope, $http, $q, $timeout, $location, Upload, notifications) {
 
       function UserClass() {
         this.user = {};
@@ -17,7 +17,7 @@ angular.module('userApp', ['ngRoute', 'ui.router', 'ngNotificationsBar', 'webcam
           })
           .success(function(response) {
             if (response.user) {
-              $location.url('/home');
+              $location.url('/ipad');
               self.user = response.user;
               self.loggedin = true;
               $rootScope.$emit('loggedin', self);
@@ -72,32 +72,20 @@ angular.module('userApp', ['ngRoute', 'ui.router', 'ngNotificationsBar', 'webcam
           });
       }
 
-      UserClass.prototype.update = function(user) {
+      UserClass.prototype.uploadPhoto = function(file, id) {
         var self = this;
-        $http.post('/updateUser', {
-            _id: user._id,
-            firstname: user.firstname,
-            lastname: user.lastname,
-            email: user.email,
-            password: user.password
-          })
-          .success(function(response) {
-            User.user = user;
-            self.showNotification('showSuccess', 'Update in');
-          })
-          .error(function(response) {
-            if(response.errors) {
-              _.each(_.keys(response.errors), function(ky) {
-                if(ky.message) self.showNotification('showError', ky.message);
-              })
-            } else if(_.isArray(response)) {
-              _.each(response, function(error) {
-                if(error.msg) self.showNotification('showError', error.msg);
-              })
-            } else {
-              self.showNotification('showError', 'Whoopss! Sorry something went wrong!');
-            }
-          });
+        Upload.upload({
+          url: 'file?_id=' + id,
+          data: {
+            file: file
+          }
+        }).then(function(resp) {
+          self.showNotification('showSuccess', 'File is uploaded!');
+        }, function(resp) {
+          self.showNotification('showError', 'Whoopss! Sorry something went wrong!');
+        }, function (evt) {
+            console.log(evt);
+        });
       }
 
 
@@ -107,41 +95,6 @@ angular.module('userApp', ['ngRoute', 'ui.router', 'ngNotificationsBar', 'webcam
         $rootScope.$emit('loggedin', this);
         $location.url('/login');
       };
-
-      UserClass.prototype.getUsers = function() {
-        var self = this;
-        $http.get('/getUsers')
-          .success(function(response) {
-            $rootScope.$emit('listusers', response);
-          })
-          .error(function(response) {
-
-          });
-      }
-
-      UserClass.prototype.removeUser = function(user) {
-        var self = this;
-        $http.post('/removeUser', {
-            _id: user._id
-          })
-          .success(function(response) {
-            $rootScope.$emit('listusers', response);
-            self.showNotification('showSuccess', 'Removed user');
-          })
-          .error(function(response) {
-            if(response.errors) {
-              _.each(_.keys(response.errors), function(ky) {
-                if(ky.message) self.showNotification('showError', ky.message);
-              })
-            } else if(_.isArray(response)) {
-              _.each(response, function(error) {
-                if(error.msg) self.showNotification('showError', error.msg);
-              })
-            } else {
-              self.showNotification('showError', 'Whoopss! Sorry something went wrong!');
-            }
-          });
-      }
 
       UserClass.prototype.showNotification = function(type, msg) {
         notifications[type]({

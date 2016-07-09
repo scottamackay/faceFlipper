@@ -1,3 +1,12 @@
 <div class="content" ng-controller="ipadController as ipad">
+  <h2 class="title2">Take photo</h2>
+  <!-- <p>Me got forms too:</p> -->
+  <form name="form">
+    <div class="box-white">
+    <p>
+      <input type="file" capture="camera" ngf-select ng-model="ipad.media" name="media" ngf-max-size="20MB" ngf-accept="'image/*'" ng-change="ipad.onFileChange()" class="button" value="Sign in" />
+    </p>
+  </form>
+  <img src="https://faceflipper.s3.amazonaws.com/bg_stock.png" alt="jpg"/>
 <webcam></webcam>
 </div>

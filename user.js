@@ -31,6 +31,35 @@ module.exports = function(System) {
         if (err) return callback(err);
         callback(null, 'done');
       });
+    },
+    /*
+     * Generate file name by user Id
+     */
+    getFileName: function(user, callback) {
+      console.log(user);
+      User.findOne({
+        _id: user._id
+      }, function(err, user) {
+        if (err) return callback(err);
+        callback(null, user.firstname + '-' + user.lastname + '-' + user._id);
+      })
+    },
+    /*
+     * Update image path and url
+     */
+    updateUser: function(user, name, callback) {
+      User.update({
+          _id: user._id
+        }, {
+          $set: {
+            'image.url': 'https://faceflipper.s3.amazonaws.com/' + name,
+            'image.name': name
+          }
+        },
+        function(err) {
+          if (err) return callback(err);
+          callback(null, 'done');
+        });
     }
   }
 }

@@ -5,7 +5,7 @@ angular.module('userApp')
       .state("ipad", {
         url: "/ipad",
         templateUrl: "pages/ipad.html",
-        authenticate: false
+        authenticate: true
       })
       .state("tv", {
         url: "/tv",

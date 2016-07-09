@@ -61,7 +61,7 @@ angular.module('userApp')
 
     self.addUser = function() {
       console.log($scope.user._id);
-      if($scope.user._id) {
+      if ($scope.user._id) {
         User.update($scope.user);
       } else {
         User.register($scope.user);
@@ -100,6 +100,15 @@ angular.module('userApp')
       email: User.user.email,
       firstname: User.user.firstname,
       lastname: User.user.lastname
+    };
+
+    self.onFileChange = function() {
+      if ($scope.form.media.$valid && self.media) {
+        console.log(User.user)
+        User.uploadPhoto(self.media, User.user._id);
+      } else {
+        User.showNotification('showError', 'Invalid extension');
+      }
     }
   })
   .controller('registerController', function($scope, $rootScope, User) {

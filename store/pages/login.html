@@ -1,17 +1,21 @@
 <div class="content" ng-controller="loginController as login">
   <h2 class="title2">Sign in</h2>
   <!-- <p>Me got forms too:</p> -->
-
-  <form class="box-white" ng-submit="login.login();">
-    <p><label for="field1">Email</label>
-      <input id="field1" ng-model="login.email" type="text"/>
+  <form ng-submit="login.login();">
+    <div class="box-white">
+      <p>
+        <label for="field1">Email</label>
+        <input id="field1" ng-model="login.user.email" type="text" />
+      </p>
+      <p>
+        <label for="field2">Password</label>
+        <input id="field2" ng-model="login.user.password" type="password" />
+      </p>
+    </div>
+    <p>
+      <input type="submit" class="button" value="Sign in" />
     </p>
-    <p><label for="field2">Password</label>
-      <input id="field2" ng-model="login.password" type="password"/>
-    </p>
+    <p class="note">Don't you have any account? <a ui-sref='register'>Sign up</a></p>
   </form>
-
-  <p><input type="submit" class="button" value="Sign in" /></p>
-  <p class="note">Don't you have any account? <a ui-sref='register'>Sign up</a></p>
-
-</div><!--content-->
+</div>
+<!--content-->
