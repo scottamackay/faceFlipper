@@ -80,12 +80,29 @@ angular.module('userApp', ['ngRoute', 'ui.router', 'ngNotificationsBar', 'webcam
             file: file
           }
         }).then(function(resp) {
+          var socket = io();
+          socket.emit('fileupload', 'File uploaded');
+          socket.on('upload', function(msg) {
+            console.log('here');
+            self.getUsers();
+          });
           self.showNotification('showSuccess', 'File is uploaded!');
         }, function(resp) {
           self.showNotification('showError', 'Whoopss! Sorry something went wrong!');
         }, function (evt) {
             console.log(evt);
         });
+      }
+
+      UserClass.prototype.getUsers = function() {
+        var self = this;
+        $http.get('/getUsers')
+          .success(function(response) {
+            $rootScope.$emit('listusers', response);
+          })
+          .error(function(response) {
+
+          })
       }
 
 

@@ -12,75 +12,13 @@ angular.module('userApp')
       User.logout();
     }
   })
-  .controller('userController', function($scope, User, $rootScope, ParseServer) {
+  .controller('tvController', function($scope, $rootScope, User) {
     var self = this;
-    $scope.selected = [];
-
-    $scope.query = {
-      order: 'firstname',
-      limit: 5,
-      page: 1
-    };
-
-    $scope.user = {
-      _id: null,
-      firstname: null,
-      lastname: null,
-      password: null,
-      email: null
-    };
-
-    self.headerText = 'Add User';
-    self.btnText = 'Save';
-
-    $scope.selectedItem = function(user) {
-      $scope.user = user;
-      self.headerText = 'Update User';
-      self.btnText = 'Update';
-    }
-
-    $scope.deselectedItem = function() {
-      $scope.user = {
-        _id: null,
-        firstname: null,
-        lastname: null,
-        password: null,
-        email: null
-      };
-      self.headerText = 'Add User';
-      self.btnText = 'Save';
-    }
-
     self.init = function() {
       User.getUsers();
-      // ParseServer.setCallback(function(users) {
-      //   console.log(users);
-      // });
-      // ParseServer.GET('/users');
     }
-
-    self.addUser = function() {
-      console.log($scope.user._id);
-      if ($scope.user._id) {
-        User.update($scope.user);
-      } else {
-        User.register($scope.user);
-      }
-    }
-
-    self.removeUser = function(user) {
-      User.removeUser(user);
-      $scope.user = {
-        _id: null,
-        firstname: null,
-        lastname: null,
-        password: null,
-        email: null
-      };
-    }
-
     $rootScope.$on('listusers', function(event, args) {
-      $scope.users = args.users;
+      self.users = args.users;
     });
   })
   .controller('loginController', function($scope, $rootScope, User) {

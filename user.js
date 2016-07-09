@@ -33,15 +33,24 @@ module.exports = function(System) {
       });
     },
     /*
+    * Return all users
+    */
+    getUsers: function(callback) {
+      User.find()
+      .exec(function(err, users) {
+        if(err) return callback(err);
+        callback(null, users);
+      });
+    },
+    /*
      * Generate file name by user Id
      */
     getFileName: function(user, callback) {
-      console.log(user);
       User.findOne({
         _id: user._id
       }, function(err, user) {
         if (err) return callback(err);
-        callback(null, user.firstname + '-' + user.lastname + '-' + user._id);
+        callback(null, user.firstname + '-' + user.lastname + '-' + user._id + '.jpg');
       })
     },
     /*

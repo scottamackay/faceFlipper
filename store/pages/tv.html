@@ -1,0 +1,9 @@
+<div class="content" ng-controller="tvController as tv" ng-init="tv.init()">
+  <h2 class="title2">Photos</h2>
+  <!-- <p>Me got forms too:</p> -->
+  <div class="box-white">
+    <div ng-repeat="user in tv.users">
+      <img ng-src="{{ user.image.url }}" width="800" height="600" alt="{{ user.image.url }}">
+    </div>
+  </div>
+</div>

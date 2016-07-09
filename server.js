@@ -45,8 +45,17 @@ app.use(bodyParser.urlencoded({
 
 app.use(expressValidator());
 
-http.listen(process.env.PORT || 3000, function() {
+var server = http.listen(process.env.PORT || 3000, function() {
   console.log("Great! App is ready.");
+});
+
+var io = require('socket.io')(server);
+io.on('connection', function(socket) {
+  // whenever any user upload file
+  socket.on('fileupload', function() {
+    // sending to all clients
+      io.emit('upload', 'fileuploaded');
+  });
 });
 
 var user;
@@ -94,9 +103,20 @@ app.route('/addUser')
     });
   });
 
+  app.route('/getUsers')
+  .get(function(req, res) {
+    user.getUsers(function(err, users) {
+      if(err) return res.status(500).send(err);
+      res.send({
+        users: users
+      })
+    })
+  })
+
 app.route('/file')
   .post(upload.single('file'), function(req, res) {
     var s3 = new AWS.S3();
+    console.log(req.file)
     async.auto({
       getFileName: function(next) {
         user.getFileName(req.query, function(err, name) {
@@ -105,7 +125,6 @@ app.route('/file')
         });
       },
       saveAws: ['getFileName', function(next, result) {
-        console.log(next, result);
         fs.readFile(req.file.path, function(err, file_buffer) {
           if (err) return next(err);
           var params = {
