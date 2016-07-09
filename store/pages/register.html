@@ -1,10 +1,14 @@
-<div class="login" ng-controller="registerController as register">
-<h1>Sign Up</h1>
-<form method="post" ng-submit="register.register()">
-    <input type="text" name="f" placeholder="First Name" ng-model="register.user.firstname" required="required" />
-    <input type="text" name="l" placeholder="Last Name" ng-model="register.user.lastname" required="required" />
-    <input type="text" name="u" placeholder="Email" ng-model="register.user.email" required="required" />
-    <input type="password" name="p" placeholder="Password" ng-model="register.user.password" required="required" />
-    <button type="submit" class="btn btn-primary btn-block btn-large">Sign up</button>
-</form>
-</div>
+<div class="content" ng-controller="registerController as register">
+  <h2 class="title2">Sign up</h2>
+  <!-- <p>Me got forms too:</p> -->
+
+  <div class="box-white">
+    <p><label for="field1">Firstname</label><input id="field1" ng-model="register.firstname" type="text"/></p>
+    <p><label for="field2">Lastname</label><input id="field2" ng-model="register.lastname" type="text"/></p>
+    <p><label for="field3">Email</label><input id="field3" ng-model="register.email" type="text"/></p>
+    <p><label for="field4">Password</label><input id="field4" ng-model="register.password" type="password"/></p>
+  </div>
+
+  <p><input type="submit" class="button" value="Sign up" /></p>
+
+</div><!--content-->

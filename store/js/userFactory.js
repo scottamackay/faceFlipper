@@ -1,5 +1,5 @@
 // create the module and name it userApp
-angular.module('userApp', ['ngRoute', 'ui.router', 'ngMaterial', 'md.data.table', 'ngNotificationsBar'])
+angular.module('userApp', ['ngRoute', 'ui.router', 'ngNotificationsBar', 'webcam'])
   .factory('User', ['$rootScope', '$http', '$q', '$timeout', '$location', 'notifications',
     function($rootScope, $http, $q, $timeout, $location, notifications) {
 
@@ -152,31 +152,4 @@ angular.module('userApp', ['ngRoute', 'ui.router', 'ngMaterial', 'md.data.table'
       }
       return User;
     }
-  ]) // user factory
-  .factory('ParseServer', ['$rootScope', function($rootScope) {
-    function ParseServerClass() {
-      this.port = window.location.port;
-      this.url = window.location.protocol + '//' + window.location.hostname;
-      if (this.port) this.url = this.url + ':' + this.port;
-    }
-    var ParseServer = new ParseServerClass();
-
-    ParseServerClass.prototype.setCallback = function(callback) {
-      this.xhttp = new XMLHttpRequest();
-      var _self = this;
-      this.xhttp.onreadystatechange = function() {
-        if (_self.xhttp.readyState == 4 && _self.xhttp.status >= 200 && _self.xhttp.status <= 299) {
-          callback(_self.xhttp.responseText);
-        }
-      };
-    }
-    ParseServerClass.prototype.GET = function(path, callback) {
-      var self = this;
-      this.xhttp.open("POST", self.url + path, true);
-      this.xhttp.setRequestHeader("X-Parse-Application-Id", "bendigi");
-      this.xhttp.setRequestHeader("Content-type", "application/json");
-      this.xhttp.send(null);
-    }
-
-    return ParseServer;
-  }]); // factory
+  ]);

@@ -3,11 +3,11 @@ angular.module('userApp')
   .controller('bodyController', function($scope, $rootScope, User) {
     var self = this;
     self.loggedin = User.loggedin;
-    self.cls = "body";
-    $rootScope.$on('loggedin', function(event, args) {
-      self.loggedin = args.loggedin;
-      self.cls = self.loggedin ? "" : "body";
-    });
+    // self.cls = "body";
+    // $rootScope.$on('loggedin', function(event, args) {
+    //   self.loggedin = args.loggedin;
+    //   self.cls = self.loggedin ? "" : "body";
+    // });
     self.logout = function() {
       User.logout();
     }
@@ -94,7 +94,7 @@ angular.module('userApp')
       User.login(self.user);
     }
   })
-  .controller('homeController', function($scope, $rootScope, User) {
+  .controller('ipadController', function($scope, $rootScope, User) {
     var self = this;
     self.user = {
       email: User.user.email,

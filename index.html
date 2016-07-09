@@ -11,51 +11,67 @@
   <!-- end: Meta -->
   <!-- <link rel="icon" href="img/turkey.ico" type="image/x-icon"> -->
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
-  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-animate.min.js"></script>
-  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-aria.min.js"></script>
-  <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.0.0/css/font-awesome.css"/>
+  <!-- <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-animate.min.js"></script> -->
+  <!-- <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-aria.min.js"></script> -->
+  <!-- <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.0.0/css/font-awesome.css"/> -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.13.1/lodash.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.10/angular-route.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.3.1/angular-ui-router.min.js"></script>
-  <script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.0.0/angular-material.min.js"></script>
-  <script src="https://rawgit.com/daniel-nagy/md-data-table/master/dist/md-data-table.js"></script>
-  <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/1.0.0/angular-material.min.css">
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <link rel="stylesheet" href="https://rawgit.com/daniel-nagy/md-data-table/master/dist/md-data-table.css">
+  <!-- <script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.0.0/angular-material.min.js"></script> -->
+  <!-- <script src="https://rawgit.com/daniel-nagy/md-data-table/master/dist/md-data-table.js"></script> -->
+  <!-- <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/1.0.0/angular-material.min.css"> -->
+  <!-- <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"> -->
+  <!-- <link rel="stylesheet" href="https://rawgit.com/daniel-nagy/md-data-table/master/dist/md-data-table.css"> -->
   <script src="js/userFactory.js"></script>
   <script src="js/userController.js"></script>
   <script src="js/userConfig.js"></script>
   <script src="js/ngNotificationsBar.min.js"></script>
+  <script src="js/webcam.min.js"></script>
   <link rel="stylesheet" type="text/css" href="css/ngNotificationsBar.min.css" />
-  <link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
+  <!-- <link rel="stylesheet" type="text/css" href="css/bootstrap.css" /> -->
   <link rel="stylesheet" type="text/css" href="css/style.css" />
 </head>
 
 <!-- define angular controller -->
-<body ng-controller="bodyController as ctrl" ng-class="ctrl.cls">
+
+<body ng-controller="bodyController as ctrl">
   <notifications-bar class="notifications"></notifications-bar>
-  <nav class="navbar navbar-inverse">
-    <div class="container">
-      <div class="navbar-header">
-        <a class="navbar-brand" ui-sref='home'>Assignment</a>
-      </div>
+  <div id="wrap">
+    <div id="main">
+      <div class="header">
 
-      <ul class="nav navbar-nav navbar-right">
-        <li ng-if="ctrl.loggedin"><a ui-sref='home'><i class="fa fa-home"></i> Home</a></li>
-        <li ng-if="ctrl.loggedin"><a ui-sref='user'><i class="fa fa-car"></i> Users</a></li>
-        <li ng-if="ctrl.loggedin"><a ng-click="ctrl.logout()"><i class="fa fa-ban"></i> Logout</a></li>
-        <li ng-if="!ctrl.loggedin"><a ui-sref='login'><i class="fa fa-home"></i> Login</a></li>
-        <li ng-if="!ctrl.loggedin"><a ui-sref='register'><i class="fa fa-shield"></i> Register</a></li>
-      </ul>
+        <a class="left" href="?">Back</a>
+        <h1 class="title">Face Flipper</h1>
+        <!-- <a class="right" href="?">Edit</a> -->
+
+      </div><!--header-->
+
+      <ui-view>
+      </ui-view>
     </div>
-  </nav>
+    <div id="sidebar">
 
-  <div id="main">
-    <ui-view>
-  </ui-view>
+      <div class="header">
+        <p class="title">Face Flipper</p>
+      </div>
+      <!--header-->
+
+      <div class="content">
+
+        <ul class="nav">
+          <li ng-if="!ctrl.loggedin"><a ui-sref='login'><span class="ico msg"></span>Sign in</a></li>
+          <li ng-if="!ctrl.loggedin"><a ui-sref='register'><span class="ico msg"></span>Sign up</a></li>
+          <li ng-if="!ctrl.loggedin"><a ui-sref='ipad'><span class="ico msg"></span>iPad<span>On</span></a></li>
+          <li ng-if="!ctrl.loggedin"><a href="tv"><span class="ico msg"></span>TV<span class="info">Live</span></a></li>
+        </ul>
+
+      </div>
+      <!--content-->
+
+    </div>
+    <!--sidebar-->
   </div>
-
 </body>
 
 </html>

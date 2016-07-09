@@ -2,15 +2,15 @@
 angular.module('userApp')
   .config(function($stateProvider, $urlRouterProvider) {
     $stateProvider
-      .state("home", {
-        url: "/home",
-        templateUrl: "pages/home.html",
-        authenticate: true
+      .state("ipad", {
+        url: "/ipad",
+        templateUrl: "pages/ipad.html",
+        authenticate: false
       })
-      .state("user", {
-        url: "/user",
-        templateUrl: "pages/user.html",
-        authenticate: true
+      .state("tv", {
+        url: "/tv",
+        templateUrl: "pages/tv.html",
+        authenticate: false
       })
       .state("register", {
         url: "/register",
