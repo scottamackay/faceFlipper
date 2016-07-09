@@ -25,7 +25,7 @@ angular.module('userApp')
     $rootScope.$on('listusers', function(event, args) {
       console.log('listed')
       self.users = args.users;
-      $scope.$apply();
+      setTimeout(function(){ $scope.$apply(); });
     });
   })
   .controller('loginController', function($scope, $rootScope, User) {
