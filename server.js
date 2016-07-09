@@ -207,6 +207,7 @@ function onChunkedUpload(fields, file, res, id) {
         if (index < totalParts - 1) {
           responseData.success = true;
           res.send(responseData);
+          console.log('totalParts')
         } else {
           combineChunks(file, uuid, id, function() {
               responseData.success = true;
@@ -270,6 +271,7 @@ function moveFile(destinationDir, sourceFile, destinationFile, success, failure)
         })
         .on("end", function() {
           destStream.end();
+          console.log('moveFile', sourceStream.path, destStream.path);
           success();
         })
         .pipe(destStream);
