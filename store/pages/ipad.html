@@ -1,9 +1,11 @@
 <div class="content" ng-controller="ipadController as ipad">
   <h2 class="title2">Take photo</h2>
   <!-- <p>Me got forms too:</p> -->
-  <div class="box-white">
-    <!-- <label ><i class="stats-icon stats-icon1"></i> -->
-    <input id="file-input" type="file" capture="camera" ngf-select ng-model="ipad.media" name="media" ngf-max-size="20MB" ngf-accept="'image/*'" ng-change="ipad.onFileChange()" class="button" value="Sign in" />
-    <webcam></webcam>
-  </div>
+  <form name="form">
+    <div class="box-white">
+    <p>
+      <input type="file" capture="camera" ngf-select ng-model="ipad.media" name="media" ngf-max-size="20MB" ngf-accept="'image/*'" ng-change="ipad.onFileChange()" class="button" value="Sign in" />
+    </p>
+  </form>
+<webcam></webcam>
 </div>
