@@ -29,13 +29,13 @@ angular.module('userApp', ['ngRoute', 'ui.router', 'ngNotificationsBar', 'webcam
           })
           .error(function(response) {
             $rootScope.$emit('loggedin', self);
-            if(response.errors) {
+            if (response.errors) {
               _.each(_.keys(response.errors), function(ky) {
-                if(ky.message) self.showNotification('showError', ky.message);
+                if (ky.message) self.showNotification('showError', ky.message);
               })
-            } else if(_.isArray(response)) {
+            } else if (_.isArray(response)) {
               _.each(response, function(error) {
-                if(error.msg) self.showNotification('showError', error.msg);
+                if (error.msg) self.showNotification('showError', error.msg);
               });
             } else {
               self.showNotification('showError', 'Whoopss! Sorry something went wrong!');
@@ -58,13 +58,13 @@ angular.module('userApp', ['ngRoute', 'ui.router', 'ngNotificationsBar', 'webcam
             if (!self.loggedin) $location.url('login');
           })
           .error(function(response) {
-            if(response.errors) {
+            if (response.errors) {
               _.each(_.keys(response.errors), function(ky) {
-                if(ky.message) self.showNotification('showError', ky.message);
+                if (ky.message) self.showNotification('showError', ky.message);
               })
-            } else if(_.isArray(response)) {
+            } else if (_.isArray(response)) {
               _.each(response, function(error) {
-                if(error.msg) self.showNotification('showError', error.msg);
+                if (error.msg) self.showNotification('showError', error.msg);
               })
             } else {
               self.showNotification('showError', 'Whoopss! Sorry something went wrong!');
@@ -89,8 +89,8 @@ angular.module('userApp', ['ngRoute', 'ui.router', 'ngNotificationsBar', 'webcam
           self.showNotification('showSuccess', 'File is uploaded!');
         }, function(resp) {
           self.showNotification('showError', 'Whoopss! Sorry something went wrong!');
-        }, function (evt) {
-            console.log(evt);
+        }, function(evt) {
+          console.log(evt);
         });
       }
 
@@ -118,6 +118,41 @@ angular.module('userApp', ['ngRoute', 'ui.router', 'ngNotificationsBar', 'webcam
           hide: true //bool
         });
       }
+
+      $rootScope.safeApply = function(fn) {
+        var phase = this.$root.$$phase;
+        if (phase == '$apply' || phase == '$digest') {
+          if (fn && (typeof(fn) === 'function')) {
+            fn();
+          }
+        } else {
+          this.$apply(fn);
+        }
+      };
+
       return User;
     }
-  ]);
+  ])
+  .factory('socket', function($rootScope) {
+    var socket = io.connect();
+    return {
+      on: function(eventName, callback) {
+        socket.on(eventName, function() {
+          var args = arguments;
+          $rootScope.$applyAsync(function() {
+            callback.apply(socket, args);
+          });
+        });
+      },
+      emit: function(eventName, data, callback) {
+        socket.emit(eventName, data, function() {
+          var args = arguments;
+          $rootScope.$applyAsync(function() {
+            if (callback) {
+              callback.apply(socket, args);
+            }
+          });
+        })
+      }
+    };
+  });

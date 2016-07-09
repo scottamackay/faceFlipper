@@ -12,9 +12,8 @@ angular.module('userApp')
       User.logout();
     }
   })
-  .controller('tvController', function($scope, $rootScope, User) {
+  .controller('tvController', function($scope, $rootScope, User, $state, socket, $timeout) {
     var self = this;
-    var socket = io();
     socket.on('upload', function(msg) {
       console.log('here');
       User.getUsers();
@@ -23,9 +22,18 @@ angular.module('userApp')
       User.getUsers();
     }
     $rootScope.$on('listusers', function(event, args) {
-      console.log('listed')
-      $scope.users = args.users;
-      setTimeout(function(){ $scope.$apply(); });
+      console.log('listed');
+      $timeout(function() {
+        $scope.users = args.users;
+        $scope.$applyAsync(function() {
+          console.log(args.users)
+          $scope.users = args.users;
+        });
+        $rootScope.safeApply(function() {
+          $scope.users = args.users;
+        });
+      }, 3000);
+      // $scope.$digest();
     });
   })
   .controller('loginController', function($scope, $rootScope, User) {

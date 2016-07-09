@@ -27,8 +27,8 @@ var express = require('express'),
   });
 
 AWS.config.update({
-  accessKeyId: process.env.AWS_KEY_ID || 'AKIAIR2XML4UTSBAPY7Q',
-  secretAccessKey: process.env.AWS_SECRET_KEY || '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'
+  accessKeyId: process.env.AWS_KEY_ID || 'AKIAIU546DRJYZGOU3WA',
+  secretAccessKey: process.env.AWS_SECRET_KEY || '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'
 });
 
 app.get('/', function(req, res) {
