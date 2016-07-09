@@ -1,0 +1,10 @@
+<div class="login" ng-controller="registerController as register">
+<h1>Sign Up</h1>
+<form method="post" ng-submit="register.register()">
+    <input type="text" name="f" placeholder="First Name" ng-model="register.user.firstname" required="required" />
+    <input type="text" name="l" placeholder="Last Name" ng-model="register.user.lastname" required="required" />
+    <input type="text" name="u" placeholder="Email" ng-model="register.user.email" required="required" />
+    <input type="password" name="p" placeholder="Password" ng-model="register.user.password" required="required" />
+    <button type="submit" class="btn btn-primary btn-block btn-large">Sign up</button>
+</form>
+</div>

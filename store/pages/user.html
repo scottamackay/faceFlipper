@@ -1,0 +1,78 @@
+<div ng-controller="userController as userctrl" ng-init="userctrl.init()">
+  <div class="col-sm-6">
+    <form ng-submit="userctrl.addUser()">
+      <md-toolbar class="md-table-toolbar md-default">
+        <div class="md-toolbar-tools">
+          <span>{{userctrl.headerText}}</span>
+        </div>
+      </md-toolbar>
+      <md-input-container class="md-block">
+        <label>First Name</label>
+        <textarea name="firstname" ng-model="user.firstname" md-maxlength="30" rows="5" md-select-on-focus>
+        </textarea>
+        <div class="errors" ng-messages="userForm.firstname.$error" ng-if="!user.firstname" ng-show="userForm.$submitted || userForm.firstname.$touched">
+          <div ng-message="required">Required</div>
+        </div>
+      </md-input-container>
+      <md-input-container class="md-block">
+        <label>Last Name</label>
+        <textarea name="lastname" ng-model="user.lastname" md-maxlength="30" rows="5" md-select-on-focus>
+        </textarea>
+        <div class="errors" ng-messages="userForm.lastname.$error" ng-if="!user.lastname" ng-show="userForm.$submitted || userForm.lastname.$touched">
+          <div ng-message="required">Required</div>
+        </div>
+      </md-input-container>
+      <md-input-container class="md-block">
+        <label>Email</label>
+        <textarea name="email" ng-model="user.email" md-maxlength="40" rows="5" md-select-on-focus>
+        </textarea>
+        <div class="errors" ng-messages="userForm.email.$error" ng-if="!user.email" ng-show="userForm.$submitted || userForm.email.$touched">
+          <div ng-message="required">Required</div>
+        </div>
+      </md-input-container>
+      <md-input-container class="md-block">
+        <label>Password</label>
+        <textarea type="password" name="password" ng-model="user.password" md-maxlength="30" rows="5" md-select-on-focus>
+        </textarea>
+        <div class="errors" ng-messages="userForm.password.$error" ng-if="!user.password" ng-show="userForm.$submitted || userForm.password.$touched">
+          <div ng-message="required">Required</div>
+        </div>
+      </md-input-container>
+      <div class="form-actions">
+        <button type="submit" class="btn btn-primary">{{userctrl.btnText}}</button>
+      </div>
+    </form>
+  </div>
+
+  <div class="col-sm-6">
+    <md-toolbar class="md-table-toolbar md-default">
+      <div class="md-toolbar-tools">
+        <span>Users</span>
+      </div>
+    </md-toolbar>
+    <md-table-container>
+      <table md-table md-row-select ng-model="selected">
+        <thead md-head md-order="query.order">
+          <tr md-row>
+            <th md-column md-order-by="nameToLower"><span>First Name</span></th>
+            <th md-column md-numeric>Last Name</th>
+            <th md-column md-numeric>Email</th>
+            <th md-column md-numeric>Remove</th>
+          </tr>
+        </thead>
+        <tbody md-body>
+          <tr md-row md-select="user" md-on-select="selectedItem" md-on-deselect="deselectedItem" md-select-id="_id" md-auto-select ng-repeat="user in users">
+            <td md-cell>{{user.firstname}}</td>
+            <td md-cell>{{user.lastname}}</td>
+            <td md-cell>{{user.email}}</td>
+            <td md-cell>
+              <md-button class="md-icon-button md-accent" ng-click="userctrl.removeUser(user)" aria-label="Delete">
+                <i class="fa fa-times"></i>
+              </md-button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </md-table-container>
+  </div>
+</div>

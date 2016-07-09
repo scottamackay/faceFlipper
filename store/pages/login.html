@@ -1,0 +1,8 @@
+<div class="login" ng-controller="loginController as login">
+<h1>Login</h1>
+<form method="post" ng-submit="login.login()">
+  <input type="text" name="u" placeholder="Email" ng-model="login.user.email" required="required" />
+    <input type="password" name="p" placeholder="Password" ng-model="login.user.password" required="required" />
+    <button type="submit" class="btn btn-primary btn-block btn-large">Let me in.</button>
+</form>
+</div>
