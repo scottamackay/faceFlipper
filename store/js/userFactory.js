@@ -98,10 +98,8 @@ angular.module('userApp', ['ngRoute', 'ui.router', 'ngNotificationsBar', 'webcam
         var self = this;
         $http.get('/getUsers')
           .success(function(response) {
+            console.log('listuser')
             $rootScope.$emit('listusers', response);
-          })
-          .error(function(response) {
-
           })
       }
 

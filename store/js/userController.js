@@ -23,6 +23,7 @@ angular.module('userApp')
       User.getUsers();
     }
     $rootScope.$on('listusers', function(event, args) {
+      console.log('listed')
       self.users = args.users;
     });
   })
