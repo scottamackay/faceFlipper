@@ -162,14 +162,14 @@ function onUpload(req, res) {
     res.set("Content-Type", "text/plain");
 
     if (partIndex == null) {
-      onSimpleUpload(fields, files[fileInputName][0], res);
+      onSimpleUpload(fields, files[fileInputName][0], res, req.query._id);
     } else {
       onChunkedUpload(fields, files[fileInputName][0], res, req.query._id);
     }
   });
 }
 
-function onSimpleUpload(fields, file, res) {
+function onSimpleUpload(fields, file, res, id) {
   var uuid = fields.qquuid,
     responseData = {
       success: false
@@ -178,7 +178,7 @@ function onSimpleUpload(fields, file, res) {
   file.name = fields.qqfilename;
 
   if (isValid(file.size)) {
-    moveUploadedFile(file, uuid, function() {
+    moveUploadedFile(file, uuid, id, function() {
         responseData.success = true;
         res.send(responseData);
       },
@@ -203,7 +203,7 @@ function onChunkedUpload(fields, file, res, id) {
   file.name = fields.qqfilename;
 
   if (isValid(size)) {
-    storeChunk(file, uuid, index, totalParts, function() {
+    storeChunk(file, uuid, index, totalParts, id, function() {
         if (index < totalParts - 1) {
           responseData.success = true;
           res.send(responseData);
@@ -252,7 +252,7 @@ function isValid(size) {
   return maxFileSize === 0 || size < maxFileSize;
 }
 
-function moveFile(destinationDir, sourceFile, destinationFile, success, failure) {
+function moveFile(destinationDir, sourceFile, destinationFile, id, success, failure) {
   mkdirp(destinationDir, function(error) {
     var sourceStream, destStream;
 
@@ -271,7 +271,10 @@ function moveFile(destinationDir, sourceFile, destinationFile, success, failure)
         })
         .on("end", function() {
           destStream.end();
-          console.log('moveFile', sourceStream.path, destStream.path);
+          writeDBandAWS(id, destStream.path, function(err, result) {
+            if (err) console.log(err);
+            else success();
+          });
           success();
         })
         .pipe(destStream);
@@ -279,19 +282,19 @@ function moveFile(destinationDir, sourceFile, destinationFile, success, failure)
   });
 }
 
-function moveUploadedFile(file, uuid, success, failure) {
+function moveUploadedFile(file, uuid, id, success, failure) {
   var destinationDir = uploadedFilesPath + uuid + "/",
     fileDestination = destinationDir + file.name;
 
-  moveFile(destinationDir, file.path, fileDestination, success, failure);
+  moveFile(destinationDir, file.path, fileDestination, id, success, failure);
 }
 
-function storeChunk(file, uuid, index, numChunks, success, failure) {
+function storeChunk(file, uuid, index, numChunks, id, success, failure) {
   var destinationDir = uploadedFilesPath + uuid + "/" + chunkDirName + "/",
     chunkFilename = getChunkFilename(index, numChunks),
     fileDestination = destinationDir + chunkFilename;
 
-  moveFile(destinationDir, file.path, fileDestination, success, failure);
+  moveFile(destinationDir, file.path, fileDestination, id, success, failure);
 }
 
 function combineChunks(file, uuid, id, success, failure) {
