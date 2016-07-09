@@ -50,19 +50,20 @@ angular.module('userApp')
   .controller('ipadController', function($scope, $rootScope, User) {
     var self = this;
     self.user = {
+      _id: User.user._id,
       email: User.user.email,
       firstname: User.user.firstname,
       lastname: User.user.lastname
     };
 
-    self.onFileChange = function() {
-      if ($scope.form.media.$valid && self.media) {
-        console.log(User.user)
-        User.uploadPhoto(self.media, User.user._id);
-      } else {
-        User.showNotification('showError', 'Invalid extension');
-      }
-    }
+    // self.onFileChange = function() {
+    //   if ($scope.form.media.$valid && self.media) {
+    //     console.log(User.user)
+    //     User.uploadPhoto(self.media, User.user._id);
+    //   } else {
+    //     User.showNotification('showError', 'Invalid extension');
+    //   }
+    // }
   })
   .controller('registerController', function($scope, $rootScope, User) {
     var self = this;

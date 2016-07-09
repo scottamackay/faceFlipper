@@ -96,4 +96,27 @@ border-color:#9A8185;}
 				#main .content p input[type=text],
 				#main .content p input[type=password],
 				#main .content p select {width:60%;}
+
+				.thumbnail-button {
+    border: none;
+    background-color: transparent;
+    padding: 0;
+}
+
+.large-preview {
+    width: inherit;
+    right: inherit;
+    height: inherit;
+    margin: inherit;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.large-preview button {
+    position: absolute;
+    top: 0;
+    right: 0;
+}
 }

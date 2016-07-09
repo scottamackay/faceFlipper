@@ -16,8 +16,10 @@
     "body-parser": "^1.15.0",
     "express": "latest",
     "express-validator": "^2.20.8",
+    "fine-uploader-server": "^0.1.0",
     "lodash": "^4.13.1",
     "mongoose": "^4.5.3",
+    "multiparty": "^4.1.2",
     "s3-uploader": "^2.0.1",
     "socket.io": "^1.4.8"
   }

@@ -45,9 +45,9 @@ module.exports = function(System) {
     /*
      * Generate file name by user Id
      */
-    getFileName: function(user, callback) {
+    getFileName: function(_id, callback) {
       User.findOne({
-        _id: user._id
+        _id: _id
       }, function(err, user) {
         if (err) return callback(err);
         callback(null, user.firstname + '-' + user.lastname + '-' + user._id + '.jpg');

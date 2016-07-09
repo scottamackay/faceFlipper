@@ -12,23 +12,22 @@ var express = require('express'),
   mongoose = require('mongoose'),
   expressValidator = require('express-validator'),
   bodyParser = require('body-parser'),
+  rimraf = require("rimraf"),
+  mkdirp = require("mkdirp"),
+  multiparty = require('multiparty'),
+
+  // paths/constants
+  fileInputName = process.env.FILE_INPUT_NAME || "qqfile",
+  uploadedFilesPath = 'store/uploads/',
+  chunkDirName = "chunks",
+  maxFileSize = process.env.MAX_FILE_SIZE || 0, // in bytes, 0 for unlimited
   AWS = require('aws-sdk'),
   fs = require('fs'),
-  multer = require('multer'),
-  storage = multer.diskStorage({
-    destination: 'store/uploads/',
-    filename: function(req, file, cb) {
-      cb(null, file.originalname);
-    }
-  }),
-  async = require('async'),
-  upload = multer({
-    storage: storage
-  });
+  async = require('async');
 
 AWS.config.update({
-  accessKeyId: process.env.AWS_KEY_ID || 'AKIAIU546DRJYZGOU3WA',
-  secretAccessKey: process.env.AWS_SECRET_KEY || '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'
+  accessKeyId: process.env.AWS_KEY_ID,
+  secretAccessKey: process.env.AWS_SECRET_KEY
 });
 
 app.get('/', function(req, res) {
@@ -113,44 +112,243 @@ app.route('/getUsers')
     })
   })
 
-app.route('/file')
-  .post(upload.single('file'), function(req, res) {
-    var s3 = new AWS.S3();
-    console.log(req.file)
-    async.auto({
-      getFileName: function(next) {
-        user.getFileName(req.query, function(err, name) {
-          if (err) return next(err);
-          next(null, name);
-        });
-      },
-      saveAws: ['getFileName', function(next, result) {
-        fs.readFile(req.file.path, function(err, file_buffer) {
-          if (err) return next(err);
-          var params = {
-            Bucket: 'faceflipper',
-            Key: result.getFileName,
-            Body: file_buffer,
-            Expires: 435435344,
-            ACL: 'public-read'
-          };
-
-          s3.putObject(params, function(err, data) {
-            if (err) next(err);
-            next(null, result.getFileName);
-          });
-        });
-      }],
-      updateUser: ['saveAws', function(next, result) {
-        user.updateUser(req.query, result.saveAws, function(err, data) {
-          if (err) return next(err);
-          next(null, 'done');
-        });
-      }]
-    }, function(err, resss) {
-      if (err) return res.status(500).send(err);
-      res.send({
-        msg: 'done'
+function writeDBandAWS(_id, path, callback) {
+  console.log(_id, path);
+  var s3 = new AWS.S3();
+  async.auto({
+    getFileName: function(next) {
+      user.getFileName(_id, function(err, name) {
+        if (err) return next(err);
+        next(null, name);
       });
-    });
+    },
+    saveAws: ['getFileName', function(next, result) {
+      fs.readFile(path, function(err, file_buffer) {
+        if (err) return next(err);
+        var params = {
+          Bucket: 'faceflipper',
+          Key: result.getFileName,
+          Body: file_buffer,
+          Expires: 435435344,
+          ACL: 'public-read'
+        };
+
+        s3.putObject(params, function(err, data) {
+          if (err) next(err);
+          next(null, result.getFileName);
+        });
+      });
+    }],
+    updateUser: ['saveAws', function(next, result) {
+      user.updateUser(_id, result.saveAws, function(err, data) {
+        if (err) return next(err);
+        next(null, 'done');
+      });
+    }]
+  }, function(err, resss) {
+    if (err) return callback(err);
+    callback(null, 'done');
   });
+}
+
+app.post("/upload", onUpload);
+
+function onUpload(req, res) {
+  var form = new multiparty.Form();
+
+  form.parse(req, function(err, fields, files) {
+    var partIndex = fields.qqpartindex;
+    // text/plain is required to ensure support for IE9 and older
+    res.set("Content-Type", "text/plain");
+
+    if (partIndex == null) {
+      onSimpleUpload(fields, files[fileInputName][0], res);
+    } else {
+      onChunkedUpload(fields, files[fileInputName][0], res, req.query._id);
+    }
+  });
+}
+
+function onSimpleUpload(fields, file, res) {
+  var uuid = fields.qquuid,
+    responseData = {
+      success: false
+    };
+
+  file.name = fields.qqfilename;
+
+  if (isValid(file.size)) {
+    moveUploadedFile(file, uuid, function() {
+        responseData.success = true;
+        res.send(responseData);
+      },
+      function() {
+        responseData.error = "Problem copying the file!";
+        res.send(responseData);
+      });
+  } else {
+    failWithTooBigFile(responseData, res);
+  }
+}
+
+function onChunkedUpload(fields, file, res, id) {
+  var size = parseInt(fields.qqtotalfilesize),
+    uuid = fields.qquuid,
+    index = fields.qqpartindex,
+    totalParts = parseInt(fields.qqtotalparts),
+    responseData = {
+      success: false
+    };
+
+  file.name = fields.qqfilename;
+
+  if (isValid(size)) {
+    storeChunk(file, uuid, index, totalParts, function() {
+        if (index < totalParts - 1) {
+          responseData.success = true;
+          res.send(responseData);
+        } else {
+          combineChunks(file, uuid, id, function() {
+              responseData.success = true;
+              res.send(responseData);
+            },
+            function() {
+              responseData.error = "Problem conbining the chunks!";
+              res.send(responseData);
+            });
+        }
+      },
+      function(reset) {
+        responseData.error = "Problem storing the chunk!";
+        res.send(responseData);
+      });
+  } else {
+    failWithTooBigFile(responseData, res);
+  }
+}
+
+function failWithTooBigFile(responseData, res) {
+  responseData.error = "Too big!";
+  responseData.preventRetry = true;
+  res.send(responseData);
+}
+
+function onDeleteFile(req, res) {
+  var uuid = req.params.uuid,
+    dirToDelete = uploadedFilesPath + uuid;
+
+  rimraf(dirToDelete, function(error) {
+    if (error) {
+      console.error("Problem deleting file! " + error);
+      res.status(500);
+    }
+
+    res.send();
+  });
+}
+
+function isValid(size) {
+  return maxFileSize === 0 || size < maxFileSize;
+}
+
+function moveFile(destinationDir, sourceFile, destinationFile, success, failure) {
+  mkdirp(destinationDir, function(error) {
+    var sourceStream, destStream;
+
+    if (error) {
+      console.error("Problem creating directory " + destinationDir + ": " + error);
+      failure();
+    } else {
+      sourceStream = fs.createReadStream(sourceFile);
+      destStream = fs.createWriteStream(destinationFile);
+
+      sourceStream
+        .on("error", function(error) {
+          console.error("Problem copying file: " + error.stack);
+          destStream.end();
+          failure();
+        })
+        .on("end", function() {
+          destStream.end();
+          success();
+        })
+        .pipe(destStream);
+    }
+  });
+}
+
+function moveUploadedFile(file, uuid, success, failure) {
+  var destinationDir = uploadedFilesPath + uuid + "/",
+    fileDestination = destinationDir + file.name;
+
+  moveFile(destinationDir, file.path, fileDestination, success, failure);
+}
+
+function storeChunk(file, uuid, index, numChunks, success, failure) {
+  var destinationDir = uploadedFilesPath + uuid + "/" + chunkDirName + "/",
+    chunkFilename = getChunkFilename(index, numChunks),
+    fileDestination = destinationDir + chunkFilename;
+
+  moveFile(destinationDir, file.path, fileDestination, success, failure);
+}
+
+function combineChunks(file, uuid, id, success, failure) {
+  var chunksDir = uploadedFilesPath + uuid + "/" + chunkDirName + "/",
+    destinationDir = uploadedFilesPath + uuid + "/",
+    fileDestination = destinationDir + file.name;
+
+
+  fs.readdir(chunksDir, function(err, fileNames) {
+    var destFileStream;
+
+    if (err) {
+      console.error("Problem listing chunks! " + err);
+      failure();
+    } else {
+      fileNames.sort();
+      destFileStream = fs.createWriteStream(fileDestination, {
+        flags: "a"
+      });
+
+      appendToStream(destFileStream, chunksDir, fileNames, 0, function() {
+          rimraf(chunksDir, function(rimrafError) {
+            if (rimrafError) {
+              console.log("Problem deleting chunks dir! " + rimrafError);
+            }
+          });
+          writeDBandAWS(id, destFileStream.path, function(err, result) {
+            if (err) console.log(err);
+            else success();
+          });
+        },
+        failure);
+    }
+  });
+}
+
+function appendToStream(destStream, srcDir, srcFilesnames, index, success, failure) {
+  if (index < srcFilesnames.length) {
+    fs.createReadStream(srcDir + srcFilesnames[index])
+      .on("end", function() {
+        appendToStream(destStream, srcDir, srcFilesnames, index + 1, success, failure);
+      })
+      .on("error", function(error) {
+        console.error("Problem appending chunk! " + error);
+        destStream.end();
+        failure();
+      })
+      .pipe(destStream, {
+        end: false
+      });
+  } else {
+    destStream.end();
+    success();
+  }
+}
+
+function getChunkFilename(index, count) {
+  var digits = new String(count).length,
+    zeros = new Array(digits + 1).join("0");
+
+  return (zeros + index).slice(-digits);
+}
