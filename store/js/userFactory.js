@@ -212,7 +212,7 @@ angular.module('userApp', ['ngRoute', 'ui.router', 'ngNotificationsBar', 'webcam
             },
 
             callbacks: {
-              onSubmitted: function(id, name) {
+              onSubmitted: function(id, name) { 
                 var fileEl = this.getItemByFileId(id),
                   thumbnailEl = fileEl.querySelector('.thumbnail-button');
                   socket.emit('fileupload', 'File uploaded');
