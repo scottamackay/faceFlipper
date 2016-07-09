@@ -130,6 +130,6 @@ app.route('/file')
       }]
     }, function(err, resss) {
       if (err) return res.status(500).send(err);
-      res.send({msg: 'done'});
+      res.send({  msg: 'done' });
     });
   });
