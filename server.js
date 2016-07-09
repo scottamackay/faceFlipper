@@ -54,7 +54,7 @@ io.on('connection', function(socket) {
   // whenever any user upload file
   socket.on('fileupload', function() {
     // sending to all clients
-      io.emit('upload', 'fileuploaded');
+    io.emit('upload', 'fileuploaded');
   });
 });
 
@@ -98,15 +98,15 @@ app.route('/addUser')
     user.addUser(req.body, function(err, msg) {
       if (err) return res.status(500).send(err);
       res.send({
-        users: users
+        msg: msg
       });
     });
   });
 
-  app.route('/getUsers')
+app.route('/getUsers')
   .get(function(req, res) {
     user.getUsers(function(err, users) {
-      if(err) return res.status(500).send(err);
+      if (err) return res.status(500).send(err);
       res.send({
         users: users
       })
@@ -149,6 +149,8 @@ app.route('/file')
       }]
     }, function(err, resss) {
       if (err) return res.status(500).send(err);
-      res.send({  msg: 'done' });
+      res.send({
+        msg: 'done'
+      });
     });
   });
