@@ -275,7 +275,6 @@ function moveFile(destinationDir, sourceFile, destinationFile, id, success, fail
             if (err) console.log(err);
             else success();
           });
-          success();
         })
         .pipe(destStream);
     }
