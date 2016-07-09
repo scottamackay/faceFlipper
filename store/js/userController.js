@@ -14,6 +14,11 @@ angular.module('userApp')
   })
   .controller('tvController', function($scope, $rootScope, User) {
     var self = this;
+    var socket = io();
+    socket.on('upload', function(msg) {
+      console.log('here');
+      User.getUsers();
+    });
     self.init = function() {
       User.getUsers();
     }

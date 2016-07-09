@@ -67,7 +67,6 @@ angular.module('userApp', ['ngRoute', 'ui.router', 'ngNotificationsBar', 'webcam
                 if(error.msg) self.showNotification('showError', error.msg);
               })
             } else {
-              console.log(response)
               self.showNotification('showError', 'Whoopss! Sorry something went wrong!');
             }
           });
