@@ -156,7 +156,7 @@ angular.module('userApp', ['ngRoute', 'ui.router', 'ngNotificationsBar', 'webcam
       }
     };
   })
-  .directive("fineUploader", function($compile, $interpolate) {
+  .directive("fineUploader", function($compile, $interpolate, socket) {
     return {
       restrict: "A",
       replace: true,
@@ -215,6 +215,7 @@ angular.module('userApp', ['ngRoute', 'ui.router', 'ngNotificationsBar', 'webcam
               onSubmitted: function(id, name) {
                 var fileEl = this.getItemByFileId(id),
                   thumbnailEl = fileEl.querySelector('.thumbnail-button');
+                  socket.emit('fileupload', 'File uploaded');
                 thumbnailEl.addEventListener('click', function() {
                   openLargerPreview($scope, uploader, previewDialog, largePreviewSize, id);
                 });
