@@ -14,6 +14,7 @@ angular.module('userApp')
   })
   .controller('tvController', function($scope, $rootScope, User, $state, socket, $timeout) {
     var self = this;
+    $scope.updateText = 'Not yet';
     socket.on('upload', function(msg) {
       User.getUsers();
     });
@@ -21,6 +22,7 @@ angular.module('userApp')
       User.getUsers();
     }
     $rootScope.$on('listusers', function(event, args) {
+      console.log('updateText: not yet');
       console.log('listed', args.users);
       $scope.users = args.users;
       $timeout(function() {
@@ -31,6 +33,8 @@ angular.module('userApp')
       }, 2000);
       $scope.$applyAsync(function() {
         $scope.users = args.users;
+        $scope.updateText = 'Updated';
+        console.log('updateText: yes');
       });
       $scope.safeApply();
       // $timeout(function() {
