@@ -15,7 +15,10 @@ angular.module('userApp')
   .controller('tvController', function($scope, $rootScope, User, $state, socket, $timeout) {
     var self = this;
     $scope.updateText = 'Not yet';
-    $scope.images = [];
+    $scope.image1 = '';
+    $scope.image2 = '';
+    $scope.image3 = '';
+    $scope.image4 = '';
     socket.on('upload', function(msg) {
       User.getUsers();
     });
@@ -25,10 +28,13 @@ angular.module('userApp')
     $rootScope.$on('listusers', function(event, args) {
       console.log('updateText: not yet');
       console.log('listed', args.users);
-      $scope.images = [];
-      _.each(args.users, function(user) {
-        if(user.image && user.image.url) $scope.images.push(user.image.url);
-      });
+      $scope.image1 = args.users[0].image.url;
+      $scope.image2 = args.users[1].image.url;
+      $scope.image3 = args.users[2].image.url;
+      $scope.image4 = args.users[3].image.url;
+      // _.each(args.users, function(user) {
+      //   if(user.image && user.image.url) $scope.images.push(user.image.url);
+      // });
       $scope.users = args.users;
       $scope.updateText = 'Not yet';
       $timeout(function() {
@@ -36,19 +42,27 @@ angular.module('userApp')
         $rootScope.$applyAsync(function() {
           $scope.users = args.users;
           $scope.updateText = 'Not YETTT';
-          $scope.images = []
-          _.each(args.users, function(user) {
-            if(user.image && user.image.url) $scope.images.push(user.image.url);
-          });
+          $scope.image1 = args.users[0].image.url;
+          $scope.image2 = args.users[1].image.url;
+          $scope.image3 = args.users[2].image.url;
+          $scope.image4 = args.users[3].image.url;
+          // $scope.images = []
+          // _.each(args.users, function(user) {
+          //   if(user.image && user.image.url) $scope.images.push(user.image.url);
+          // });
         });
         $rootScope.safeApply();
       }, 10000);
       $scope.$applyAsync(function() {
         $scope.users = args.users;
-        $scope.images = []
-        _.each(args.users, function(user) {
-          if(user.image && user.image.url) $scope.images.push(user.image.url);
-        });
+        $scope.image1 = args.users[0].image.url;
+        $scope.image2 = args.users[1].image.url;
+        $scope.image3 = args.users[2].image.url;
+        $scope.image4 = args.users[3].image.url;
+        // $scope.images = []
+        // _.each(args.users, function(user) {
+        //   if(user.image && user.image.url) $scope.images.push(user.image.url);
+        // });
         $scope.updateText = 'Updated';
         console.log('updateText: yes');
       });
