@@ -3,7 +3,7 @@
   <!-- <p>Me got forms too:</p> -->
   <div class="box-white">
     <div ng-repeat="user in users">
-      <span ng-if="user.image.url"><img ng-src="{{ user.image.url }}" width="400" height="300" alt="{{ user.image.url }}"></span>
+      <span ng-if="user.image.url"><img ng-src="{{ generateLink(user.image.url)}}" width="400" height="300" alt="{{ user.image.url }}"></span>
     </div>
   </div>
 </div>

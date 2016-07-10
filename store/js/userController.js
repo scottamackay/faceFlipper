@@ -22,6 +22,11 @@ angular.module('userApp')
         $state.reload();
       }, 7000);
     });
+
+    $scope.generateLink = function(link) {
+      var d = new Date().getTime();
+      return link + '?breakcache=' + d;
+    }
     // self.init = function() {
       User.getUsers();
     // }
