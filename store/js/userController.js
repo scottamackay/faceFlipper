@@ -45,6 +45,10 @@ angular.module('userApp')
       }, 10000);
       $scope.$applyAsync(function() {
         $scope.users = args.users;
+        $scope.images = []
+        _.each(args.users, function(user) {
+          if(user.image && user.image.url) $scope.images.push(user.image.url);
+        });
         $scope.updateText = 'Updated';
         console.log('updateText: yes');
       });
