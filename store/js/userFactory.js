@@ -51,6 +51,7 @@ angular.module('userApp', ['ngRoute', 'ui.router', 'ngNotificationsBar', 'webcam
             email: user.email
           })
           .success(function(response) {
+            console.log(response);
             $location.url('/ipad');
             self.user = response.user;
             self.loggedin = true;
@@ -58,9 +59,11 @@ angular.module('userApp', ['ngRoute', 'ui.router', 'ngNotificationsBar', 'webcam
             // self.showNotification('showSuccess', 'Saved');
           })
           .error(function(response) {
+            console.log(response)
             if (response.errors) {
               _.each(_.keys(response.errors), function(ky) {
-                if (ky.message) self.showNotification('showError', ky.message);
+                console.log(ky);
+                if (response.errors[ky].message) self.showNotification('showError', response.errors[ky].message);
               })
             } else if (_.isArray(response)) {
               _.each(response, function(error) {
@@ -72,27 +75,27 @@ angular.module('userApp', ['ngRoute', 'ui.router', 'ngNotificationsBar', 'webcam
           });
       }
 
-      UserClass.prototype.uploadPhoto = function(file, id) {
-        var self = this;
-        Upload.upload({
-          url: 'file?_id=' + id,
-          data: {
-            file: file
-          }
-        }).then(function(resp) {
-          var socket = io();
-          socket.emit('fileupload', 'File uploaded');
-          socket.on('upload', function(msg) {
-            console.log('here');
-            self.getUsers();
-          });
-          self.showNotification('showSuccess', 'File is uploaded!');
-        }, function(resp) {
-          self.showNotification('showError', 'Whoopss! Sorry something went wrong!');
-        }, function(evt) {
-          console.log(evt);
-        });
-      }
+      // UserClass.prototype.uploadPhoto = function(file, id) {
+      //   var self = this;
+      //   Upload.upload({
+      //     url: 'file?_id=' + id,
+      //     data: {
+      //       file: file
+      //     }
+      //   }).then(function(resp) {
+      //     var socket = io();
+      //     socket.emit('fileupload', 'File uploaded');
+      //     socket.on('upload', function(msg) {
+      //       console.log('here');
+      //       self.getUsers();
+      //     });
+      //     self.showNotification('showSuccess', 'File is uploaded!');
+      //   }, function(resp) {
+      //     self.showNotification('showError', 'Whoopss! Sorry something went wrong!');
+      //   }, function(evt) {
+      //     console.log(evt);
+      //   });
+      // }
 
       UserClass.prototype.getUsers = function() {
         var self = this;
