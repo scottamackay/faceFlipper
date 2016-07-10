@@ -18,9 +18,9 @@ angular.module('userApp')
     $scope.users = [];
     socket.on('upload', function(msg) {
       User.getUsers();
-      $timeout(function () {
-        $state.reload();
-      }, 7000);
+      // $timeout(function () {
+      //   $state.reload();
+      // }, 7000);
     });
 
     $scope.generateLink = function(link) {
