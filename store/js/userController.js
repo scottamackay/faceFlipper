@@ -18,9 +18,9 @@ angular.module('userApp')
     $scope.users = [];
     socket.on('upload', function(msg) {
       User.getUsers();
-      // $timeout(function () {
-      //   $state.reload();
-      // }, 7000);
+      $timeout(function () {
+        $state.reload();
+      }, 5000);
     });
 
     $scope.generateLink = function(link) {
@@ -34,9 +34,9 @@ angular.module('userApp')
       console.log('updateText: not yet');
       console.log('listed', args.users);
       $scope.users = args.users;
-      $scope.$applyAsync(function() {
-        $scope.users = args.users;
-      });
+      // $scope.$applyAsync(function() {
+      //   $scope.users = args.users;
+      // });
       // _.each(args.users, function(user, id) {
       //   if(user.image && user.image.url) $scope['image' + id] = user.image.url;
       // })
