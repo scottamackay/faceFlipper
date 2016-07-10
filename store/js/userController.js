@@ -17,7 +17,7 @@ angular.module('userApp')
     $scope.updateText = 'Not yet';
     $scope.users = [];
     socket.on('upload', function(msg) {
-      User.getUsers();
+      // User.getUsers();
       $timeout(function () {
         $state.reload();
       }, 5000);
