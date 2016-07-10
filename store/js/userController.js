@@ -32,9 +32,9 @@ angular.module('userApp')
         // $scope.safeApply(function () {
         //   $scope.users = args.users;
         // });
-        // $rootScope.safeApply(function() {
-        //   $scope.users = args.users;
-        // });
+        $rootScope.safeApply(function() {
+          $scope.users = args.users;
+        });
       }, 5000);
       // $scope.$digest();
     });
