@@ -29,6 +29,7 @@ module.exports = function(System) {
       var newUser = new User(user);
       newUser.save(function(err, savedUser) {
         if (err) return callback(err);
+        console.log(savedUser);
         callback(null, savedUser);
       });
     },

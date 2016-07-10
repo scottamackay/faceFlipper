@@ -77,7 +77,7 @@ app.route('/addUser')
     user.addUser(req.body, function(err, user) {
       if (err) return res.status(500).send(err);
       res.send({
-        msg: msg
+        user: user
       });
     });
   });
