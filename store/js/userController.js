@@ -30,7 +30,8 @@ angular.module('userApp')
         $rootScope.$applyAsync(function() {
           $scope.users = args.users;
         });
-      }, 2000);
+        $rootScope.safeApply();
+      }, 5000);
       $scope.$applyAsync(function() {
         $scope.users = args.users;
         $scope.updateText = 'Updated';
