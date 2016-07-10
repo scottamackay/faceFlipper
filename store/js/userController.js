@@ -22,10 +22,13 @@ angular.module('userApp')
     $scope.image4 = '';
     socket.on('upload', function(msg) {
       User.getUsers();
+      $timeout(function () {
+        $state.reload();
+      }, 5000);
     });
-    self.init = function() {
+    // self.init = function() {
       User.getUsers();
-    }
+    // }
     $rootScope.$on('listusers', function(event, args) {
       console.log('updateText: not yet');
       console.log('listed', args.users);
