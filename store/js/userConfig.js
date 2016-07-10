@@ -16,20 +16,15 @@ angular.module('userApp')
         url: "/register",
         templateUrl: "pages/register.html",
         authenticate: false
-      })
-      .state("login", {
-        url: "/login",
-        templateUrl: "pages/login.html",
-        authenticate: false
       });
     // Send to login if the URL was not found
-    $urlRouterProvider.otherwise("/login");
+    $urlRouterProvider.otherwise("/register");
   })
   .run(function($rootScope, $state, User) {
     $rootScope.$on("$stateChangeStart", function(event, toState, toParams, fromState, fromParams) {
       if (toState.authenticate && !User.loggedin) {
         // User isn’t authenticated
-        $state.transitionTo("login");
+        $state.transitionTo("register");
         event.preventDefault();
       }
     });
