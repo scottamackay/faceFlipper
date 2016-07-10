@@ -215,13 +215,18 @@ angular.module('userApp', ['ngRoute', 'ui.router', 'ngNotificationsBar', 'webcam
               onSubmitted: function(id, name) {
                 var fileEl = this.getItemByFileId(id),
                   thumbnailEl = fileEl.querySelector('.thumbnail-button');
-                  // console.log('started');
-                  $timeout(function() {
-                    socket.emit('fileupload', 'File uploaded');
-                  }, 2000);
+
+                  // $timeout(function() {
+                  //   socket.emit('fileupload', 'File uploaded');
+                  // }, 2000);
                 thumbnailEl.addEventListener('click', function() {
                   openLargerPreview($scope, uploader, previewDialog, largePreviewSize, id);
                 });
+              },
+              onAllComplete: function() {
+                $timeout(function() {
+                  socket.emit('fileupload', 'File uploaded');
+                }, 2000);
               }
             }
           });
