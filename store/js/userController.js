@@ -15,6 +15,7 @@ angular.module('userApp')
   .controller('tvController', function($scope, $rootScope, User, $state, socket, $timeout) {
     var self = this;
     $scope.updateText = 'Not yet';
+    $scope.image0 = '';
     $scope.image1 = '';
     $scope.image2 = '';
     $scope.image3 = '';
@@ -28,10 +29,9 @@ angular.module('userApp')
     $rootScope.$on('listusers', function(event, args) {
       console.log('updateText: not yet');
       console.log('listed', args.users);
-      $scope.image1 = args.users[0].image.url;
-      $scope.image2 = args.users[1].image.url;
-      // $scope.image3 = args.users[2].image.url;
-      $scope.image4 = args.users[3].image.url;
+      _.each(args.users, function(user, id) {
+        if(user.image && user.image.url) $scope['image' + id] = user.image.url;
+      })
       // _.each(args.users, function(user) {
       //   if(user.image && user.image.url) $scope.images.push(user.image.url);
       // });
@@ -42,10 +42,9 @@ angular.module('userApp')
         $rootScope.$applyAsync(function() {
           $scope.users = args.users;
           $scope.updateText = 'Not YETTT';
-          $scope.image1 = args.users[0].image.url;
-          $scope.image2 = args.users[1].image.url;
-          $scope.image3 = args.users[2].image.url;
-          $scope.image4 = args.users[3].image.url;
+          _.each(args.users, function(user, id) {
+            if(user.image && user.image.url) $scope['image' + id] = user.image.url;
+          })
           // $scope.images = []
           // _.each(args.users, function(user) {
           //   if(user.image && user.image.url) $scope.images.push(user.image.url);
@@ -55,10 +54,9 @@ angular.module('userApp')
       }, 10000);
       $scope.$applyAsync(function() {
         $scope.users = args.users;
-        $scope.image1 = args.users[0].image.url;
-        $scope.image2 = args.users[1].image.url;
-        $scope.image3 = args.users[2].image.url;
-        $scope.image4 = args.users[3].image.url;
+        _.each(args.users, function(user, id) {
+          if(user.image && user.image.url) $scope['image' + id] = user.image.url;
+        });
         // $scope.images = []
         // _.each(args.users, function(user) {
         //   if(user.image && user.image.url) $scope.images.push(user.image.url);
