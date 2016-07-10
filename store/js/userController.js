@@ -30,7 +30,7 @@ angular.module('userApp')
       console.log('listed', args.users);
       $scope.image1 = args.users[0].image.url;
       $scope.image2 = args.users[1].image.url;
-      $scope.image3 = args.users[2].image.url;
+      // $scope.image3 = args.users[2].image.url;
       $scope.image4 = args.users[3].image.url;
       // _.each(args.users, function(user) {
       //   if(user.image && user.image.url) $scope.images.push(user.image.url);
