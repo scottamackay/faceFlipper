@@ -15,27 +15,30 @@ angular.module('userApp')
   .controller('tvController', function($scope, $rootScope, User, $state, socket, $timeout) {
     var self = this;
     socket.on('upload', function(msg) {
-      console.log('here');
       User.getUsers();
     });
     self.init = function() {
       User.getUsers();
     }
     $rootScope.$on('listusers', function(event, args) {
-      console.log('listed');
+      console.log('listed', args.users);
+      $scope.users = args.users;
       $timeout(function() {
+        $scope.$apply();
+      }, 2000);
+      $scope.$applyAsync(function() {
         $scope.users = args.users;
-        $scope.$applyAsync(function() {
-          console.log(args.users)
-          $scope.users = args.users;
-        });
-        // $scope.safeApply(function () {
-        //   $scope.users = args.users;
-        // });
-        $rootScope.safeApply(function() {
-          $scope.users = args.users;
-        });
-      }, 5000);
+      });
+      $scope.safeApply();
+      // $timeout(function() {
+      //   $scope.$applyAsync(function() {
+      //     console.log(args.users)
+      //     $scope.users = args.users;
+      //   });
+      //   $rootScope.safeApply(function() {
+      //     $scope.users = args.users;
+      //   });
+      // }, 2000);
       // $scope.$digest();
     });
   })

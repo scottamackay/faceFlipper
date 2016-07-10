@@ -56,16 +56,17 @@ module.exports = function(System) {
     /*
      * Update image path and url
      */
-    updateUser: function(user, name, callback) {
-      User.update({
-          _id: user._id
+    updateUser: function(_id, name, callback) {
+      User.findOneAndUpdate({
+          _id: _id
         }, {
           $set: {
             'image.url': 'https://faceflipper.s3.amazonaws.com/' + name,
             'image.name': name
           }
         },
-        function(err) {
+        function(err, saa) {
+          console.log(err, saa);
           if (err) return callback(err);
           callback(null, 'done');
         });
