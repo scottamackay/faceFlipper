@@ -27,9 +27,9 @@ module.exports = function(System) {
      */
     addUser: function(user, callback) {
       var newUser = new User(user);
-      newUser.save(function(err) {
+      newUser.save(function(err, savedUser) {
         if (err) return callback(err);
-        callback(null, 'done');
+        callback(null, savedUser);
       });
     },
     /*

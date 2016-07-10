@@ -36,7 +36,7 @@ angular.module('userApp')
       $scope.users = args.users;
       $scope.$applyAsync(function() {
         $scope.users = args.users;
-      })
+      });
       // _.each(args.users, function(user, id) {
       //   if(user.image && user.image.url) $scope['image' + id] = user.image.url;
       // })
@@ -85,17 +85,6 @@ angular.module('userApp')
       // $scope.$digest();
     });
   })
-  .controller('loginController', function($scope, $rootScope, User) {
-    var self = this;
-    self.user = {
-      email: null,
-      password: null
-    }
-
-    self.login = function() {
-      User.login(self.user);
-    }
-  })
   .controller('ipadController', function($scope, $rootScope, User) {
     var self = this;
     self.user = {
@@ -119,8 +108,7 @@ angular.module('userApp')
     self.user = {
       firstname: null,
       lastname: null,
-      email: null,
-      password: null
+      email: null
     }
 
     self.register = function() {

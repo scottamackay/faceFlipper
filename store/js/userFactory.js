@@ -9,53 +9,54 @@ angular.module('userApp', ['ngRoute', 'ui.router', 'ngNotificationsBar', 'webcam
       }
 
       var User = new UserClass();
-      UserClass.prototype.login = function(user) {
-        var self = this;
-        $http.post('/login', {
-            email: user.email,
-            password: user.password
-          })
-          .success(function(response) {
-            if (response.user) {
-              $location.url('/ipad');
-              self.user = response.user;
-              self.loggedin = true;
-              $rootScope.$emit('loggedin', self);
-              self.showNotification('showSuccess', 'logged in');
-            } else {
-              $rootScope.$emit('loggedin', self);
-              self.showNotification('showError', 'cannot log in');
-            }
-          })
-          .error(function(response) {
-            $rootScope.$emit('loggedin', self);
-            if (response.errors) {
-              _.each(_.keys(response.errors), function(ky) {
-                if (ky.message) self.showNotification('showError', ky.message);
-              })
-            } else if (_.isArray(response)) {
-              _.each(response, function(error) {
-                if (error.msg) self.showNotification('showError', error.msg);
-              });
-            } else {
-              self.showNotification('showError', 'Whoopss! Sorry something went wrong!');
-            }
-          });
-      }
+      // UserClass.prototype.login = function(user) {
+      //   var self = this;
+      //   $http.post('/login', {
+      //       email: user.email,
+      //       password: user.password
+      //     })
+      //     .success(function(response) {
+      //       if (response.user) {
+      //         $location.url('/ipad');
+      //         self.user = response.user;
+      //         self.loggedin = true;
+      //         $rootScope.$emit('loggedin', self);
+      //         self.showNotification('showSuccess', 'logged in');
+      //       } else {
+      //         $rootScope.$emit('loggedin', self);
+      //         self.showNotification('showError', 'cannot log in');
+      //       }
+      //     })
+      //     .error(function(response) {
+      //       $rootScope.$emit('loggedin', self);
+      //       if (response.errors) {
+      //         _.each(_.keys(response.errors), function(ky) {
+      //           if (ky.message) self.showNotification('showError', ky.message);
+      //         })
+      //       } else if (_.isArray(response)) {
+      //         _.each(response, function(error) {
+      //           if (error.msg) self.showNotification('showError', error.msg);
+      //         });
+      //       } else {
+      //         self.showNotification('showError', 'Whoopss! Sorry something went wrong!');
+      //       }
+      //     });
+      // }
 
       UserClass.prototype.register = function(user) {
         var self = this;
         $http.post('/addUser', {
             firstname: user.firstname,
             lastname: user.lastname,
-            email: user.email,
-            password: user.password
+            email: user.email
           })
           .success(function(response) {
             User.user = user;
-            $rootScope.$emit('listusers', response);
-            self.showNotification('showSuccess', 'Saved');
-            if (!self.loggedin) $location.url('login');
+            $location.url('/ipad');
+            self.user = response.user;
+            self.loggedin = true;
+            $rootScope.$emit('loggedin', self);
+            // self.showNotification('showSuccess', 'Saved');
           })
           .error(function(response) {
             if (response.errors) {
@@ -108,7 +109,7 @@ angular.module('userApp', ['ngRoute', 'ui.router', 'ngNotificationsBar', 'webcam
         this.user = {};
         this.loggedin = false;
         $rootScope.$emit('loggedin', this);
-        $location.url('/login');
+        $location.url('/register');
       };
 
       UserClass.prototype.showNotification = function(type, msg) {
@@ -215,7 +216,7 @@ angular.module('userApp', ['ngRoute', 'ui.router', 'ngNotificationsBar', 'webcam
               onSubmitted: function(id, name) {
                 var fileEl = this.getItemByFileId(id),
                   thumbnailEl = fileEl.querySelector('.thumbnail-button');
-                  console.log('started');
+                  // console.log('started');
                   $timeout(function() {
                     socket.emit('fileupload', 'File uploaded');
                   }, 2000);
