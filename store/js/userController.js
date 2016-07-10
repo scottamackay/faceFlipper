@@ -25,10 +25,12 @@ angular.module('userApp')
       console.log('updateText: not yet');
       console.log('listed', args.users);
       $scope.users = args.users;
+      $scope.updateText = 'Not yet';
       $timeout(function() {
         $scope.$apply();
         $rootScope.$applyAsync(function() {
           $scope.users = args.users;
+          $scope.updateText = 'Not YETTT';
         });
         $rootScope.safeApply();
       }, 5000);
