@@ -15,16 +15,12 @@ angular.module('userApp')
   .controller('tvController', function($scope, $rootScope, User, $state, socket, $timeout) {
     var self = this;
     $scope.updateText = 'Not yet';
-    $scope.image0 = '';
-    $scope.image1 = '';
-    $scope.image2 = '';
-    $scope.image3 = '';
-    $scope.image4 = '';
+    $scope.users = [];
     socket.on('upload', function(msg) {
       User.getUsers();
       $timeout(function () {
         $state.reload();
-      }, 5000);
+      }, 7000);
     });
     // self.init = function() {
       User.getUsers();
@@ -32,42 +28,46 @@ angular.module('userApp')
     $rootScope.$on('listusers', function(event, args) {
       console.log('updateText: not yet');
       console.log('listed', args.users);
-      _.each(args.users, function(user, id) {
-        if(user.image && user.image.url) $scope['image' + id] = user.image.url;
+      $scope.users = args.users;
+      $scope.applyAsync(function() {
+        $scope.users = args.users;
       })
+      // _.each(args.users, function(user, id) {
+      //   if(user.image && user.image.url) $scope['image' + id] = user.image.url;
+      // })
       // _.each(args.users, function(user) {
       //   if(user.image && user.image.url) $scope.images.push(user.image.url);
       // });
-      $scope.users = args.users;
-      $scope.updateText = 'Not yet';
-      $timeout(function() {
-        $scope.$apply();
-        $rootScope.$applyAsync(function() {
-          $scope.users = args.users;
-          $scope.updateText = 'Not YETTT';
-          _.each(args.users, function(user, id) {
-            if(user.image && user.image.url) $scope['image' + id] = user.image.url;
-          })
-          // $scope.images = []
-          // _.each(args.users, function(user) {
-          //   if(user.image && user.image.url) $scope.images.push(user.image.url);
-          // });
-        });
-        $rootScope.safeApply();
-      }, 10000);
-      $scope.$applyAsync(function() {
-        $scope.users = args.users;
-        _.each(args.users, function(user, id) {
-          if(user.image && user.image.url) $scope['image' + id] = user.image.url;
-        });
-        // $scope.images = []
-        // _.each(args.users, function(user) {
-        //   if(user.image && user.image.url) $scope.images.push(user.image.url);
-        // });
-        $scope.updateText = 'Updated';
-        console.log('updateText: yes');
-      });
-      $scope.safeApply();
+      // $scope.users = args.users;
+      // $scope.updateText = 'Not yet';
+      // $timeout(function() {
+      //   $scope.$apply();
+      //   $rootScope.$applyAsync(function() {
+      //     $scope.users = args.users;
+      //     $scope.updateText = 'Not YETTT';
+      //     _.each(args.users, function(user, id) {
+      //       if(user.image && user.image.url) $scope['image' + id] = user.image.url;
+      //     })
+      //     // $scope.images = []
+      //     // _.each(args.users, function(user) {
+      //     //   if(user.image && user.image.url) $scope.images.push(user.image.url);
+      //     // });
+      //   });
+      //   $rootScope.safeApply();
+      // }, 10000);
+      // $scope.$applyAsync(function() {
+      //   $scope.users = args.users;
+      //   _.each(args.users, function(user, id) {
+      //     if(user.image && user.image.url) $scope['image' + id] = user.image.url;
+      //   });
+      //   // $scope.images = []
+      //   // _.each(args.users, function(user) {
+      //   //   if(user.image && user.image.url) $scope.images.push(user.image.url);
+      //   // });
+      //   $scope.updateText = 'Updated';
+      //   console.log('updateText: yes');
+      // });
+      // $scope.safeApply();
       // $timeout(function() {
       //   $scope.$applyAsync(function() {
       //     console.log(args.users)

@@ -2,13 +2,8 @@
   <h2 class="title2">Photos: {{updateText}}</h2>
   <!-- <p>Me got forms too:</p> -->
   <div class="box-white">
-    <!-- <div ng-repeat="image in images">
-      <img ng-src="{{image}}" width="400" height="300" alt="{{image}}">
-    </div> -->
-    <img ng-src="{{image0}}" width="400" height="300" alt="{{image0}}">
-    <img ng-src="{{image1}}" width="400" height="300" alt="{{image1}}">
-    <img ng-src="{{image2}}" width="400" height="300" alt="{{image2}}">
-    <img ng-src="{{image3}}" width="400" height="300" alt="{{image3}}">
-    <img ng-src="{{image4}}" width="400" height="300" alt="{{image4}}">
+    <div ng-repeat="user in users">
+      <span ng-if="user.image.url"><img ng-src="{{ user.image.url }}" width="400" height="300" alt="{{ user.image.url }}"></span>
+    </div>
   </div>
 </div>
