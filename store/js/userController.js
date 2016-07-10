@@ -25,6 +25,9 @@ angular.module('userApp')
       $scope.users = args.users;
       $timeout(function() {
         $scope.$apply();
+        $rootScope.applyAsync(function() {
+          $scope.users = args.users;
+        });
       }, 2000);
       $scope.$applyAsync(function() {
         $scope.users = args.users;
