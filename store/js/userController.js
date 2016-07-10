@@ -29,13 +29,13 @@ angular.module('userApp')
           console.log(args.users)
           $scope.users = args.users;
         });
-        $scope.safeApply(function () {
-          $scope.users = args.users;
-        });
-        $rootScope.safeApply(function() {
-          $scope.users = args.users;
-        });
-      }, 3000);
+        // $scope.safeApply(function () {
+        //   $scope.users = args.users;
+        // });
+        // $rootScope.safeApply(function() {
+        //   $scope.users = args.users;
+        // });
+      }, 5000);
       // $scope.$digest();
     });
   })
