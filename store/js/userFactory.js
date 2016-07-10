@@ -224,6 +224,7 @@ angular.module('userApp', ['ngRoute', 'ui.router', 'ngNotificationsBar', 'webcam
                 });
               },
               onAllComplete: function() {
+                console.log('here');
                 $timeout(function() {
                   socket.emit('fileupload', 'File uploaded');
                 }, 2000);
