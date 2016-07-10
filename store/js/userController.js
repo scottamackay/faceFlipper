@@ -27,9 +27,9 @@ angular.module('userApp')
       var d = new Date().getTime();
       return link + '?breakcache=' + d;
     }
-    // self.init = function() {
+    self.init = function() {
       User.getUsers();
-    // }
+    }
     $rootScope.$on('listusers', function(event, args) {
       console.log('updateText: not yet');
       console.log('listed', args.users);
