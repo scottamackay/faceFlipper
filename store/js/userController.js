@@ -29,7 +29,7 @@ angular.module('userApp')
       console.log('updateText: not yet');
       console.log('listed', args.users);
       $scope.users = args.users;
-      $scope.applyAsync(function() {
+      $scope.$applyAsync(function() {
         $scope.users = args.users;
       })
       // _.each(args.users, function(user, id) {
