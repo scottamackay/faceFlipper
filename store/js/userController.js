@@ -33,7 +33,7 @@ angular.module('userApp')
           $scope.updateText = 'Not YETTT';
         });
         $rootScope.safeApply();
-      }, 5000);
+      }, 10000);
       $scope.$applyAsync(function() {
         $scope.users = args.users;
         $scope.updateText = 'Updated';
