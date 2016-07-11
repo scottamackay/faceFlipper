@@ -5,9 +5,9 @@
     <!-- <div ng-repeat="user in users">
       <span ng-if="user.image.url"><img ng-src="{{ generateLink(user.image.url)}}" width="400" height="300" alt="{{ user.image.url }}"></span>
     </div> -->
-    <div class="original top"><img ng-src="{{ generateLink(tv.urlFirst)}}" alt=""></div>
-    <div class="original middle"><img ng-src="{{ generateLink(tv.urlSecond)}}" alt=""></div>
-    <div class="original bottom"><img ng-src="{{ generateLink(tv.urlThird)}}" alt=""></div>
+    <div class="original"><img ng-src="{{ generateLink(tv.urlFirst)}}" class="top" alt=""></div>
+    <div class="original"><img ng-src="{{ generateLink(tv.urlSecond)}}" class="middle" alt=""></div>
+    <div class="original"><img ng-src="{{ generateLink(tv.urlThird)}}" class="bottom" alt=""></div>
   </div>
 
 </div>
