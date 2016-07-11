@@ -21,7 +21,7 @@ angular.module('userApp')
     self.urlThird = '';
     socket.on('upload', function(userId) {
       $timeout(function() {
-        $scope.uploaderId = userId;
+        User.uploaderId = userId;
         $state.reload();
       }, 5000);
     });
@@ -43,13 +43,14 @@ angular.module('userApp')
         });
       }); // each
       if($scope.images.length > 0) {
-        if ($scope.uploaderId) {
+        if (User.uploaderId) {
           // console.log(_.findIndex($scope.images, function(img) {
           //   return img.id === $scope.uploaderId;
           // }), $scope.images, $scope.uploaderId);
           self.urlFirst = $scope.images[_.findIndex($scope.images, function(img) {
-            return img.id === $scope.uploaderId;
+            return img.id === User.uploaderId;
           })]['url'];
+          console.log('yes id')
           self.urlSecond = self.urlFirst;
           self.urlThird = self.urlFirst;
           // self.urlSecond = self.urlThird = self.urlFirst;
