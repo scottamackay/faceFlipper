@@ -457,21 +457,12 @@ a {
 .image {
 	max-height: 900px;
 }
-.image img {
-    /*max-height: 90%;
-    max-width: 90%;
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    margin: auto;
-    border: 2px solid rgb(44, 44, 44);*/
-    width: auto;
-    height: 300px;
-		overflow: hidden;
-}
 
-.original {
-	width: 100%;
-}
+.original { height:300px; overflow:hidden; position:relative;}
+.original img {width:100%; height:auto; display:block; position:absolute;}
+
+.original img.top {top:0;}
+
+.original img.middle {top:-200px;}
+
+.original img.bottom {bottom:0;}
