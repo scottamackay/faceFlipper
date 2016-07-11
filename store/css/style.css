@@ -467,6 +467,11 @@ a {
     right: 0;
     margin: auto;
     border: 2px solid rgb(44, 44, 44);*/
-    width: 100%;
+    width: auto;
     height: 300px;
+		overflow: hidden;
+}
+
+.original {
+	width: 100%;
 }
