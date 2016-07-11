@@ -46,7 +46,7 @@ angular.module('userApp')
         if ($scope.uploaderId) {
           console.log(_.findIndex($scope.images, function(img) {
             return img.id === $scope.uploaderId;
-          }), $scope.images);
+          }), $scope.images, $scope.uploaderId);
           self.urlFirst = $scope.images[_.findIndex($scope.images, function(img) {
             return img.id === $scope.uploaderId;
           })]['url'];
