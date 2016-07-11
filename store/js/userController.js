@@ -81,6 +81,8 @@ angular.module('userApp')
   })
   .controller('ipadController', function($scope, $rootScope, User, socket) {
     var self = this;
+    $scope.userplayed = false;
+
     self.user = {
       _id: User.user._id,
       email: User.user.email,
@@ -90,6 +92,8 @@ angular.module('userApp')
 
     self.play = function() {
       socket.emit('play', User.user._id);
+      $scope.userplayed = true;
+
     }
 
     // self.onFileChange = function() {
