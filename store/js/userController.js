@@ -23,7 +23,7 @@ angular.module('userApp')
       $timeout(function() {
         User.uploaderId = userId;
         $state.reload();
-      }, 5000);
+      }, 2000);
     });
 
     $scope.generateLink = function(link) {
