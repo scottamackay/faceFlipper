@@ -1,18 +1,23 @@
 <div class="content" ng-controller="ipadController as ipad">
   <h2 class="title2">Take photo</h2>
   <!-- <p>Me got forms too:</p> -->
-  <form name="form">
-    <div class="box-white">
-      <!-- <p>
+  <div class="box-white">
+    <!-- <p>
       <input type="file" capture="camera" ngf-select ng-model="ipad.media" name="media" ngf-max-size="20MB" ngf-accept="'image/*'" ng-change="ipad.onFileChange()" class="button" value="Sign in" />
     </p> -->
 
-      <dialog class="large-preview">
-        <button title="close" ng-click="closePreview()">X</button>
-        <image ng-src="{{largePreviewUri}}" />
-      </dialog>
+    <dialog class="large-preview">
+      <button title="close" ng-click="closePreview()">X</button>
+      <image ng-src="{{largePreviewUri}}" />
+    </dialog>
 
-      <div fine-uploader upload-server="/upload?_id={{ipad.user._id}}" max-file-size="10000000" large-preview-size="500" allowed-mimes="image/jpeg, image/png, image/gif, image/tiff, image/bmp" allowed-extensions='{{["jpeg", "jpg", "png", "gif", "tiff", "tif", "bmp"]}}'></div>
-  </form>
-  <!-- <webcam></webcam> -->
+    <div fine-uploader upload-server="/upload?_id={{ipad.user._id}}" max-file-size="10000000" large-preview-size="500" allowed-mimes="image/jpeg, image/png, image/gif, image/tiff, image/bmp" allowed-extensions='{{["jpeg", "jpg", "png", "gif", "tiff", "tif", "bmp"]}}'></div>
+    <form name="form" ng-submit="ipad.play()">
+      <p>
+        <input type="submit" class="button" value="Play" />
+      </p>
+    </form>
   </div>
+  <!-- box-white-->
+  <!-- <webcam></webcam> -->
+</div>

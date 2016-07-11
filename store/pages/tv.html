@@ -1,9 +1,12 @@
 <div class="content" ng-controller="tvController as tv" ng-init="tv.init()">
-  <h2 class="title2">Photos: {{updateText}}</h2>
+  <h2 class="title2">Photos</h2>
   <!-- <p>Me got forms too:</p> -->
-  <div class="box-white">
-    <div ng-repeat="user in users">
+  <div class="box-white image">
+    <!-- <div ng-repeat="user in users">
       <span ng-if="user.image.url"><img ng-src="{{ generateLink(user.image.url)}}" width="400" height="300" alt="{{ user.image.url }}"></span>
-    </div>
+    </div> -->
+    <img ng-src="{{ generateLink(tv.urlFirst)}}" alt="">
+    <img ng-src="{{ generateLink(tv.urlSecond)}}" alt="">
+    <img ng-src="{{ generateLink(tv.urlThird)}}" alt="">
   </div>
 </div>

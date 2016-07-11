@@ -14,11 +14,14 @@ angular.module('userApp')
   })
   .controller('tvController', function($scope, $rootScope, User, $state, socket, $timeout) {
     var self = this;
-    $scope.updateText = 'Not yet';
     $scope.users = [];
-    socket.on('upload', function(msg) {
-      // User.getUsers();
-      $timeout(function () {
+    // $scope.uploaderId = null;
+    self.urlFirst = '';
+    self.urlSecond = '';
+    self.urlThird = '';
+    socket.on('upload', function(userId) {
+      $timeout(function() {
+        $scope.uploaderId = userId;
         $state.reload();
       }, 5000);
     });
@@ -31,61 +34,45 @@ angular.module('userApp')
       User.getUsers();
     }
     $rootScope.$on('listusers', function(event, args) {
-      console.log('updateText: not yet');
-      console.log('listed', args.users);
-      $scope.users = args.users;
-      // $scope.$applyAsync(function() {
-      //   $scope.users = args.users;
-      // });
-      // _.each(args.users, function(user, id) {
-      //   if(user.image && user.image.url) $scope['image' + id] = user.image.url;
-      // })
-      // _.each(args.users, function(user) {
-      //   if(user.image && user.image.url) $scope.images.push(user.image.url);
-      // });
       // $scope.users = args.users;
-      // $scope.updateText = 'Not yet';
-      // $timeout(function() {
-      //   $scope.$apply();
-      //   $rootScope.$applyAsync(function() {
-      //     $scope.users = args.users;
-      //     $scope.updateText = 'Not YETTT';
-      //     _.each(args.users, function(user, id) {
-      //       if(user.image && user.image.url) $scope['image' + id] = user.image.url;
-      //     })
-      //     // $scope.images = []
-      //     // _.each(args.users, function(user) {
-      //     //   if(user.image && user.image.url) $scope.images.push(user.image.url);
-      //     // });
-      //   });
-      //   $rootScope.safeApply();
-      // }, 10000);
-      // $scope.$applyAsync(function() {
-      //   $scope.users = args.users;
-      //   _.each(args.users, function(user, id) {
-      //     if(user.image && user.image.url) $scope['image' + id] = user.image.url;
-      //   });
-      //   // $scope.images = []
-      //   // _.each(args.users, function(user) {
-      //   //   if(user.image && user.image.url) $scope.images.push(user.image.url);
-      //   // });
-      //   $scope.updateText = 'Updated';
-      //   console.log('updateText: yes');
-      // });
-      // $scope.safeApply();
-      // $timeout(function() {
-      //   $scope.$applyAsync(function() {
-      //     console.log(args.users)
-      //     $scope.users = args.users;
-      //   });
-      //   $rootScope.safeApply(function() {
-      //     $scope.users = args.users;
-      //   });
-      // }, 2000);
-      // $scope.$digest();
+      $scope.images = [];
+      _.each(args.users, function(user) {
+        if (user.image && user.image.url) $scope.images.push({
+          url: user.image.url,
+          id: user._id
+        });
+      }); // each
+      if($scope.images.length > 0) {
+        if ($scope.uploaderId) {
+          self.urlSecond = self.urlThird = self.urlFirst = $scope.images[_.findIndex($scope.images, function(img) {
+            return img.id === $scope.uploaderId;
+          })]['url'];
+          // self.urlSecond = self.urlThird = self.urlFirst;
+        } else {
+          self.urlFirst = $scope.images[_.random(0, $scope.images.length - 1)]['url'];
+          self.urlSecond = $scope.images[_.random(0, $scope.images.length - 1)]['url'];
+          self.urlThird = $scope.images[_.random(0, $scope.images.length - 1)]['url'];
+        }
+      }
+    }); // listusers
+
+    socket.on('playgame', function(userId) {
+      var luckyInd = _.random(2);
+      _.each([self.urlFirst, self.urlSecond, self.urlThird], function(url, ind) {
+        if (luckyInd === ind) {
+          url = $scope.images[_.findIndex($scope.images, function(img) {
+            return img.id === userId;
+          })]['url']
+        } else {
+          url = $scope.images[ind]['url'];
+        }
+      });
+      self.urlFirst = $scope.images[_.random(0, $scope.images.length - 1)]['url'];
+      self.urlSecond = $scope.images[_.random(0, $scope.images.length - 1)]['url'];
+      self.urlThird = $scope.images[_.random(0, $scope.images.length - 1)]['url'];
     });
   })
-  .controller('ipadController', function($scope, $rootScope, User) {
+  .controller('ipadController', function($scope, $rootScope, User, socket) {
     var self = this;
     self.user = {
       _id: User.user._id,
@@ -93,6 +80,10 @@ angular.module('userApp')
       firstname: User.user.firstname,
       lastname: User.user.lastname
     };
+
+    self.play = function() {
+      socket.emit('play', User.user._id);
+    }
 
     // self.onFileChange = function() {
     //   if ($scope.form.media.$valid && self.media) {

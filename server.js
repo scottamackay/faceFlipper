@@ -51,9 +51,15 @@ var server = http.listen(process.env.PORT || 3000, function() {
 var io = require('socket.io')(server);
 io.on('connection', function(socket) {
   // whenever any user upload file
-  socket.on('fileupload', function() {
+  socket.on('fileupload', function(userId) {
     // sending to all clients
-    io.emit('upload', 'fileuploaded');
+    io.emit('upload', userId);
+  });
+
+  // user send play request
+  socket.on('play', function(userId) {
+    //send play request to all clients
+    io.emit('playgame', userId);
   });
 });
 
