@@ -159,7 +159,7 @@ angular.module('userApp', ['ngRoute', 'ui.router', 'ngNotificationsBar', 'webcam
       }
     };
   })
-  .directive("fineUploader", function($compile, $interpolate, socket, $timeout) {
+  .directive("fineUploader", function($compile, $interpolate, socket, $timeout, User) {
     return {
       restrict: "A",
       replace: true,
@@ -229,7 +229,7 @@ angular.module('userApp', ['ngRoute', 'ui.router', 'ngNotificationsBar', 'webcam
               onAllComplete: function() {
                 console.log('here');
                 $timeout(function() {
-                  socket.emit('fileupload', 'File uploaded');
+                  socket.emit('fileupload', User.user._id);
                 }, 2000);
               }
             }
