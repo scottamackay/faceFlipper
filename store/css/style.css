@@ -454,6 +454,9 @@ a {
     top: 0;
     right: 0;
 }
+.image {
+	max-height: 900px;
+}
 .image img {
     /*max-height: 90%;
     max-width: 90%;
