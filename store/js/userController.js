@@ -44,9 +44,11 @@ angular.module('userApp')
       }); // each
       if($scope.images.length > 0) {
         if ($scope.uploaderId) {
-          self.urlSecond = self.urlThird = self.urlFirst = $scope.images[_.findIndex($scope.images, function(img) {
+          self.urlFirst = $scope.images[_.findIndex($scope.images, function(img) {
             return img.id === $scope.uploaderId;
           })]['url'];
+          self.urlSecond = self.urlFirst;
+          self.urlThird = self.urlFirst;
           // self.urlSecond = self.urlThird = self.urlFirst;
         } else {
           self.urlFirst = $scope.images[_.random(0, $scope.images.length - 1)]['url'];
@@ -64,7 +66,7 @@ angular.module('userApp')
             return img.id === userId;
           })]['url']
         } else {
-          url = $scope.images[ind]['url'];
+          url = $scope.images[_.random(0, $scope.images.length - 1)]['url'];
         }
       });
       self.urlFirst = $scope.images[_.random(0, $scope.images.length - 1)]['url'];
