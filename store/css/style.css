@@ -461,8 +461,8 @@ a {
 .original { height:300px; overflow:hidden; position:relative;}
 .original img {width:100%; height:auto; display:block; position:absolute;}
 
-.original img.top {top:0;}
+.original img.top {top:0; float: right;}
 
-.original img.middle {top:-200px;}
+.original img.middle {top:-200px; float: right;}
 
-.original img.bottom {bottom:0;}
+.original img.bottom {bottom:0; float: right;}
