@@ -26,6 +26,10 @@ angular.module('userApp')
       }, 2000);
     });
 
+    socket.on('signupOnTV', function(msg) {
+      User.showNotification('showSuccess', msg);
+    });
+
     $scope.generateLink = function(link) {
       var d = new Date().getTime();
       return link + '?breakcache=' + d;
@@ -96,14 +100,9 @@ angular.module('userApp')
 
     }
 
-    // self.onFileChange = function() {
-    //   if ($scope.form.media.$valid && self.media) {
-    //     console.log(User.user)
-    //     User.uploadPhoto(self.media, User.user._id);
-    //   } else {
-    //     User.showNotification('showError', 'Invalid extension');
-    //   }
-    // }
+    self.takeBack = function() {
+      socket.emit('signup', "Sign up on the ipad to play");
+    }
   })
   .controller('registerController', function($scope, $rootScope, User) {
     var self = this;

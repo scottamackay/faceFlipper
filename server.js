@@ -61,6 +61,12 @@ io.on('connection', function(socket) {
     //send play request to all clients
     io.emit('playgame', userId);
   });
+
+  // user send signup request
+  socket.on('signup', function(msg) {
+    //send play request to all clients
+    io.emit('signupOnTV', msg);
+  });
 });
 
 var user;
