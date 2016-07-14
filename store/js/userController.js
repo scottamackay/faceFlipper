@@ -94,6 +94,7 @@ angular.module('userApp')
       lastname: User.user.lastname
     };
 
+
     self.play = function() {
       socket.emit('play', User.user._id);
       $scope.userplayed = true;
@@ -111,6 +112,10 @@ angular.module('userApp')
       lastname: null,
       email: null
     }
+
+    self.days = _.range(1, 32);
+    self.months = _.range(1,13);
+    self.years = (_.range(1920, 2001)).reverse();
 
     self.register = function() {
       User.register(self.user);

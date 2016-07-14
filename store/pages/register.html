@@ -15,16 +15,16 @@
         <p>
           <label>DATE OF BIRTH</label>
           <select id="field3">
-            <option>0</option>
-            <option>1</option>
+            <option></option>
+            <option ng-repeat="day in register.days">{{day}}</option>
           </select>
           <select id="field4">
-            <option>2</option>
-            <option>3</option>
+            <option></option>
+            <option ng-repeat="month in register.months">{{month}}</option>
           </select>
           <select id="field5">
-            <option>4</option>
-            <option>5</option>
+            <option></option>
+            <option ng-repeat="year in register.years">{{year}}</option>
           </select>
         </p>
         <p>
