@@ -9,7 +9,7 @@ angular.module('userApp')
     $stateProvider
       .state("ipad", {
         url: "/ipad",
-        templateUrl: "pages/ipad.html",
+        templateUrl: "pages/ipad_2_add_photo.html",
         authenticate: true
       })
       .state("win", {
