@@ -70,6 +70,21 @@ angular.module('userApp')
           self.urlSecond = $scope.images[_.random(0, $scope.images.length - 1)]['url'];
           self.urlThird = $scope.images[_.random(0, $scope.images.length - 1)]['url'];
         }
+        moveImage('left', 'top', 'top2', 'top3');
+      }
+
+      function moveImage(direction, id, id2, id3) {
+        var box = $('#' + id),
+          box2 = $('#' + id2),
+          box3 = $('#' + id3);
+
+        TweenLite
+        .fromTo(box, 4, {x: '-=1400px'}, {x: 0, ease:Power4.easeInOut});
+        TweenLite
+        .fromTo(box2, 4, {x: 0}, {x: 1400, ease:Power4.easeInOut});
+        TweenLite
+        .fromTo(box3, 6, {x: '-=2800px'}, {x: 0, ease:Power4.easeInOut});
+
       }
     }); // listusers
 

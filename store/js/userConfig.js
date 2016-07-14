@@ -12,8 +12,8 @@ angular.module('userApp')
         templateUrl: "pages/ipad_1_starting_page.html",
         authenticate: false
       })
-      .state("ipad", {
-        url: "/ipad",
+      .state("addphoto", {
+        url: "/addphoto",
         templateUrl: "pages/ipad_2_add_photo.html",
         authenticate: false
       })
