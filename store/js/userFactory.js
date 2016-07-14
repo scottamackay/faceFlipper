@@ -114,6 +114,14 @@ angular.module('userApp', ['ngRoute', 'ui.router', 'ngNotificationsBar', 'webcam
         $location.url('/register');
       };
 
+      UserClass.prototype.win = function() {
+        $location.url('/win');
+      }
+
+      UserClass.prototype.lose = function() {
+        $location.url('/lose');
+      }
+
       UserClass.prototype.showNotification = function(type, msg) {
         notifications[type]({
           message: msg,

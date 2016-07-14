@@ -288,6 +288,7 @@ a {
 }
 #main .content p select {
     margin-right: 15px;
+    width: 15%;
 }
 #main .content .button {
     color: #fff;
@@ -430,8 +431,12 @@ a {
         left: 10px;
     }
     #main .content p label {}
-    #main .content p input[type=text], #main .content p input[type=password], #main .content p select {
+    #main .content p input[type=text], #main .content p input[type=password] {
         width: 60%;
+    }
+
+    #main .content p select {
+      width: 15%;
     }
 }
 .thumbnail-button {

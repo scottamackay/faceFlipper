@@ -57,13 +57,15 @@ module.exports = function(System) {
     /*
      * Update image path and url
      */
-    updateUser: function(_id, name, callback) {
+    updateUser: function(_id, path, callback) {
+      var pth = path;
+      if (path.indexOf('store/') !== -1) pth = path.split('store/').join('');
       User.findOneAndUpdate({
           _id: _id
         }, {
           $set: {
-            'image.url': 'https://faceflipper.s3.amazonaws.com/' + name,
-            'image.name': name
+            'image.url': 'https://faceflipper.s3.amazonaws.com/' + pth,
+            'image.name': pth
           }
         },
         function(err, saa) {

@@ -1,27 +1,56 @@
-<div class="content" ng-controller="registerController as register">
-  <h2 class="title2">Sign up</h2>
-  <!-- <p>Me got forms too:</p> -->
-  <form ng-submit="register.register();">
-    <div class="box-white">
-      <p>
-        <label for="field1">Firstname</label>
-        <input id="field1" ng-model="register.user.firstname" type="text" />
-      </p>
-      <p>
-        <label for="field2">Lastname</label>
-        <input id="field2" ng-model="register.user.lastname" type="text" />
-      </p>
-      <p>
-        <label for="field3">Email</label>
-        <input id="field3" ng-model="register.user.email" type="text" />
-      </p>
-    </div>
+<div id="main" ng-controller="registerController as register">
+  <div class="content" ng-controller="registerController as register">
+    <h2 class="title2">GIVE US A LITTLE INFO TO GET STARTED</h2>
+    <!-- <p>Me got forms too:</p> -->
+    <form ng-submit="register.register();">
+      <div class="box-white">
+        <p>
+          <label for="field1">FIRST NAME </label>
+          <input id="field1" ng-model="register.user.firstname" type="text" />
+        </p>
+        <p>
+          <label for="field2">LAST NAME</label>
+          <input id="field2" ng-model="register.user.lastname" type="text" />
+        </p>
+        <p>
+          <label>DATE OF BIRTH</label>
+          <select id="field3">
+            <option>0</option>
+            <option>1</option>
+          </select>
+          <select id="field4">
+            <option>2</option>
+            <option>3</option>
+          </select>
+          <select id="field5">
+            <option>4</option>
+            <option>5</option>
+          </select>
+        </p>
+        <p>
+          <label for="field6">EMAIL</label>
+          <input id="field6" ng-model="register.user.email" type="text" />
+        </p>
+        <p>
+          <label for="field7">POSTAL CODE</label>
+          <input id="field7" ng-model="register.user.postal" type="text" />
+        </p>
+        <p>
+          <input type="checkbox" name="vehicle" value="Car">YES, I AM OVER 19 YEARS OF AGE.
+        </p>
+        <p>
+          <input type="checkbox" name="vehicle" value="Car">YES, I GIVE OLG SLUTS AND CASINOS PERMISSION TO USE MY PHOTO
+        </p>
+        <p>
+          <input type="checkbox" name="vehicle" value="Car">YES, I WOULD LIKE TO RECEIVE EMAIL COMMUNICATIONS FROM OLG SLOTS AND CASINOS
+        </p>
+      </div>
 
-    <p>
-      <input type="submit" class="button" value="Sign up" />
-    </p>
-    <p class="note">No worry. We are not gonna send spam.</p>
-  </form>
+      <p>
+        <input type="submit" class="button" value="SIGN ME UP" />
+      </p>
+    </form>
 
+  </div>
 </div>
 <!--content-->

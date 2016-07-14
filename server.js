@@ -21,14 +21,9 @@ var express = require('express'),
   uploadedFilesPath = 'store/uploads/',
   chunkDirName = "chunks",
   maxFileSize = process.env.MAX_FILE_SIZE || 0, // in bytes, 0 for unlimited
-  AWS = require('aws-sdk'),
   fs = require('fs'),
   async = require('async');
 
-AWS.config.update({
-  accessKeyId: process.env.AWS_KEY_ID,
-  secretAccessKey: process.env.AWS_SECRET_KEY
-});
 
 app.get('/', function(req, res) {
   res.sendFile(path.join(__dirname + '/index.html'));
@@ -105,8 +100,6 @@ app.route('/getUsers')
   })
 
 function writeDBandAWS(_id, path, callback) {
-  console.log(_id, path);
-  var s3 = new AWS.S3();
   async.auto({
     getFileName: function(next) {
       user.getFileName(_id, function(err, name) {
@@ -114,25 +107,8 @@ function writeDBandAWS(_id, path, callback) {
         next(null, name);
       });
     },
-    saveAws: ['getFileName', function(next, result) {
-      fs.readFile(path, function(err, file_buffer) {
-        if (err) return next(err);
-        var params = {
-          Bucket: 'faceflipper',
-          Key: result.getFileName,
-          Body: file_buffer,
-          Expires: 435435344,
-          ACL: 'public-read'
-        };
-
-        s3.putObject(params, function(err, data) {
-          if (err) next(err);
-          next(null, result.getFileName);
-        });
-      });
-    }],
-    updateUser: ['saveAws', function(next, result) {
-      user.updateUser(_id, result.saveAws, function(err, data) {
+    updateUser: ['getFileName', function(next, result) {
+      user.updateUser(_id, path, function(err, data) {
         if (err) return next(err);
         next(null, 'done');
       });

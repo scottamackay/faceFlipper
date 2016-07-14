@@ -41,8 +41,8 @@ angular.module('userApp')
       // $scope.users = args.users;
       $scope.images = [];
       _.each(args.users, function(user) {
-        if (user.image && user.image.url) $scope.images.push({
-          url: user.image.url,
+        if (user.image && user.image.name) $scope.images.push({
+          url: user.image.name,
           id: user._id
         });
       }); // each
@@ -97,7 +97,7 @@ angular.module('userApp')
     self.play = function() {
       socket.emit('play', User.user._id);
       $scope.userplayed = true;
-
+      _.random(1) > 0 ? User.win() : User.lose();
     }
 
     self.takeBack = function() {
