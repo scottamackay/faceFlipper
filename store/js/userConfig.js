@@ -14,22 +14,17 @@ angular.module('userApp')
       })
       .state("win", {
         url: "/win",
-        templateUrl: "pages/win.html",
+        templateUrl: "pages/ipad_4_you_won.html",
         authenticate: true
       })
       .state("lose", {
         url: "/lose",
-        templateUrl: "pages/lose.html",
+        templateUrl: "pages/ipad_6_so_close.html",
         authenticate: true
-      })
-      .state("ipadregister", {
-        url: "/ipadregister",
-        templateUrl: "pages/register.html.html",
-        authenticate: false
       })
       .state("home", {
         url: "/",
-        templateUrl: isTabletOrMobile ? "pages/register.html" : "pages/tv.html",
+        templateUrl: isTabletOrMobile ? "pages/ipad_1_starting_page.html" : "pages/tv_screen.html",
         authenticate: false
       });
     // Send to login if the URL was not found
