@@ -19,7 +19,7 @@ angular.module('userApp')
       })
       .state("goodluck", {
         url: "/goodluck",
-        templateUrl: "pages/ipad_5_good_luck.html",
+        templateUrl: "pages/ipad_4_good_luck.html",
         authenticate: false
       })
       .state("spin", {
@@ -29,7 +29,7 @@ angular.module('userApp')
       })
       .state("win", {
         url: "/win",
-        templateUrl: "pages/ipad_4_you_won.html",
+        templateUrl: "pages/ipad_5_you_won.html",
         authenticate: false
       })
       .state("lose", {
