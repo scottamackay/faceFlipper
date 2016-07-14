@@ -22,6 +22,11 @@ angular.module('userApp')
         templateUrl: "pages/lose.html",
         authenticate: true
       })
+      .state("ipadregister", {
+        url: "/ipadregister",
+        templateUrl: "pages/register.html.html",
+        authenticate: false
+      })
       .state("home", {
         url: "/",
         templateUrl: isTabletOrMobile ? "pages/register.html" : "pages/tv.html",
