@@ -7,24 +7,39 @@ angular.module('userApp')
       return check;
     })();
     $stateProvider
+      .state("starting", {
+        url: "/ipad",
+        templateUrl: "pages/ipad_1_starting_page.html",
+        authenticate: false
+      })
       .state("ipad", {
         url: "/ipad",
         templateUrl: "pages/ipad_2_add_photo.html",
-        authenticate: true
+        authenticate: false
+      })
+      .state("goodluck", {
+        url: "/goodluck",
+        templateUrl: "pages/ipad_5_good_luck.html",
+        authenticate: false
       })
       .state("win", {
         url: "/win",
         templateUrl: "pages/ipad_4_you_won.html",
-        authenticate: true
+        authenticate: false
       })
       .state("lose", {
         url: "/lose",
         templateUrl: "pages/ipad_6_so_close.html",
-        authenticate: true
+        authenticate: false
+      })
+      .state("playnow", {
+        url: "/playnow",
+        templateUrl: "pages/ipad_0_play_now.html",
+        authenticate: false
       })
       .state("home", {
         url: "/",
-        templateUrl: isTabletOrMobile ? "pages/ipad_1_starting_page.html" : "pages/tv_screen.html",
+        templateUrl: isTabletOrMobile ? "pages/ipad_0_play_now.html" : "pages/tv_screen.html",
         authenticate: false
       });
     // Send to login if the URL was not found
