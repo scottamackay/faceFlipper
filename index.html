@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" nat-lang="tr" ng-app="userApp">
+<html lang="en" nat-lang="tr" ng-app="userApp" ng-controller="bodyController as ctrl">
 
 <head>
   <!-- start: Meta -->
@@ -38,7 +38,7 @@
   <link rel="stylesheet" type="text/css" href="css/ngNotificationsBar.min.css" />
   <link rel="stylesheet" type="text/css" href="css/fine-uploader-new.css" />
   <!-- <link rel="stylesheet" type="text/css" href="css/bootstrap.css" /> -->
-  <link rel="stylesheet" type="text/css" href="css/style.css" />
+  <link rel="stylesheet" type="text/css" ng-href="{{responsiveCSS}}" />
 
   <script type="text/template" id="qq-template">
     <div class="qq-uploader-selector qq-uploader qq-gallery" ng-attr-qq-drop-area-text="{{dropZoneText}}">
@@ -121,7 +121,7 @@
 
 <!-- define angular controller -->
 
-<body ng-controller="bodyController as ctrl">
+<body>
   <notifications-bar class="notifications"></notifications-bar>
   <div id="wrap">
     <!--header-->

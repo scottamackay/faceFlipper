@@ -42,6 +42,7 @@ angular.module('userApp')
         templateUrl: isTabletOrMobile ? "pages/ipad_0_play_now.html" : "pages/tv_screen.html",
         authenticate: false
       });
+      // $rootScope.isTabletOrMobile = isTabletOrMobile;
     // Send to login if the URL was not found
     $urlRouterProvider.otherwise("/");
   })
