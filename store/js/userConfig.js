@@ -22,6 +22,11 @@ angular.module('userApp')
         templateUrl: "pages/ipad_5_good_luck.html",
         authenticate: false
       })
+      .state("spin", {
+        url: "/spin",
+        templateUrl: "pages/ipad_3_spin.html",
+        authenticate: false
+      })
       .state("win", {
         url: "/win",
         templateUrl: "pages/ipad_4_you_won.html",
