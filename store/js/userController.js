@@ -138,7 +138,7 @@ angular.module('userApp')
       lastname: User.user.lastname
     };
   })
-  .controller('spinController', function($scope, User) {
+  .controller('spinController', function($scope, User, socket) {
     self.play = function() {
       console.log('wondasddfds')
       socket.emit('play', User.user._id);
