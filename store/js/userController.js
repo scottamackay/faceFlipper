@@ -122,9 +122,14 @@ angular.module('userApp')
 
       });
       moveImage('left', 'bottom', function() {
-        self.screen = false;
-        console.log(self, 'here');
-        _.random(1) > 0 ? self.win = true : self.lose = true;
+        console.log($scope, 'here');
+        $scope.safeApply();
+        $scope.$applyAsync(function(){
+          if(_.random(1) > 0)  $scope.win = true;
+          else $scope.lose = true;
+          $scope.screen = false;
+
+        })
       });
     });
   })
