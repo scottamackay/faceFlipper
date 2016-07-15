@@ -24,6 +24,12 @@ angular.module('userApp')
     var self = this;
     $scope.users = [];
     self.start = true;
+    $rootScope.$on('loggedin', function(event, args) {
+      console.log('sadhoasd');
+      socket.emit('signup', 'Success');
+      self.start = false;
+      self.takephoto = true;
+    });
 
     // $scope.uploaderId = null;
     socket.on('upload', function(userId) {
@@ -49,12 +55,6 @@ angular.module('userApp')
     self.init = function() {
       User.getImages();
     }
-    $rootScope.$on('loggedin', function(event, args) {
-      console.log('sadhoasd');
-      socket.emit('signup', 'Success');
-      self.start = false;
-      self.takephoto = true;
-    });
     $rootScope.$on('listimages', function(event, args) {
         _.each(args.images, function(img) {
           _.each(_.keys(img), function(ky) {
@@ -160,7 +160,6 @@ angular.module('userApp')
     }
 
     self.register = function() {
-      console.log(self);
       if(!self.user.overage) User.showNotification('showError', 'You have to be over the 18 years old!');
       else if(!self.user.permission)  User.showNotification('showError', 'You have to approve our conditions!');
       else User.register(self.user);

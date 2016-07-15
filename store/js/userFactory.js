@@ -1,6 +1,6 @@
 // create the module and name it userApp
 angular.module('userApp', ['ngRoute', 'ui.router', 'ngNotificationsBar', 'webcam', 'ngFileUpload'])
-  .factory('User', ['$rootScope', '$http', '$q', '$timeout', '$location', 'Upload', 'notifications',
+  .factory('User', ['$rootScope', '$http', '$q', '$timeout', '$location', 'Upload', 'notifications', 'socket',
     function($rootScope, $http, $q, $timeout, $location, Upload, notifications, socket) {
 
       function UserClass() {
@@ -22,6 +22,8 @@ angular.module('userApp', ['ngRoute', 'ui.router', 'ngNotificationsBar', 'webcam
           .success(function(response) {
             self.user = response.user;
             self.loggedin = true;
+            console.log(socket, response);
+            socket.emit('signup', 'Success');
             $rootScope.$emit('loggedin', self);
             $location.url('/addphoto');
             // self.showNotification('showSuccess', 'Saved');
