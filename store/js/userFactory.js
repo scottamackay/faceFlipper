@@ -62,7 +62,6 @@ angular.module('userApp', ['ngRoute', 'ui.router', 'ngNotificationsBar', 'webcam
       };
 
       UserClass.prototype.win = function() {
-        console.log('wond')
         $location.url('/win');
       }
 

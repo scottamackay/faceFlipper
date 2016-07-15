@@ -123,6 +123,7 @@ angular.module('userApp')
       });
       moveImage('left', 'bottom', function() {
         self.screen = false;
+        console.log(self, 'here');
         _.random(1) > 0 ? self.win = true : self.lose = true;
       });
     });
@@ -140,8 +141,6 @@ angular.module('userApp')
   })
   .controller('spinController', function($scope, User, socket) {
     $scope.play = function() {
-      alert('example');
-      console.log('wondasddfds');
       socket.emit('play', User.user._id);
       _.random(1) > 0 ? User.win() : User.lose();
     }
