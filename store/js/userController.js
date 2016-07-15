@@ -88,28 +88,28 @@ angular.module('userApp')
           .fromTo(box, 3, {
             x: 0
           }, {
-            x: direction === 'right' ? -2760 : 2760,
+            x: direction === 'right' ? -1940 : 1940,
             ease: SteppedEase.easeInOut
           });
         TweenLite
           .fromTo(box2, 3, {
-            x: direction === 'right' ? 1380 : -1380,
+            x: direction === 'right' ? 970 : -970,
           }, {
-            x: direction === 'right' ? -1380 : 1380,
+            x: direction === 'right' ? -970 : 970,
             ease: SteppedEase.easeInOut
             // delay: 1
           });
         TweenLite
           .fromTo(box3, 3, {
-            x: direction === 'right' ? 1380 : -1380,
+            x: direction === 'right' ? 970 : -970,
           }, {
-            x: direction === 'right' ? -1380 : +1380,
+            x: direction === 'right' ? -970 : +970,
             ease: SteppedEase.easeInOut,
             delay: 0.9
           });
           TweenLite
           .fromTo(box4, 3, {
-            x: direction === 'right' ? 2760 : -2760
+            x: direction === 'right' ? 1940 : -1940
           }, {
             x: 0,
             ease: SteppedEase.easeInOut,
