@@ -136,7 +136,7 @@ angular.module('userApp')
       });
     });
   })
-  .controller('loseController', function($scope,$state) {
+  .controller('loseController', function($scope,$state, socket) {
     var self = this;
     self.reload = function() {
       console.log('loooosee');
@@ -144,7 +144,7 @@ angular.module('userApp')
       $state.transitionTo("home");
     }
   })
-  .controller('winController', function($scope, $state) {
+  .controller('winController', function($scope, $state, socket) {
     var self = this;
     self.reload = function() {
       console.log('wiiin');
