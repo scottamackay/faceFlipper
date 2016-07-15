@@ -68,7 +68,7 @@ html, #wrap {
 }
 
 .dev-only{
-	display:block;
+	display:none;
 	width: 100px;
 	height:100px;
 	float:left;
@@ -76,7 +76,8 @@ html, #wrap {
 	margin-top:30px;	
 }
 .dev-only button{
-	display:inline;
+	/*display:inline;*/
+	display:none;
 	font-size:30px;	
 }
 
@@ -285,12 +286,28 @@ input[type=date]{
 	
 }
  /*-----------------------------------lose page--------*/
-.ipad-close {
+.ipad-lose {
 	display:block;
 	width:1536px;
 	height:2048px;
 	background:url(../images/lose_1536x2048.jpg) no-repeat top left;
 	
+}
+.ipad-win .content, ipad-lose .content{
+	display:block;
+	width:1536px;
+	height:2048px;
+	padding-top:1920px;
+	padding-left:0px;
+}
+.ipad-win button, .ipad-lose button{
+	display:block;
+	width:300px;
+	height:100px;
+	/*background:#3F0;*/
+	text-indent:-9999px;	
+	-webkit-appearance: none;
+	opacity:0;
 }
  /*-----------------------------------good luck page--------*/
 .ipad-good-luck {
@@ -321,12 +338,11 @@ input[type=date]{
 	height:100%;
 }
 .ipad-spin button{
-	/*-webkit-appearance: none;*/
-	background:#6FF;
 	display:block;
 	width:	720px;
 	height:272px;
 	text-indent:-9999999px;
-	/*opacity:0;*/
+	-webkit-appearance: none;
+	opacity:0;
 	
 }
