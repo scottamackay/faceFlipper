@@ -56,9 +56,10 @@ io.on('connection', function(socket) {
     //send play request to all clients
     io.emit('playgame', userId, result);
   });
+
   socket.io('playfinished', function(userId, result) {
     io.emit('playresult', result);
-  })
+  });
   // user send signup request
   socket.on('signup', function(msg) {
     //send play request to all clients
