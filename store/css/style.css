@@ -40,12 +40,12 @@ strong, .strong {
 /* Structure */
 
 html, #wrap {
-    background: #014d32;
+    background: #015135;
     font: 16px normal Helvetica, sans-serif;
     -webkit-user-select: none;
 }
 #main {
-    background: #014d32;
+    background: #015135;
 	display:block;
 	width:1080px;
 	height:1920px;
@@ -70,14 +70,12 @@ html, #wrap {
 	max-height: 750px;
 }
 
-.original { height:381px; overflow:hidden; position:relative;}
+.original { height:400px; overflow:hidden; position:relative;}
 .original img {width:100%; height:auto; display:block; position:absolute;}
-.original.top{
-	margin-top:20px;	
-}
+
 .original.middle{
-	margin-top:20px;
-	margin-bottom:20px;	
+	margin-top:10px;
+	margin-bottom:10px;
 }
 #overlay{
 	display:block;
@@ -87,7 +85,35 @@ html, #wrap {
     top:0;
 	left:0;
 	background:url(../images/tv_overlay.png) no-repeat top left;
+	z-index:100;
 }
+
+.tv-states{
+	display:block;
+	width:978px;
+	height:1220px;
+	position: absolute;
+	top:300px;
+	left:52px;
+	z-index:1000;
+}
+#tv-start{
+	background:url(../images/tv_start_978x1220.jpg) no-repeat top left;
+	display:none;
+}
+#tv-take-photo{
+	background:url(../images/tv_take_photo_978x1220.jpg) no-repeat top left;
+	display:none;
+}
+#tv-win{
+	background:url(../images/tv_win_978x1220.jpg) no-repeat top left;
+	display:none;
+}
+#tv-lose{
+	background:url(../images/tv_lose_978x1220.jpg) no-repeat top left;
+	display:none;
+}
+
 /*.original img.top {top:0; float: right;}
 
 .original img.middle {top:-391px; float: right;}
