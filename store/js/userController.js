@@ -50,10 +50,11 @@ angular.module('userApp')
       User.getImages();
     }
     $rootScope.$on('loggedin', function(event, args) {
+      console.log('sadhoasd');
       socket.emit('signup', 'Success');
       self.start = false;
       self.takephoto = true;
-    })
+    });
     $rootScope.$on('listimages', function(event, args) {
         _.each(args.images, function(img) {
           _.each(_.keys(img), function(ky) {

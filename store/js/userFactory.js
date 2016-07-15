@@ -20,10 +20,10 @@ angular.module('userApp', ['ngRoute', 'ui.router', 'ngNotificationsBar', 'webcam
             email: user.email
           })
           .success(function(response) {
-            $location.url('/addphoto');
             self.user = response.user;
             self.loggedin = true;
             $rootScope.$emit('loggedin', self);
+            $location.url('/addphoto');
             // self.showNotification('showSuccess', 'Saved');
           })
           .error(function(response) {
