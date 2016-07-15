@@ -410,7 +410,7 @@ a {
 
 @media only screen and (max-device-width: 1024px) {
 	html{
-	background-color:#014d32;	
+	background-color:#014d32;
 	}
     #sidebar {
         overflow: scroll;
@@ -463,14 +463,14 @@ a {
     right: 0;
 }
 .image {
-	max-height: 900px;
+	max-height: 750px;
 }
 
-.original { height:300px; overflow:hidden; position:relative;}
+.original { height:250px; overflow:hidden; position:relative;}
 .original img {width:100%; height:auto; display:block; position:absolute;}
 
 .original img.top {top:0; float: right;}
 
-.original img.middle {top:-300px; float: right;}
+.original img.middle {top:-250px; float: right;}
 
 .original img.bottom {bottom:0; float: right;}

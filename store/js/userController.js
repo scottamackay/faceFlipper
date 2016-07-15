@@ -73,6 +73,8 @@ angular.module('userApp')
           self.urlThird = $scope.images[_.random(0, $scope.images.length - 1)]['url'];
         }
         moveImage('left', 'top');
+        moveImage('right', 'middle');
+        moveImage('left', 'bottom');
       }
 
       function moveImage(direction, id) {
@@ -82,35 +84,35 @@ angular.module('userApp')
           box4 = $('#' + id + '4');
 
         TweenLite
-          .fromTo(box, 4, {
-            x: '-=1390px'
+          .fromTo(box, 3, {
+            x: 0
           }, {
-            x: '+=2780px',
-            // ease: SteppedEase.easeInOut
+            x: direction === 'right' ? -2760 : 2760,
+            ease: SteppedEase.easeInOut
           });
         TweenLite
-          .fromTo(box2, 4, {
-            x: '-=1390px',
+          .fromTo(box2, 3, {
+            x: direction === 'right' ? 1380 : -1380,
           }, {
-            x: '+=2780px',
-            // ease: SteppedEase.easeInOut,
-            delay: 1
-          })
+            x: direction === 'right' ? -1380 : 1380,
+            ease: SteppedEase.easeInOut
+            // delay: 1
+          });
         TweenLite
-          .fromTo(box3, 4, {
-            x: '-=1390px',
+          .fromTo(box3, 3, {
+            x: direction === 'right' ? 1380 : -1380,
           }, {
-            x: '+=2780px',
-            // ease: SteppedEase.easeInOut,
-            delay: 2
+            x: direction === 'right' ? -1380 : +1380,
+            ease: SteppedEase.easeInOut,
+            delay: 0.9
           });
           TweenLite
           .fromTo(box4, 3, {
-            x: '-=1390px'
+            x: direction === 'right' ? 2760 : -2760
           }, {
             x: 0,
-            // ease: SteppedEase.easeInOut,
-            delay: 3
+            ease: SteppedEase.easeInOut,
+            delay: 0.9
           });
       }
     }); // listusers
