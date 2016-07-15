@@ -73,8 +73,8 @@ angular.module('userApp', ['ngRoute', 'ui.router', 'ngNotificationsBar', 'webcam
       UserClass.prototype.showNotification = function(type, msg) {
         notifications[type]({
           message: msg,
-          // hideDelay: 1500, //ms
-          hide: false //bool
+          hideDelay: 1500, //ms
+          hide: true //bool
         });
       }
 

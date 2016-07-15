@@ -113,7 +113,7 @@ angular.module('userApp')
       });
     }
 
-    socket.on('playgame', function(userId) {
+    socket.on('playgame', function(userId, result) {
 
       moveImage('left', 'top', function() {
 
@@ -123,12 +123,11 @@ angular.module('userApp')
       });
       moveImage('left', 'bottom', function() {
         console.log($scope, 'here');
-        $scope.safeApply();
         $scope.$applyAsync(function(){
-          if(_.random(1) > 0)  $scope.win = true;
+          if(result)  $scope.win = true;
           else $scope.lose = true;
           $scope.screen = false;
-
+          socket.emit('playfinished', User.user._id, isWin);
         })
       });
     });
@@ -145,9 +144,13 @@ angular.module('userApp')
     };
   })
   .controller('spinController', function($scope, User, socket) {
+    $('.notifications').remove;
     $scope.play = function() {
-      socket.emit('play', User.user._id);
-      _.random(1) > 0 ? User.win() : User.lose();
+      var isWin = _.random(1) > 0 ? true : false;
+      socket.emit('play', User.user._id, isWin);
+      socket.on('playresult', function(result) {
+        result ? User.win() : User.lose();
+      }
     }
   })
   .controller('registerController', function($scope, $rootScope, User) {
