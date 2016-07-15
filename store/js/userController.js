@@ -24,9 +24,6 @@ angular.module('userApp')
     var self = this;
     $scope.users = [];
     // $scope.uploaderId = null;
-    self.urlFirst = '';
-    self.urlSecond = '';
-    self.urlThird = '';
     socket.on('upload', function(userId) {
       $timeout(function() {
         User.uploaderId = userId;
@@ -43,39 +40,43 @@ angular.module('userApp')
       return link + '?breakcache=' + d;
     }
     self.init = function() {
-      User.getUsers();
+      User.getImages();
     }
-    $rootScope.$on('listusers', function(event, args) {
+    $rootScope.$on('listimages', function(event, args) {
       // $scope.users = args.users;
-      $scope.images = [];
-      _.each(args.users, function(user) {
-        if (user.image && user.image.name) $scope.images.push({
-          url: user.image.name,
-          id: user._id
-        });
-      }); // each
-      if ($scope.images.length > 0) {
+      // $scope.images = [];
+      // _.each(args.users, function(user) {
+      //   if (user.image && user.image.name) $scope.images.push({
+      //     url: user.image.name,
+      //     id: user._id
+      //   });
+      // }); // each
         if (User.uploaderId) {
           // console.log(_.findIndex($scope.images, function(img) {
           //   return img.id === $scope.uploaderId;
           // }), $scope.images, $scope.uploaderId);
-          self.urlFirst = $scope.images[_.findIndex($scope.images, function(img) {
-            return img.id === User.uploaderId;
-          })]['url'];
-          console.log('yes id')
-          self.urlSecond = self.urlFirst;
-          self.urlThird = self.urlFirst;
-          // self.urlSecond = self.urlThird = self.urlFirst;
+          // self.urlFirst = $scope.images[_.findIndex($scope.images, function(img) {
+          //   return img.id === User.uploaderId;
+          // })]['url'];
+          // console.log('yes id')
+          // self.urlSecond = self.urlFirst;
+          // self.urlThird = self.urlFirst;
+          // // self.urlSecond = self.urlThird = self.urlFirst;
         } else {
-          console.log('no id');
-          self.urlFirst = $scope.images[_.random(0, $scope.images.length - 1)]['url'];
-          self.urlSecond = $scope.images[_.random(0, $scope.images.length - 1)]['url'];
-          self.urlThird = $scope.images[_.random(0, $scope.images.length - 1)]['url'];
+          // console.log('no id');
+          // self.urlFirst = $scope.images[_.random(0, $scope.images.length - 1)]['url'];
+          // self.urlSecond = $scope.images[_.random(0, $scope.images.length - 1)]['url'];
+          // self.urlThird = $scope.images[_.random(0, $scope.images.length - 1)]['url'];
         }
+        _.each(args.images, function(img) {
+          _.each(_.keys(img), function(ky) {
+            self[ky] = img[ky];
+          });
+        })
+        console.log(self);
         moveImage('left', 'top');
         moveImage('right', 'middle');
         moveImage('left', 'bottom');
-      }
 
       function moveImage(direction, id) {
         var box = $('#' + id),
@@ -115,7 +116,7 @@ angular.module('userApp')
             delay: 0.9
           });
       }
-    }); // listusers
+    }); // listimages
 
     socket.on('playgame', function(userId) {
       var luckyInd = _.random(2);

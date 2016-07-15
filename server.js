@@ -89,12 +89,12 @@ app.route('/addUser')
     });
   });
 
-app.route('/getUsers')
+app.route('/getImages')
   .get(function(req, res) {
-    user.getUsers(function(err, users) {
+    user.getImages(req.query, function(err, images) {
       if (err) return res.status(500).send(err);
       res.send({
-        users: users
+        images: images
       })
     })
   })
