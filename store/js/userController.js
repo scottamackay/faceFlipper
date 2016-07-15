@@ -51,6 +51,8 @@ angular.module('userApp')
     }
     $rootScope.$on('loggedin', function(event, args) {
       socket.emit('signup', 'Success');
+      self.start = false;
+      self.takephoto = true;
     })
     $rootScope.$on('listimages', function(event, args) {
         _.each(args.images, function(img) {
