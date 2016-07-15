@@ -409,6 +409,9 @@ a {
 /* All portable */
 
 @media only screen and (max-device-width: 1024px) {
+	html{
+	background-color:#014d32;	
+	}
     #sidebar {
         overflow: scroll;
     }

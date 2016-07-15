@@ -1,15 +1,17 @@
-<div id="main">
+<div id="main" class="ipad-add-photo">
   <div class="content" ng-controller="ipadController as ipad">
-    <h2 class="title2">Take photo</h2>
+    
+    <div class="dev-only">
     <!-- <p>Me got forms too:</p> -->
-    <button ui-sref='win'>win</button>
+    <button ui-sref='spin'>spin</button>
+    <button ui-sref='goodluck'>goodluck</button>
     <button ui-sref='lose'>loose</button>
-    <button ui-sref='ipad'>goodluck</button>
-    <div class="box-white">
+    <button ui-sref='win'>win</button>
+    </div>
       <!-- <p>
       <input type="file" capture="camera" ngf-select ng-model="ipad.media" name="media" ngf-max-size="20MB" ngf-accept="'image/*'" ng-change="ipad.onFileChange()" class="button" value="Sign in" />
     </p> -->
-
+		<div class="uploader-content">
       <dialog class="large-preview">
         <button title="close" ng-click="closePreview()">X</button>
         <image ng-src="{{largePreviewUri}}" />
@@ -22,8 +24,8 @@
         </p>
         <a class="left" ui-sref='register' ng-show="userplayed" ng-click="ipad.takeBack()">Take me back to sign up!</a>
       </form>
-    </div>
-    <!-- box-white-->
+    	</div>
+    
     <!-- <webcam></webcam> -->
   </div>
 </div>

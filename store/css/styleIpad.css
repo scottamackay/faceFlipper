@@ -37,437 +37,211 @@ strong, .strong {
     text-align: center;
 }
 
-/* Shared classes */
+ /*-----------------------------------fonts------*/
+@font-face {
+    font-family: TradeGothic;
+    src: url(../fonts/TradeGothic/TradeGothicLTStd.otf);
+}
 
-.header {
-    background: #aeb2be;
-    /* Old browsers */
-    background: -moz-linear-gradient(top, #ffffff 0%, #aeb2be 100%);
-    /* FF3.6+ */
-    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #ffffff), color-stop(100%, #aeb2be));
-    /* Chrome,Safari4+ */
-    background: -webkit-linear-gradient(top, #ffffff 0%, #aeb2be 100%);
-    /* Chrome10+,Safari5.1+ */
-    background: -o-linear-gradient(top, #ffffff 0%, #aeb2be 100%);
-    /* Opera 11.10+ */
-    background: -ms-linear-gradient(top, #ffffff 0%, #aeb2be 100%);
-    /* IE10+ */
-    background: linear-gradient(top, #ffffff 0%, #aeb2be 100%);
-    /* W3C */
-    filter: progid: DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#aeb2be', GradientType=0);
-    /* IE6-9 */
-    border-bottom: 1px solid #000;
-    height: 43px;
-    position: fixed;
-    text-align: center;
-    top: 0;
-    left: 0;
+@font-face {
+    font-family: Compacta;
+    src: url(../fonts/Compacta/compacta-bt.ttf);
 }
-.header .title {
-    color: #71787F;
-    font-size: 18px;
-    font-weight: bold;
-    margin-top: 10px;
-    text-shadow: 0 1px 1px #fff;
-}
+
+
 
 /* Structure */
 
 html, #wrap {
-    background: #d8dae0;
+    background: #014d32;
     font: 16px normal Helvetica, sans-serif;
     -webkit-user-select: none;
 }
 #main {
-    background: #d8dae0;
-    height: 100%;
-    padding: 63px 20px 20px 320px;
+    display:block;
+	width:1536px;
+	height:2048px;
     position: relative;
     vertical-align: top;
 }
-#main .header {
-    padding-left: 155px;
-    width: 100%;
+
+.dev-only{
+	display:block;
+	width: 100px;
+	height:100px;
+	float:left;
+	font-size:30px;	
 }
-#main .header .left, #main .header .right {
-    background: #7A8091;
-    /* Old browsers */
-    background: -moz-linear-gradient(top, #999999 0%, #333333 100%);
-    /* FF3.6+ */
-    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #999999), color-stop(100%, #333333));
-    /* Chrome,Safari4+ */
-    background: -webkit-linear-gradient(top, #999999 0%, #333333 100%);
-    /* Chrome10+,Safari5.1+ */
-    background: -o-linear-gradient(top, #999999 0%, #333333 100%);
-    /* Opera 11.10+ */
-    background: -ms-linear-gradient(top, #999999 0%, #333333 100%);
-    /* IE10+ */
-    background: linear-gradient(top, #999999 0%, #333333 100%);
-    /* W3C */
-    filter: progid: DXImageTransform.Microsoft.gradient( startColorstr='#999999', endColorstr='#333333', GradientType=0);
-    /* IE6-9 */
-    color: #fff;
-    border-radius: 5px;
-    border: 1px solid #6d6d6d;
-    font-size: 12px;
-    left: 310px;
-    position: fixed;
-    top: 9px;
-    padding: 5px 8px;
-    text-decoration: none;
+.dev-only button{
+	display:inline;
+	font-size:30px;	
 }
-#main .header .title {}
-#main .header .right {
-    right: 10px;
-    left: auto;
+ /*-----------------------------------first page------*/
+.ipad-play-now{
+	background:url(../images/play_now_1536x2048.jpg) no-repeat top left;
 }
-#main .content {}
-#main .content>:first-child {
-    margin-top: 0 !important;
+.ipad-play-now .content{
+	padding-top:1010px;
+	padding-left:422px;
 }
-#main .content .title {
-    font-size: 18px;
-    font-weight: bold;
-    margin: 20px 0 10px;
+.ipad-play-now button{
+	display:block;
+	width:719px;
+	height:272px;
+	text-indent:-999999999px;
+	
+	
 }
-#main .content .title2 {
-    color: #4C536C;
-    font-size: 16px;
-    font-weight: bold;
-    margin: 20px 0 10px;
-}
-#main .content .title3 {}
-#main .content .title4 {}
-#main .content .title5 {}
-#main .content>p {
-    color: #4C536C;
-    margin: 10px 0;
-    text-shadow: 0 1px 1px #ccc;
-}
-#main .content p.note {
-    color: #4C536C;
-    font-size: 12px;
-    text-align: center;
-    text-shadow: 0 1px 1px #ccc;
+ /*-----------------------------------second page--------*/
+.ipad-sign-up .sign-up-header{
+	display:block;
+	width:1536px;
+	height:376px;
+	background:url(../images/form_header_1536x376.jpg) no-repeat top left;
+	background-size: 1536px 376px;
 }
 
-/* Box white */
-
-#main .content .box-white {
-    background: #fff;
-    border: 1px solid #B4B7BB;
-    border-radius: 10px;
+.ipad-sign-up .sign-up-form{
+	display:block;
+	width:1536px;
+	height:1396px;
+	background:#FFF;
 }
-#main .content .box-white p {
-    color: #000;
-    border-bottom: 1px solid #B4B7BB;
-    font-weight: bold;
-    margin: 0;
-    padding: 10px;
+.ipad-sign-up .sign-up-form form{
+	font-family:Compacta;
+	font-weight:bold;
+	display:inline-block;
+	width:986px;
+	margin:55px;
+	background:#f2f6f5;
+	padding:55px 200px 55px 250px;
+	
 }
-#main .content .box-white p:last-child {
-    border-bottom: none;
+.ipad-sign-up .sign-up-form form h2{
+	font-weight:bold;
+	font-size:33px;
+	color:#8fb2a6;
+	margin-bottom:70px;
 }
-#main .content .box-white p span {
-    color: #4C556C;
-    float: right;
-    font-weight: normal;
-}
-#main .content .box-white p span.detail {
-    color: #999;
-    float: none;
-    font-size: 12px;
-    margin-left: 5px;
-}
-#main .content .box-white p span.arrow {
-    color: #666;
-    float: none;
-    font-family: monospace;
-    font-weight: bold;
-    margin-left: 5px;
-    text-shadow: 0 1px 1px #666;
+.ipad-sign-up .sign-up-form .form_row{
+	display:block;
+	width:100%;
+	height:40px;
+	font-size:22px;
+	color:#015135;
+	margin-bottom:70px;
+	
 }
 
-/* Tables */
-
-#main table {
-    margin: 20px 0 10px;
-    width: 100%;
+.ipad-sign-up .sign-up-form .form_label{
+	display:block;
+	height:65px;
+	float:right;
+	font-weight:bold;
+	margin-right:40px;
+	vertical-align:bottom;
+	line-height:75px;
 }
-#main table thead th {
-    color: #848B9A;
-    font-size: 90%;
-    font-weight: normal;
-    margin: 20px 0 10px;
-    padding-bottom: 10px;
-    text-align: left;
+.ipad-sign-up .sign-up-form .checkbox_label{
+	font-size:18px;
+	display:block;
+	height:65px;
+	float:left;
+	font-weight:bold;
+	vertical-align:bottom;
+	line-height:75px;
 }
-#main table thead th:first-child {
-    color: #000;
-    font-size: 16px;
-    font-weight: bold;
+.ipad-sign-up .sign-up-form .form_row input{
+	display:block;
+	width:643px;
+	height:65px;
+	border:solid thin #999;
+	float:right;
+	font-size:22px;
+	line-height:30px;
+	margin-right:100px;
+	vertical-align:bottom;
 }
-#main table tbody {
-    background: #fff;
-    border: 1px solid #B4B7BB;
-    border-radius: 10px;
-    /* not working */
-}
-#main table tbody tr {
-    border-bottom: 1px solid #B4B7BB;
-}
-#main table tbody tr:last-child {
-    border-bottom: none;
-}
-#main table tbody tr td {
-    color: #4C556C;
-    padding: 10px 0;
-}
-#main table tbody tr td:first-child {
-    color: #000;
-    padding-left: 10px;
-}
-#main table tbody tr td:last-child {
-    padding-right: 10px;
-}
-
-/* Dirty fix attempt for tbody border-radius */
-
-#main table tbody {
-    border-spacing: 0;
-}
-#main table tbody tr {
-    border: 1px solid #B4B7BB;
-    border-radius: 10px;
-}
-#main table tbody tr:first-child td:first-child {
-    border-top-left-radius: 10px;
-}
-#main table tbody tr:first-child td:last-child {
-    border-top-right-radius: 10px;
-}
-#main table tbody tr:last-child td:first-child {
-    border-bottom-left-radius: 10px;
-}
-#main table tbody tr:last-child td:last-child {
-    border-bottom-right-radius: 10px;
-}
-#main table tbody tr:last-child {
-    border-bottom: 1px solid #B4B7BB;
+.ipad-sign-up .sign-up-form .form_row_checkbox input{
+	display:block;
+	width:66px;
+	height:65px;
+	border:solid thin #999;
+	float:left;
+	font-size:22px;
+	line-height:30px;
+	margin-left:86px;
+	margin-right:40px;
+	vertical-align:bottom;
 }
 
-/* Links */
-
-a {
-    color: #0085d5;
-    text-decoration: none;
-    -webkit-touch-callout: none;
-}
-#main .content .box-white p a, #main .content table a {
-    display: block;
-    padding: 10px;
-    margin: -10px;
+.ipad-sign-up .sign-up-form .form_row_button{
+	display:block;
+	width:	423px;
+	height:140px;
+	margin: 120px auto 0px auto;
+	text-indent:-9999999px;
+	background:url(../images/sign_me_up_button_423x140.png) no-repeat top left;
 }
 
-/* Forms and buttons */
-
-#main .content p label {
-    width: 15%;
+.ipad-sign-up .sign-up-footer{
+	display:block;
+	width:1536px;
+	height:276px;
+	background:url(../images/form_footer_1536x276.jpg) no-repeat top left;
+	bakground-size: 1536px 276px;
+}
+ /*-----------------------------------third page--------*/
+.ipad-add-photo {
+	display:block;
+	width:1536px;
+	height:2048px;
+	background:url(../images/take_photo_1536x2048.jpg) no-repeat top left;
+	
 }
 
-/* Labels not currently clickable without scripting */
+.ipad-add-photo .uploader-content{
+	display:block;
+	width:100%;
+	padding-top:1516px;	
+	padding-left:562px;
+}
+.ipad-add-photo .qq-uploader{
+	display:block;
+	width:370px;	
+	height:70px;
+	background-color:#6FF;
 
-#main .content p input[type=text], #main .content p input[type=password], #main .content p select {
-    background: none;
-    border: none;
-    color: #4C556C;
-    float: right;
-    font-size: 14px;
-    margin-top: -1px;
-    width: 84%;
 }
-#main .content p select {
-    margin-right: 15px;
-    width: 15%;
+ /*-----------------------------------win page--------*/
+.ipad-win {
+	display:block;
+	width:1536px;
+	height:2048px;
+	background:url(../images/win_1536x2048.jpg) no-repeat top left;
+	
 }
-#main .content .button {
-    color: #fff;
-    cursor: pointer;
-    border: 1px solid #999;
-    border-radius: 5px;
-    margin-top: 10px;
-    font-size: 16px;
-    font-weight: bold;
-    padding: 8px;
-    width: 100%;
+ /*-----------------------------------lose page--------*/
+.ipad-close {
+	display:block;
+	width:1536px;
+	height:2048px;
+	background:url(../images/lose_1536x2048.jpg) no-repeat top left;
+	
 }
-#main .content .button.red {
-    background: #D42E32;
-    /* Old browsers */
-    background: -moz-linear-gradient(top, #d58e94 0%, #d42e32 50%, #be1012 51%, #90191b 100%);
-    /* FF3.6+ */
-    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #d58e94), color-stop(50%, #d42e32), color-stop(51%, #be1012), color-stop(100%, #90191b));
-    /* Chrome,Safari4+ */
-    background: -webkit-linear-gradient(top, #d58e94 0%, #d42e32 50%, #be1012 51%, #90191b 100%);
-    /* Chrome10+,Safari5.1+ */
-    background: -o-linear-gradient(top, #d58e94 0%, #d42e32 50%, #be1012 51%, #90191b 100%);
-    /* Opera 11.10+ */
-    background: -ms-linear-gradient(top, #d58e94 0%, #d42e32 50%, #be1012 51%, #90191b 100%);
-    /* IE10+ */
-    background: linear-gradient(top, #d58e94 0%, #d42e32 50%, #be1012 51%, #90191b 100%);
-    /* W3C */
-    filter: progid: DXImageTransform.Microsoft.gradient( startColorstr='#d58e94', endColorstr='#90191b', GradientType=0);
-    /* IE6-9 */
-    border-color: #9A8185;
+ /*-----------------------------------good luck page--------*/
+.ipad-good-luck {
+	display:block;
+	width:1536px;
+	height:2048px;
+	background:url(../images/good_luck_1536x2048.jpg) no-repeat top left;
+	
 }
-#sidebar {
-    background: #BCBEC4;
-    border-right: 1px solid #000;
-    height: 100%;
-    left: 0;
-    position: fixed;
-    top: 0;
-    vertical-align: top;
-    width: 300px;
-    z-index: 1;
+ /*-----------------------------------spin page--------*/
+.ipad-spin {
+	display:block;
+	width:1536px;
+	height:2048px;
+	background:url(../images/spin_1536x2048.jpg) no-repeat top left;
+	
 }
-#sidebar .header {
-    width: 300px;
-}
-#sidebar .header .title {}
-#sidebar .content {
-    padding: 43px 0 20px 0;
-}
-#sidebar .content .nav {}
-#sidebar .content .nav a {
-    background: #D9DCE0;
-    border-top: 1px solid #E7EAED;
-    border-bottom: 1px solid #D0D3D7;
-    color: #000;
-    display: block;
-    font-weight: 900;
-    height: 17px;
-    padding: 12px 10px 16px 10px;
-    text-decoration: none;
-}
-#sidebar .content .nav a.active {
-    background: #0375EE;
-    /* Old browsers */
-    background: -moz-linear-gradient(top, #058CF5 0%, #015DE6 100%);
-    /* FF3.6+ */
-    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #058CF5), color-stop(100%, #015DE6));
-    /* Chrome,Safari4+ */
-    background: -webkit-linear-gradient(top, #058CF5 0%, #015DE6 100%);
-    /* Chrome10+,Safari5.1+ */
-    background: -o-linear-gradient(top, #058CF5 0%, #015DE6 100%);
-    /* Opera 11.10+ */
-    background: -ms-linear-gradient(top, #058CF5 0%, #015DE6 100%);
-    /* IE10+ */
-    background: linear-gradient(top, #058CF5 0%, #015DE6 100%);
-    /* W3C */
-    filter: progid: DXImageTransform.Microsoft.gradient( startColorstr='#058CF5', endColorstr='#015DE6', GradientType=0);
-    /* IE6-9 */
-    border-top: 1px solid #015DE6;
-    color: #fff;
-    text-shadow: 0 1px 1px #333;
-}
-#sidebar .content .nav a span {
-    color: #4C556C;
-    float: right;
-    font-weight: normal;
-}
-#sidebar .content .nav a.active span {
-    color: #fff;
-}
-#sidebar .content .nav a .ico {
-    background: #999;
-    border-radius: 5px;
-    display: inline-block;
-    float: none;
-    height: 28px;
-    margin: -5px 10px 0 0;
-    vertical-align: middle;
-    width: 28px;
-}
-#sidebar .content .nav a .info {
-    background: #E20000;
-    border: 1px solid #C00;
-    border-radius: 100%;
-    box-shadow: 0 1px 1px #999;
-    color: white;
-    font-size: 12px;
-    display: block;
-    padding: 1px 5px;
-}
-#sidebar .content p {
-    color: #4C536C;
-    font-size: 14px;
-    padding: 10px;
-    text-shadow: 0 1px 1px #ccc;
-}
-
-/* All portable */
-
-@media only screen and (max-device-width: 1024px) {
-    #sidebar {
-        overflow: scroll;
-    }
-    /* Sidebar is only scrollable in portable devices, you can change that */
-}
-
-/* iPhone */
-
-@media only screen and (max-width: 768px) {
-    #sidebar {
-        display: none;
-    }
-    #main {
-        padding-left: 20px;
-    }
-    #main .header {
-        padding-left: 0;
-    }
-    #main .header .left {
-        left: 10px;
-    }
-    #main .content p label {}
-    #main .content p input[type=text], #main .content p input[type=password] {
-        width: 60%;
-    }
-
-    #main .content p select {
-      width: 15%;
-    }
-}
-.thumbnail-button {
-    border: none;
-    background-color: transparent;
-    padding: 0;
-}
-.large-preview {
-    width: inherit;
-    right: inherit;
-    height: inherit;
-    margin: inherit;
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-}
-.large-preview button {
-    position: absolute;
-    top: 0;
-    right: 0;
-}
-.image {
-	max-height: 900px;
-}
-
-.original { height:300px; overflow:hidden; position:relative;}
-.original img {width:100%; height:auto; display:block; position:absolute;}
-
-.original img.top {top:0; float: right;}
-
-.original img.middle {top:-300px; float: right;}
-
-.original img.bottom {bottom:0; float: right;}
