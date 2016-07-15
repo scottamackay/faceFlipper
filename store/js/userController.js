@@ -113,7 +113,7 @@ angular.module('userApp')
       });
     }
 
-    socket.on('playgame', function(userId, result) {
+    socket.on('playgame', function(result) {
 
       moveImage('left', 'top', function() {
 
@@ -127,7 +127,7 @@ angular.module('userApp')
           if(result)  $scope.win = true;
           else $scope.lose = true;
           $scope.screen = false;
-          socket.emit('playfinished', User.user._id, isWin);
+          socket.emit('playfinished', isWin);
         })
       });
     });

@@ -52,12 +52,12 @@ io.on('connection', function(socket) {
   });
 
   // user send play request
-  socket.on('play', function(userId, result) {
+  socket.on('play', function(result) {
     //send play request to all clients
-    io.emit('playgame', userId, result);
+    io.emit('playgame', result);
   });
 
-  socket.on('playfinished', function(userId, result) {  
+  socket.on('playfinished', function(result) {
     io.emit('playresult', result);
   });
   // user send signup request
