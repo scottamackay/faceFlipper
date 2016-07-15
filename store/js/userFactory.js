@@ -70,6 +70,11 @@ angular.module('userApp', ['ngRoute', 'ui.router', 'ngNotificationsBar', 'webcam
         $location.url('/lose');
       }
 
+      UserClass.prototype.goodluck = function() {
+        console.log('wondasd')
+        $location.url('/goodluck');
+      }
+
       UserClass.prototype.showNotification = function(type, msg) {
         notifications[type]({
           message: msg,

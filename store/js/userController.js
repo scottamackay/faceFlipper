@@ -127,7 +127,7 @@ angular.module('userApp')
           if(result)  $scope.win = true;
           else $scope.lose = true;
           $scope.screen = false;
-          socket.emit('playfinished', isWin);
+          socket.emit('playfinished', result);
         })
       });
     });
@@ -143,6 +143,11 @@ angular.module('userApp')
       lastname: User.user.lastname
     };
   })
+  .controller('goodluckController', function($scope, User) {
+    socket.on('playresult', function(result) {
+      result ? User.win() : User.lose();
+    });
+  })
   .controller('spinController', function($scope, User, socket) {
     $('.notifications').remove;
     $scope.play = function() {
@@ -151,6 +156,7 @@ angular.module('userApp')
       socket.on('playresult', function(result) {
         result ? User.win() : User.lose();
       });
+      User.goodluck();
     }
   })
   .controller('registerController', function($scope, $rootScope, User) {
