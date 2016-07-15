@@ -143,7 +143,7 @@ angular.module('userApp')
       lastname: User.user.lastname
     };
   })
-  .controller('goodluckController', function($scope, User) {
+  .controller('goodluckController', function($scope, User, socket) {
     socket.on('playresult', function(result) {
       result ? User.win() : User.lose();
     });
