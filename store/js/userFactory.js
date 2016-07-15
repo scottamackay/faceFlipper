@@ -189,7 +189,6 @@ angular.module('userApp', ['ngRoute', 'ui.router', 'ngNotificationsBar', 'webcam
               },
               onAllComplete: function() {
                 $timeout(function() {
-                  $location.url('/spin');
                   socket.emit('fileupload', User.user._id);
                 }, 2000);
               }

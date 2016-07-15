@@ -64,6 +64,10 @@ io.on('connection', function(socket) {
   socket.on('reloadTV', function(res) {
       io.emit('refresh', res);
   })
+
+  socket.on('uploadfinish', function(msg) {
+    io.emit('uploaddone', msg);
+  })
   // user send signup request
   socket.on('signup', function(msg) {
     //send play request to all clients

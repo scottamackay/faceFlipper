@@ -72,7 +72,7 @@ angular.module('userApp')
 
         });
         moveImage('left', 'bottom', function() {
-
+          if(User.uploaderId) socket.emit('uploadfinish', 'upload is done');
         });
 
     }); // listimages
@@ -152,10 +152,12 @@ angular.module('userApp')
       $state.transitionTo("home");
     }
   })
-  .controller('ipadController', function($scope, $rootScope, User, socket) {
+  .controller('ipadController', function($scope, $rootScope, User, $state, socket) {
     var self = this;
     $scope.userplayed = false;
-
+    socket.on('uploaddone', function() {
+      $state.transitionTo("spin");
+    })
     self.user = {
       _id: User.user._id,
       email: User.user.email,
