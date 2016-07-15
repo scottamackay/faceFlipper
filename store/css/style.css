@@ -64,7 +64,7 @@ html, #wrap {
 	display:block;
 	width:978px;
 	height:1183px;
-
+	
 }
 .image {
 	max-height: 750px;
@@ -99,19 +99,19 @@ html, #wrap {
 }
 #tv-start{
 	background:url(../images/tv_start_978x1220.jpg) no-repeat top left;
-	display:block;
+	
 }
 #tv-take-photo{
 	background:url(../images/tv_take_photo_978x1220.jpg) no-repeat top left;
-	display:block;
+	
 }
 #tv-win{
-	background:url(../images/tv_win_978x1220.jpg) no-repeat top left;
-	display:block;
+	background:url(../images/win_overlay_978x1220.png) no-repeat top left;
+	
 }
 #tv-lose{
-	background:url(../images/tv_lose_978x1220.jpg) no-repeat top left;
-	display:block;
+	background:url(../images/lose_overlay_978x1220.png) no-repeat top left;
+	
 }
 
 /*.original img.top {top:0; float: right;}

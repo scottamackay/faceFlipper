@@ -186,7 +186,7 @@ button, input, select, textarea {
 	float:right;
 	font-size:37px;
 	line-height:37px;
-	margin-right:190px;
+	margin-right:180px;
 	vertical-align:bottom;
 }
 .ipad-sign-up .sign-up-form .form_row_checkbox input{
@@ -203,11 +203,29 @@ button, input, select, textarea {
 	
 }
 
-input[type=text], input[type=date]{
+input[type=date]{
+	-webkit-appearance: none;
+	
+}
+input[type=text]{
+	display:block;
+	vertical-align:bottom;
+	height:65px;
 	font-family:TradeGothicBold;
 	border-radius:10px;
 	padding-left:25px;
-	padding-top:10px;
+	padding-top:15px;
+}
+input[type=date]{
+	display:block;
+	vertical-align:bottom;
+	height:65px;
+	font-family:TradeGothicBold;
+	border-radius:10px;
+	padding-left:25px;
+	padding-top:20px;
+	padding-bottom:5px;
+	
 }
 
 .ipad-sign-up .sign-up-form .form_row_button{
@@ -288,5 +306,22 @@ input[type=text], input[type=date]{
 	width:1536px;
 	height:2048px;
 	background:url(../images/spin_1536x2048.jpg) no-repeat top left;
+	
+}
+.ipad-spin .content{
+	display:block;	
+	width:1536px;
+	height:2048px;
+	padding-top:1010px;
+	padding-left:420px;
+}
+.ipad-spin button{
+	-webkit-appearance: none;
+	background:#6FF;
+	display:block;
+	width:	720px;
+	height:272px;
+	text-indent:-9999999px;
+	opacity:0;
 	
 }
