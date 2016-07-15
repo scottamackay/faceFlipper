@@ -150,7 +150,7 @@ angular.module('userApp')
       socket.emit('play', User.user._id, isWin);
       socket.on('playresult', function(result) {
         result ? User.win() : User.lose();
-      }
+      });
     }
   })
   .controller('registerController', function($scope, $rootScope, User) {
