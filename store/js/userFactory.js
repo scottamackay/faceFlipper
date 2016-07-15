@@ -15,6 +15,8 @@ angular.module('userApp', ['ngRoute', 'ui.router', 'ngNotificationsBar', 'webcam
         $http.post('/addUser', {
             firstname: user.firstname,
             lastname: user.lastname,
+            date: user.date,
+            postal: user.postal,
             email: user.email
           })
           .success(function(response) {
@@ -58,10 +60,12 @@ angular.module('userApp', ['ngRoute', 'ui.router', 'ngNotificationsBar', 'webcam
       };
 
       UserClass.prototype.win = function() {
+        console.log('wond')
         $location.url('/win');
       }
 
       UserClass.prototype.lose = function() {
+        console.log('wondasd')
         $location.url('/lose');
       }
 
@@ -110,7 +114,7 @@ angular.module('userApp', ['ngRoute', 'ui.router', 'ngNotificationsBar', 'webcam
       }
     };
   })
-  .directive("fineUploader", function($compile, $interpolate, socket, $timeout, User) {
+  .directive("fineUploader", function($compile, $interpolate, socket, $timeout, User, $location) {
     return {
       restrict: "A",
       replace: true,
@@ -178,8 +182,8 @@ angular.module('userApp', ['ngRoute', 'ui.router', 'ngNotificationsBar', 'webcam
                 });
               },
               onAllComplete: function() {
-                console.log('here');
                 $timeout(function() {
+                  $location.url('/spin');
                   socket.emit('fileupload', User.user._id);
                 }, 2000);
               }

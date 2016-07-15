@@ -132,6 +132,7 @@ angular.module('userApp')
   })
   .controller('spinController', function($scope, User) {
     self.play = function() {
+      console.log('wondasddfds')
       socket.emit('play', User.user._id);
       _.random(1) > 0 ? User.win() : User.lose();
     }
@@ -150,6 +151,7 @@ angular.module('userApp')
     }
 
     self.register = function() {
+      console.log(self);
       if(!self.user.overage) User.showNotification('showError', 'You have to be over the 18 years old!');
       else if(!self.user.permission)  User.showNotification('showError', 'You have to approve our conditions!');
       else User.register(self.user);
