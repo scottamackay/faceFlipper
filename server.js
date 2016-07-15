@@ -75,6 +75,8 @@ app.route('/addUser')
     req.assert('firstname', 'You must enter a firstname').notEmpty();
     req.assert('lastname', 'You must enter a lastname').notEmpty();
     req.assert('email', 'You must enter a valid email address').isEmail();
+    req.assert('date', 'You must enter your birthday').notEmpty();
+    req.assert('postal', 'You must enter a postal code').notEmpty();
 
     var errors = req.validationErrors();
     if (errors) {

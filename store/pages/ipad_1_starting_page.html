@@ -6,26 +6,26 @@
     <button ui-sref='addphoto'>addphoto</button>
     </div>
   </div>
-  
+
   <div class="sign-up-form">
-    
+
     <!-- <p>Me got forms too:</p> -->
-    
+
     <form ng-submit="register.register();">
     <h2 class="title2">GIVE US A LITTLE INFO TO GET STARTED.</h2>
-     
+
         <div class="form_row">
-          
+
           <input id="field1" ng-model="register.user.firstname" type="text" />
           <span class="form_label"><label for="field1">FIRST NAME </label></span>
         </div>
         <div class="form_row">
-          
+
           <input id="field2" ng-model="register.user.lastname" type="text" />
           <span class="form_label"><label for="field2">LAST NAME</label></span>
         </div>
         <div class="form_row">
-          <input id="startdate" name="startdate" min="1950-01-01" max="2015-01-01" type="date">
+          <input id="startdate" ng-model="register.user.date"  name="startdate" min="1950-01-01" max="2015-01-01" type="date">
           <!--<select id="field3">
             <option></option>
             <option ng-repeat="day in register.days">{{day}}</option>
@@ -41,36 +41,36 @@
           <span class="form_label"><label>DATE OF BIRTH</label></span>
         </div>
         <div class="form_row">
-          
+
           <input id="field6" ng-model="register.user.email" type="text" />
           <span class="form_label"><label for="field6">EMAIL</label></span>
         </div>
         <div class="form_row">
-          
+
           <input id="field7" ng-model="register.user.postal" type="text" />
           <span class="form_label"><label for="field7">POSTAL CODE</label></span>
         </div>
         <div class="form_row form_row_checkbox">
-          <input type="checkbox" name="vehicle" value="Car"><span class="checkbox_label">YES, I AM OVER 19 YEARS OF AGE.</span>
+          <input type="checkbox" ng-model="register.user.overage" name="overage"><span class="checkbox_label">YES, I AM OVER 19 YEARS OF AGE.</span>
         </div>
         <div class="form_row form_row_checkbox">
-          <input type="checkbox" name="vehicle" value="Car"><span class="checkbox_label">YES, I GIVE OLG SLUTS AND CASINOS PERMISSION TO USE MY PHOTO</span>
+          <input type="checkbox" ng-model="register.user.permission" name="vehicle"><span class="checkbox_label">YES, I GIVE OLG SLUTS AND CASINOS PERMISSION TO USE MY PHOTO</span>
         </div>
         <div class="form_row form_row_checkbox">
-          <input type="checkbox" name="vehicle" value="Car"><span class="checkbox_label">YES, I WOULD LIKE TO RECEIVE EMAIL COMMUNICATIONS FROM OLG SLOTS AND CASINOS</span>
+          <input type="checkbox" ng-model="register.user.subscription" name="vehicle"><span class="checkbox_label">YES, I WOULD LIKE TO RECEIVE EMAIL COMMUNICATIONS FROM OLG SLOTS AND CASINOS</span>
         </div>
-    
+
 
       <div class="form_row_button">
         <input type="submit" class="button" value="SIGN ME UP" />
       </div>
     </form>
-    
+
 	</div>
-    
+
     <div class="sign-up-footer">
   </div>
-  
+
   </div>
 </div>
 <!--content-->

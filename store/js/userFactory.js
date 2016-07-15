@@ -18,8 +18,7 @@ angular.module('userApp', ['ngRoute', 'ui.router', 'ngNotificationsBar', 'webcam
             email: user.email
           })
           .success(function(response) {
-            console.log(response);
-            $location.url('/ipad');
+            $location.url('/addphoto');
             self.user = response.user;
             self.loggedin = true;
             $rootScope.$emit('loggedin', self);

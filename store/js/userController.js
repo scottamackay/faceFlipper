@@ -23,8 +23,12 @@ angular.module('userApp')
   .controller('tvController', function($scope, $rootScope, User, $state, socket, $timeout) {
     var self = this;
     $scope.users = [];
+    self.start = true;
+
     // $scope.uploaderId = null;
     socket.on('upload', function(userId) {
+      self.screen = true;
+      self.start = false;
       $timeout(function() {
         User.uploaderId = userId;
         $state.reload();
@@ -43,95 +47,76 @@ angular.module('userApp')
       User.getImages();
     }
     $rootScope.$on('listimages', function(event, args) {
-      // $scope.users = args.users;
-      // $scope.images = [];
-      // _.each(args.users, function(user) {
-      //   if (user.image && user.image.name) $scope.images.push({
-      //     url: user.image.name,
-      //     id: user._id
-      //   });
-      // }); // each
-        if (User.uploaderId) {
-          // console.log(_.findIndex($scope.images, function(img) {
-          //   return img.id === $scope.uploaderId;
-          // }), $scope.images, $scope.uploaderId);
-          // self.urlFirst = $scope.images[_.findIndex($scope.images, function(img) {
-          //   return img.id === User.uploaderId;
-          // })]['url'];
-          // console.log('yes id')
-          // self.urlSecond = self.urlFirst;
-          // self.urlThird = self.urlFirst;
-          // // self.urlSecond = self.urlThird = self.urlFirst;
-        } else {
-          // console.log('no id');
-          // self.urlFirst = $scope.images[_.random(0, $scope.images.length - 1)]['url'];
-          // self.urlSecond = $scope.images[_.random(0, $scope.images.length - 1)]['url'];
-          // self.urlThird = $scope.images[_.random(0, $scope.images.length - 1)]['url'];
-        }
         _.each(args.images, function(img) {
           _.each(_.keys(img), function(ky) {
             self[ky] = img[ky];
           });
         })
         console.log(self);
-        moveImage('left', 'top');
-        moveImage('right', 'middle');
-        moveImage('left', 'bottom');
+        moveImage('left', 'top', function() {
 
-      function moveImage(direction, id) {
-        var box = $('#' + id),
-          box2 = $('#' + id + '2'),
-          box3 = $('#' + id + '3'),
-          box4 = $('#' + id + '4');
+        });
+        moveImage('right', 'middle', function(){
 
-        TweenLite
-          .fromTo(box, 3, {
-            x: 0
-          }, {
-            x: direction === 'right' ? -1940 : 1940,
-            ease: SteppedEase.easeInOut
-          });
-        TweenLite
-          .fromTo(box2, 3, {
-            x: direction === 'right' ? 970 : -970,
-          }, {
-            x: direction === 'right' ? -970 : 970,
-            ease: SteppedEase.easeInOut
-            // delay: 1
-          });
-        TweenLite
-          .fromTo(box3, 3, {
-            x: direction === 'right' ? 970 : -970,
-          }, {
-            x: direction === 'right' ? -970 : +970,
-            ease: SteppedEase.easeInOut,
-            delay: 0.9
-          });
-          TweenLite
-          .fromTo(box4, 3, {
-            x: direction === 'right' ? 1940 : -1940
-          }, {
-            x: 0,
-            ease: SteppedEase.easeInOut,
-            delay: 0.9
-          });
-      }
+        });
+        moveImage('left', 'bottom', function() {
+
+        });
+
     }); // listimages
 
-    socket.on('playgame', function(userId) {
-      var luckyInd = _.random(2);
-      _.each([self.urlFirst, self.urlSecond, self.urlThird], function(url, ind) {
-        if (luckyInd === ind) {
-          url = $scope.images[_.findIndex($scope.images, function(img) {
-            return img.id === userId;
-          })]['url'];
-        } else {
-          url = $scope.images[_.random(0, $scope.images.length - 1)]['url'];
-        }
+    function moveImage(direction, id, callback) {
+      var box = $('#' + id),
+      box2 = $('#' + id + '2'),
+      box3 = $('#' + id + '3'),
+      box4 = $('#' + id + '4');
+
+      TweenLite
+      .fromTo(box, 3, {
+        x: 0
+      }, {
+        x: direction === 'right' ? -1940 : 1940,
+        ease: SteppedEase.easeInOut
       });
-      self.urlFirst = $scope.images[_.random(0, $scope.images.length - 1)]['url'];
-      self.urlSecond = $scope.images[_.random(0, $scope.images.length - 1)]['url'];
-      self.urlThird = $scope.images[_.random(0, $scope.images.length - 1)]['url'];
+      TweenLite
+      .fromTo(box2, 3, {
+        x: direction === 'right' ? 970 : -970,
+      }, {
+        x: direction === 'right' ? -970 : 970,
+        ease: SteppedEase.easeInOut
+        // delay: 1
+      });
+      TweenLite
+      .fromTo(box3, 3, {
+        x: direction === 'right' ? 970 : -970,
+      }, {
+        x: direction === 'right' ? -970 : +970,
+        ease: SteppedEase.easeInOut,
+        delay: 0.9
+      });
+      TweenLite
+      .fromTo(box4, 3, {
+        x: direction === 'right' ? 1940 : -1940
+      }, {
+        x: 0,
+        ease: SteppedEase.easeInOut,
+        delay: 0.9,
+        onComplete: function() { callback(); }
+      });
+    }
+
+    socket.on('playgame', function(userId) {
+
+      moveImage('left', 'top', function() {
+
+      });
+      moveImage('right', 'middle', function(){
+
+      });
+      moveImage('left', 'bottom', function() {
+        self.screen = false;
+        _.random(1) > 0 ? self.win = true : self.lose = true;
+      });
     });
   })
   .controller('ipadController', function($scope, $rootScope, User, socket) {
@@ -144,16 +129,11 @@ angular.module('userApp')
       firstname: User.user.firstname,
       lastname: User.user.lastname
     };
-
-
+  })
+  .controller('spinController', function($scope, User) {
     self.play = function() {
       socket.emit('play', User.user._id);
-      $scope.userplayed = true;
       _.random(1) > 0 ? User.win() : User.lose();
-    }
-
-    self.takeBack = function() {
-      socket.emit('signup', "Sign up on the ipad to play");
     }
   })
   .controller('registerController', function($scope, $rootScope, User) {
@@ -161,14 +141,17 @@ angular.module('userApp')
     self.user = {
       firstname: null,
       lastname: null,
-      email: null
+      email: null,
+      date: null,
+      postal: null,
+      overage: false,
+      permission: false,
+      subscription: false
     }
 
-    self.days = _.range(1, 32);
-    self.months = _.range(1, 13);
-    self.years = (_.range(1920, 2001)).reverse();
-
     self.register = function() {
-      User.register(self.user);
+      if(!self.user.overage) User.showNotification('showError', 'You have to be over the 18 years old!');
+      else if(!self.user.permission)  User.showNotification('showError', 'You have to approve our conditions!');
+      else User.register(self.user);
     }
   });

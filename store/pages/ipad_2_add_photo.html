@@ -1,6 +1,6 @@
 <div id="main" class="ipad-add-photo">
   <div class="content" ng-controller="ipadController as ipad">
-    
+
     <div class="dev-only">
     <!-- <p>Me got forms too:</p> -->
     <button ui-sref='spin'>spin</button>
@@ -18,14 +18,13 @@
       </dialog>
 
       <div fine-uploader upload-server="/upload?_id={{ipad.user._id}}" max-file-size="10000000" large-preview-size="500" allowed-mimes="image/jpeg, image/png, image/gif, image/tiff, image/bmp" allowed-extensions='{{["jpeg", "jpg", "png", "gif", "tiff", "tif", "bmp"]}}'></div>
-      <form name="form" ng-submit="ipad.play()">
+      <!-- <form name="form" ng-submit="ipad.play()">
         <p ng-show="!userplayed">
           <input type="submit" class="button" value="Play" />
         </p>
-        <a class="left" ui-sref='register' ng-show="userplayed" ng-click="ipad.takeBack()">Take me back to sign up!</a>
-      </form>
+      </form> -->
     	</div>
-    
+
     <!-- <webcam></webcam> -->
   </div>
 </div>
