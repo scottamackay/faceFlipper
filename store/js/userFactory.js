@@ -1,7 +1,7 @@
 // create the module and name it userApp
 angular.module('userApp', ['ngRoute', 'ui.router', 'ngNotificationsBar', 'webcam', 'ngFileUpload'])
   .factory('User', ['$rootScope', '$http', '$q', '$timeout', '$location', 'Upload', 'notifications',
-    function($rootScope, $http, $q, $timeout, $location, Upload, notifications) {
+    function($rootScope, $http, $q, $timeout, $location, Upload, notifications, socket) {
 
       function UserClass() {
         this.user = {};
@@ -72,8 +72,8 @@ angular.module('userApp', ['ngRoute', 'ui.router', 'ngNotificationsBar', 'webcam
       UserClass.prototype.showNotification = function(type, msg) {
         notifications[type]({
           message: msg,
-          hideDelay: 1500, //ms
-          hide: true //bool
+          // hideDelay: 1500, //ms
+          hide: false //bool
         });
       }
 

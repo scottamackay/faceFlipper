@@ -28,7 +28,7 @@ angular.module('userApp')
     // $scope.uploaderId = null;
     socket.on('upload', function(userId) {
       self.screen = true;
-      self.start = false;
+      self.takephoto = false;
       $timeout(function() {
         User.uploaderId = userId;
         $state.reload();
@@ -36,6 +36,9 @@ angular.module('userApp')
     });
 
     socket.on('signupOnTV', function(msg) {
+      console.log('hereradsasd')
+      self.start = false;
+      self.takephoto = true;
       User.showNotification('showSuccess', msg);
     });
 
@@ -46,6 +49,9 @@ angular.module('userApp')
     self.init = function() {
       User.getImages();
     }
+    $rootScope.$on('loggedin', function(event, args) {
+      socket.emit('signup', 'Success');
+    })
     $rootScope.$on('listimages', function(event, args) {
         _.each(args.images, function(img) {
           _.each(_.keys(img), function(ky) {
