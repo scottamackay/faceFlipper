@@ -23,7 +23,7 @@ angular.module('userApp')
   .controller('tvController', function($scope, $rootScope, User, $state, socket, $timeout) {
     var self = this;
     $scope.users = [];
-    self.start = true;
+    User.uploaderId ? self.screen = true : self.start = true;
     $rootScope.$on('loggedin', function(event, args) {
       console.log('sadhoasd');
       socket.emit('signup', 'Success');
@@ -45,7 +45,6 @@ angular.module('userApp')
       console.log('hereradsasd')
       self.start = false;
       self.takephoto = true;
-      User.showNotification('showSuccess', msg);
     });
 
     $scope.generateLink = function(link) {
