@@ -30,7 +30,6 @@ angular.module('userApp')
       self.start = false;
       self.takephoto = true;
     });
-
     // $scope.uploaderId = null;
     socket.on('upload', function(userId) {
       self.screen = true;
@@ -131,6 +130,18 @@ angular.module('userApp')
         })
       });
     });
+  })
+  .controller('loseController', function($scope,$state) {
+    var self = this;
+    self.reload = function() {
+      $state.transitionTo("home");
+    }
+  })
+  .controller('winController', function($scope,$state) {
+    var self = this;
+    self.reload = function() {
+      $state.transitionTo("home");
+    }
   })
   .controller('ipadController', function($scope, $rootScope, User, socket) {
     var self = this;
