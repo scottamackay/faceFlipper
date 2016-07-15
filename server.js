@@ -60,6 +60,10 @@ io.on('connection', function(socket) {
   socket.on('playfinished', function(result) {
     io.emit('playresult', result);
   });
+
+  socket.on('reloadTV', function(res) {
+      io.emit('refresh', res);
+  })
   // user send signup request
   socket.on('signup', function(msg) {
     //send play request to all clients

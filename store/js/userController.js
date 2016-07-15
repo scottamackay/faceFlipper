@@ -40,6 +40,11 @@ angular.module('userApp')
       }, 2000);
     });
 
+    socket.on('refresh', function(msg) {
+      User.uploaderId = null;
+      $state.reload();
+    });
+
     socket.on('signupOnTV', function(msg) {
       console.log('hereradsasd')
       self.start = false;
@@ -134,12 +139,16 @@ angular.module('userApp')
   .controller('loseController', function($scope,$state) {
     var self = this;
     self.reload = function() {
+      console.log('loooosee');
+      socket.emit('reloadTV', 'reload');
       $state.transitionTo("home");
     }
   })
-  .controller('winController', function($scope,$state) {
+  .controller('winController', function($scope, $state) {
     var self = this;
     self.reload = function() {
+      console.log('wiiin');
+      socket.emit('reloadTV', 'reload');
       $state.transitionTo("home");
     }
   })
