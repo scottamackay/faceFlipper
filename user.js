@@ -38,53 +38,59 @@ module.exports = function(System) {
      */
     getImages: function(query, callback) {
       var images = [],
-        searchObj = query.id && query.id !== 'undefined' ? { _id: query.id } : {},
-        defaultImages = ['images/slide_play_start_978x-381.jpg', 'images/slide_slots_casinos_978x381.jpg', 'images/slide_winners_circle_978x381.jpg'];
+        searchObj = query.id && query.id !== 'undefined' ? {
+          _id: query.id
+        } : {},
+        defaultImages = ['images/slider_play_smart_980x400.jpg', 'images/slider_olg_980x400.jpg', 'images/slider_winners_980x400.jpg'];
 
-      function getMeLuckyNumber(first, last, unwanted, cb) {
-        var luckyNumber = _.random(first, last - 1),
-          newList = _.uniq(unwanted);
-        if(unwanted.indexOf(luckyNumber) !== -1) {
-          newList.push(luckyNumber);
-          getMeLuckyNumber(first, last, newList);
-        } else {
-          console.log(luckyNumber);
-          return luckyNumber;
-        }
+      function getMeLuckyNumber(array) {
+        var randomInd = Math.floor(Math.random() * array.length);
+        return [array[randomInd], randomInd];
       }
       User.findOne(searchObj)
         .exec(function(err, user) {
-          console.log(err, searchObj, query.id)
           if (err) return callback(err);
           if (user) {
             defaultImages.push(user.image.name);
             _.each(['top', 'middle', 'bottom'], function(item) {
               var obj = {},
-                lucky1 = getMeLuckyNumber(0, defaultImages.length, []),
-                lucky2 = getMeLuckyNumber(0, defaultImages.length, [lucky1]),
-                lucky3 = getMeLuckyNumber(0, defaultImages.length, [lucky1, lucky2]),
-                lucky4 = getMeLuckyNumber(0, defaultImages.length, [lucky1, lucky2, lucky3]);
-                console.log(lucky1, lucky2, lucky3, lucky4);
-              obj[item + '1'] = defaultImages[lucky1];
-              obj[item + '2'] = defaultImages[lucky2];
-              obj[item + '3'] = defaultImages[lucky3];
-              obj[item + '4'] = defaultImages[lucky4];
+                copiedArray = defaultImages.slice();
+              var lucky1 = getMeLuckyNumber(copiedArray);
+              copiedArray.splice(lucky1[1], 1)
+              var lucky2 = getMeLuckyNumber(copiedArray);
+              // delete copiedArray[lucky2[1]];
+              copiedArray.splice(lucky2[1], 1)
+              var lucky3 = getMeLuckyNumber(copiedArray);
+              // delete copiedArray[lucky3[1]];
+              copiedArray.splice(lucky3[1], 1)
+              var lucky4 = getMeLuckyNumber(copiedArray);
+              obj[item + '1'] = lucky1[0];
+              obj[item + '2'] = lucky2[0];
+              obj[item + '3'] = lucky3[0];
+              obj[item + '4'] = lucky4[0];
               images.push(obj);
             });
 
           } else {
-            defaultImages.push('images/slide_play_start_978x-381.jpg');
+            defaultImages.push('images/slider_olg_980x400.jpg');
+            var lastImage = null;
             _.each(['top', 'middle', 'bottom'], function(item) {
               var obj = {},
-                lucky1 = getMeLuckyNumber(0, defaultImages.length, []),
-                lucky2 = getMeLuckyNumber(0, defaultImages.length, [lucky1]),
-                lucky3 = getMeLuckyNumber(0, defaultImages.length, [lucky1, lucky2]),
-                lucky4 = getMeLuckyNumber(0, defaultImages.length, [lucky1, lucky2, lucky3]);
-
-              obj[item + '1'] = defaultImages[0];
-              obj[item + '2'] = defaultImages[1];
-              obj[item + '3'] = defaultImages[2];
-              obj[item + '4'] = defaultImages[3];
+                copiedArray = defaultImages.slice();
+                var lucky1 = getMeLuckyNumber(copiedArray);
+                copiedArray.splice(lucky1[1], 1)
+                var lucky2 = getMeLuckyNumber(copiedArray);
+                // delete copiedArray[lucky2[1]];
+                copiedArray.splice(lucky2[1], 1)
+                var lucky3 = getMeLuckyNumber(copiedArray);
+                // delete copiedArray[lucky3[1]];
+                copiedArray.splice(lucky3[1], 1)
+                var lucky4 = getMeLuckyNumber(copiedArray);
+                if(!lastImage) lastImage = lucky4[0];
+              obj[item + '1'] = lucky1[0];
+              obj[item + '2'] = lucky2[0];
+              obj[item + '3'] = lucky3[0];
+              obj[item + '4'] = lastImage;
               images.push(obj);
             });
           }
