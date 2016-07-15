@@ -57,7 +57,7 @@ io.on('connection', function(socket) {
     io.emit('playgame', userId, result);
   });
 
-  socket.io('playfinished', function(userId, result) {
+  socket.on('playfinished', function(userId, result) {  
     io.emit('playresult', result);
   });
   // user send signup request
