@@ -22,17 +22,14 @@ angular.module('userApp', ['ngRoute', 'ui.router', 'ngNotificationsBar', 'webcam
           .success(function(response) {
             self.user = response.user;
             self.loggedin = true;
-            console.log(socket, response);
             socket.emit('signup', 'Success');
             $rootScope.$emit('loggedin', self);
             $location.url('/addphoto');
             // self.showNotification('showSuccess', 'Saved');
           })
           .error(function(response) {
-            console.log(response)
             if (response.errors) {
               _.each(_.keys(response.errors), function(ky) {
-                console.log(ky);
                 if (response.errors[ky].message) self.showNotification('showError', response.errors[ky].message);
               })
             } else if (_.isArray(response)) {
@@ -66,12 +63,10 @@ angular.module('userApp', ['ngRoute', 'ui.router', 'ngNotificationsBar', 'webcam
       }
 
       UserClass.prototype.lose = function() {
-        console.log('wondasd')
         $location.url('/lose');
       }
 
       UserClass.prototype.goodluck = function() {
-        console.log('wondasd')
         $location.url('/goodluck');
       }
 

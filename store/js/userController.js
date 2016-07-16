@@ -46,7 +46,6 @@ angular.module('userApp')
     });
 
     socket.on('signupOnTV', function(msg) {
-      console.log('hereradsasd')
       self.start = false;
       self.takephoto = true;
     });
@@ -59,76 +58,85 @@ angular.module('userApp')
       User.getImages();
     }
     $rootScope.$on('listimages', function(event, args) {
-        _.each(args.images, function(img) {
-          _.each(_.keys(img), function(ky) {
-            self[ky] = img[ky];
-          });
-        })
-        console.log(self);
-        moveImage('left', 'top', function() {
+      _.each(args.images, function(img) {
+        _.each(_.keys(img), function(ky) {
+          self[ky] = img[ky];
+        });
+      });
+      moveImage('left', 'top', function() {
 
-        });
-        moveImage('right', 'middle', function(){
+      });
+      moveImage('right', 'middle', function() {
 
-        });
-        moveImage('left', 'bottom', function() {
-          if(User.uploaderId) socket.emit('uploadfinish', 'upload is done');
-        });
+      });
+      moveImage('left', 'bottom', function() {
+        if (User.uploaderId) socket.emit('uploadfinish', 'upload is done');
+      });
 
     }); // listimages
 
     function moveImage(direction, id, callback) {
       var box = $('#' + id),
-      box2 = $('#' + id + '2'),
-      box3 = $('#' + id + '3'),
-      box4 = $('#' + id + '4');
+        box2 = $('#' + id + '2'),
+        box3 = $('#' + id + '3'),
+        box4 = $('#' + id + '4');
 
       TweenLite
-      .fromTo(box, 3, {
-        x: 0
-      }, {
-        x: direction === 'right' ? -1940 : 1940,
-        ease: SteppedEase.easeInOut
-      });
+        .fromTo(box, 3, {
+          x: 0
+        }, {
+          x: direction === 'right' ? -1940 : 1940,
+          ease: SteppedEase.easeInOut
+        });
       TweenLite
-      .fromTo(box2, 3, {
-        x: direction === 'right' ? 970 : -970,
-      }, {
-        x: direction === 'right' ? -970 : 970,
-        ease: SteppedEase.easeInOut
-        // delay: 1
-      });
+        .fromTo(box2, 3, {
+          x: direction === 'right' ? 970 : -970,
+        }, {
+          x: direction === 'right' ? -970 : 970,
+          ease: SteppedEase.easeInOut
+            // delay: 1
+        });
       TweenLite
-      .fromTo(box3, 3, {
-        x: direction === 'right' ? 970 : -970,
-      }, {
-        x: direction === 'right' ? -970 : +970,
-        ease: SteppedEase.easeInOut,
-        delay: 0.9
-      });
+        .fromTo(box3, 3, {
+          x: direction === 'right' ? 970 : -970,
+        }, {
+          x: direction === 'right' ? -970 : +970,
+          ease: SteppedEase.easeInOut,
+          delay: 0.9
+        });
       TweenLite
-      .fromTo(box4, 3, {
-        x: direction === 'right' ? 1940 : -1940
-      }, {
-        x: 0,
-        ease: SteppedEase.easeInOut,
-        delay: 0.9,
-        onComplete: function() { callback(); }
-      });
+        .fromTo(box4, 3, {
+          x: direction === 'right' ? 1940 : -1940
+        }, {
+          x: 0,
+          ease: SteppedEase.easeInOut,
+          delay: 0.9,
+          onComplete: function() {
+            callback();
+          }
+        });
     }
 
     socket.on('playgame', function(result) {
-
+      console.log(result);
+      if (!result) {
+        var luckyNo = _.random(2),
+          list = ['top', 'middle', 'bottom'];
+        self[list[luckyNo] + '4'] = self[list[luckyNo] + '1'];
+        $scope.$applyAsync(function() {
+          self[list[luckyNo] + '4'] = self[list[luckyNo] + '1'];
+          console.log(self);
+        });
+      }
       moveImage('left', 'top', function() {
 
       });
-      moveImage('right', 'middle', function(){
+      moveImage('right', 'middle', function() {
 
       });
       moveImage('left', 'bottom', function() {
-        console.log($scope, 'here');
-        $scope.$applyAsync(function(){
-          if(result)  $scope.win = true;
+        $scope.$applyAsync(function() {
+          if (result) $scope.win = true;
           else $scope.lose = true;
           $scope.screen = false;
           socket.emit('playfinished', result);
@@ -136,10 +144,9 @@ angular.module('userApp')
       });
     });
   })
-  .controller('loseController', function($scope,$state, socket) {
+  .controller('loseController', function($scope, $state, socket) {
     var self = this;
     self.reload = function() {
-      console.log('loooosee');
       socket.emit('reloadTV', 'reload');
       $state.transitionTo("home");
     }
@@ -173,8 +180,10 @@ angular.module('userApp')
   .controller('spinController', function($scope, User, socket) {
     $('.notifications').remove;
     $scope.play = function() {
-      var isWin = _.random(1) > 0 ? true : false;
-      socket.emit('play', User.user._id, isWin);
+      console.log(User.user)
+      var isWin = User.user.winnerIndex === 3 ? false : true;
+      console.log(isWin);
+      socket.emit('play', isWin);
       socket.on('playresult', function(result) {
         result ? User.win() : User.lose();
       });
@@ -195,8 +204,8 @@ angular.module('userApp')
     }
 
     self.register = function() {
-      if(!self.user.overage) User.showNotification('showError', 'You have to be over the 18 years old!');
-      else if(!self.user.permission)  User.showNotification('showError', 'You have to approve our conditions!');
+      if (!self.user.overage) User.showNotification('showError', 'You have to be over the 18 years old!');
+      else if (!self.user.permission) User.showNotification('showError', 'You have to approve our conditions!');
       else User.register(self.user);
     }
   });

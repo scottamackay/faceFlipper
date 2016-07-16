@@ -59,6 +59,7 @@ var UserSchema = new Schema({
   },
   postal: String,
   date: Date,
+  createdAt: Date,
   image: {
     name: String,
     sliceTop: String,

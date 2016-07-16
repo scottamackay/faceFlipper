@@ -15,9 +15,18 @@ module.exports = function(System) {
      */
     addUser: function(user, callback) {
       var newUser = new User(user);
-      newUser.save(function(err, savedUser) {
-        if (err) return callback(err);
-        callback(null, savedUser);
+      User.findOne({}, {}, {
+        sort: {
+          'createdAt': -1
+        }
+      }, function(err, user) {
+        if(err) return callback(err);
+        newUser.createdAt = new Date();
+        if(user) newUser.winnerIndex = (user.winnerIndex + 1) % 4;
+        newUser.save(function(err, savedUser) {
+          if (err) return callback(err);
+          callback(null, savedUser);
+        });
       });
     },
     /*
@@ -35,13 +44,13 @@ module.exports = function(System) {
         return [array[randomInd], randomInd];
       }
       String.prototype.capitalizeFirstLetter = function() {
-          return this.charAt(0).toUpperCase() + this.slice(1);
+        return this.charAt(0).toUpperCase() + this.slice(1);
       }
       User.findOne(searchObj)
         .exec(function(err, user) {
           if (err) return callback(err);
           if (user) {
-            defaultImages.push(user.image.name);
+            defaultImages.push('images/slider_olg_980x400.jpg');
             _.each(['top', 'middle', 'bottom'], function(item) {
               var obj = {},
                 copiedArray = defaultImages.slice();
@@ -67,16 +76,16 @@ module.exports = function(System) {
             _.each(['top', 'middle', 'bottom'], function(item) {
               var obj = {},
                 copiedArray = defaultImages.slice();
-                var lucky1 = getMeLuckyNumber(copiedArray);
-                copiedArray.splice(lucky1[1], 1)
-                var lucky2 = getMeLuckyNumber(copiedArray);
-                // delete copiedArray[lucky2[1]];
-                copiedArray.splice(lucky2[1], 1)
-                var lucky3 = getMeLuckyNumber(copiedArray);
-                // delete copiedArray[lucky3[1]];
-                copiedArray.splice(lucky3[1], 1)
-                var lucky4 = getMeLuckyNumber(copiedArray);
-                if(!lastImage) lastImage = lucky4[0];
+              var lucky1 = getMeLuckyNumber(copiedArray);
+              copiedArray.splice(lucky1[1], 1)
+              var lucky2 = getMeLuckyNumber(copiedArray);
+              // delete copiedArray[lucky2[1]];
+              copiedArray.splice(lucky2[1], 1)
+              var lucky3 = getMeLuckyNumber(copiedArray);
+              // delete copiedArray[lucky3[1]];
+              copiedArray.splice(lucky3[1], 1)
+              var lucky4 = getMeLuckyNumber(copiedArray);
+              if (!lastImage) lastImage = lucky4[0];
               obj[item + '1'] = lucky1[0];
               obj[item + '2'] = lucky2[0];
               obj[item + '3'] = lucky3[0];
@@ -104,7 +113,6 @@ module.exports = function(System) {
     updateUser: function(_id, path, result, callback) {
       var pth = path,
         top, middle, bottom;
-      console.log(result);
       pth = path.split('store/').join('');
       top = result.cutImage.getTopSlice.split('store/').join('');
       middle = result.cutImage.getMiddleSlice.split('store/').join('');
