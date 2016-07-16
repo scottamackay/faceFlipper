@@ -34,7 +34,7 @@ module.exports = function(System) {
      */
     getImages: function(query, callback) {
       var images = [],
-        searchObj = query.id && query.id !== 'undefined' ? {
+        searchObj = query.id && query.id !== 'undefined' && query.id !== 'null' ? {
           _id: query.id
         } : {},
         defaultImages = ['images/slider_play_smart_980x400.jpg', 'images/slider_olg_980x400.jpg', 'images/slider_winners_980x400.jpg'];
@@ -69,7 +69,7 @@ module.exports = function(System) {
               obj[item + '4'] = user.image['slice' + item.capitalizeFirstLetter()];
               images.push(obj);
             });
-
+            
           } else {
             defaultImages.push('images/slider_olg_980x400.jpg');
             var lastImage = null;

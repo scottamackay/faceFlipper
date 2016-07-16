@@ -125,7 +125,6 @@ function getImageSlice(path, top, name, callback) {
       imageMagick(path)
         .crop(980, 400, 0, top)
         .write(name, function(err) {
-          console.log(err);
           if (err) callback(err);
           callback(null);
         });

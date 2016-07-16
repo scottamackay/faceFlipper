@@ -63,15 +63,15 @@ angular.module('userApp')
           $scope[ky] = img[ky];
         });
       });
-      moveImage('left', 'top', function() {
-
-      });
-      moveImage('right', 'middle', function() {
-
-      });
-      moveImage('left', 'bottom', function() {
+      // moveImage('left', 'top', function() {
+      //
+      // });
+      // moveImage('right', 'middle', function() {
+      //
+      // });
+      // moveImage('left', 'bottom', function() {
         if (User.uploaderId) socket.emit('uploadfinish', 'upload is done');
-      });
+      // });
 
     }); // listimages
 
@@ -118,14 +118,12 @@ angular.module('userApp')
     }
 
     socket.on('playgame', function(result) {
-      console.log(result);
       if (!result) {
         var luckyNo = _.random(2),
           list = ['top', 'middle', 'bottom'];
         $scope[list[luckyNo] + '4'] = $scope[list[luckyNo] + '1'];
         $scope.$applyAsync(function() {
           $scope[list[luckyNo] + '4'] = $scope[list[luckyNo] + '1'];
-          console.log($scope[list[luckyNo] + '4'], $scope[list[luckyNo] + '1']);
         });
       }
       moveImage('left', 'top', function() {
@@ -180,9 +178,7 @@ angular.module('userApp')
   .controller('spinController', function($scope, User, socket) {
     $('.notifications').remove;
     $scope.play = function() {
-      console.log(User.user)
       var isWin = User.user.winnerIndex === 3 ? false : true;
-      console.log(isWin);
       socket.emit('play', isWin);
       socket.on('playresult', function(result) {
         result ? User.win() : User.lose();
