@@ -118,6 +118,7 @@ function getImageSlice(path, top, name, callback) {
   });
 
   imageMagick(path)
+    .autoOrient()
     .resize(980, 1200, "!")
     .write(path, function(err) {
       if (err) return callback(err);
