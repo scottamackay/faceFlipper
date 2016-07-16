@@ -32,8 +32,6 @@ angular.module('userApp')
     });
     // $scope.uploaderId = null;
     socket.on('upload', function(userId) {
-      self.screen = true;
-      self.takephoto = false;
       $timeout(function() {
         User.uploaderId = userId;
         $state.reload();
@@ -63,6 +61,8 @@ angular.module('userApp')
           $scope[ky] = img[ky];
         });
       });
+      self.screen = true;
+      self.takephoto = false;
       // moveImage('left', 'top', function() {
       //
       // });
