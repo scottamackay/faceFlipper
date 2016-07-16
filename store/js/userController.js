@@ -3,11 +3,6 @@ angular.module('userApp')
   .controller('bodyController', function($scope, $rootScope, User) {
     var self = this;
     self.loggedin = User.loggedin;
-    // self.cls = "body";
-    // $rootScope.$on('loggedin', function(event, args) {
-    //   self.loggedin = args.loggedin;
-    //   self.cls = self.loggedin ? "" : "body";
-    // });
     var isTabletOrMobile = (function() {
       var check = false;
       (function(a) {
@@ -20,27 +15,27 @@ angular.module('userApp')
       User.logout();
     }
   })
-  .controller('tvController', function($scope, $rootScope, User, $state, socket, $timeout) {
+  .controller('tvController', function($scope, $rootScope, User, $window, socket, $timeout) {
     var self = this;
     $scope.users = [];
     User.uploaderId ? self.screen = true : self.start = true;
     $rootScope.$on('loggedin', function(event, args) {
-      console.log('sadhoasd');
       socket.emit('signup', 'Success');
       self.start = false;
       self.takephoto = true;
     });
     // $scope.uploaderId = null;
     socket.on('upload', function(userId) {
+      console.log('here');
       $timeout(function() {
         User.uploaderId = userId;
-        $state.reload();
+        User.getImages();
       }, 2000);
     });
 
     socket.on('refresh', function(msg) {
       User.uploaderId = null;
-      $state.reload();
+      $window.location.reload();
     });
 
     socket.on('signupOnTV', function(msg) {
@@ -52,10 +47,11 @@ angular.module('userApp')
       var d = new Date().getTime();
       return link + '?breakcache=' + d;
     }
-    self.init = function() {
-      User.getImages();
-    }
+    // self.init = function() {
+    //   if(User.uploaderId)
+    // }
     $rootScope.$on('listimages', function(event, args) {
+      console.log('here2');
       _.each(args.images, function(img) {
         _.each(_.keys(img), function(ky) {
           $scope[ky] = img[ky];

@@ -180,6 +180,7 @@ angular.module('userApp', ['ngRoute', 'ui.router', 'ngNotificationsBar', 'webcam
               },
               onAllComplete: function() {
                 $timeout(function() {
+                  console.log('upload');
                   socket.emit('fileupload', User.user._id);
                 }, 2000);
               }
