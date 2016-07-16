@@ -60,8 +60,10 @@ var UserSchema = new Schema({
   postal: String,
   date: Date,
   image: {
-    url: String,
-    name: String
+    name: String,
+    sliceTop: String,
+    sliceMiddle: String,
+    sliceBottom: String
   }
 });
 

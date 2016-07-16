@@ -62,13 +62,13 @@ io.on('connection', function(socket) {
   });
 
   socket.on('reloadTV', function(res) {
-      io.emit('refresh', res);
+    io.emit('refresh', res);
   })
 
   socket.on('uploadfinish', function(msg) {
-    io.emit('uploaddone', msg);
-  })
-  // user send signup request
+      io.emit('uploaddone', msg);
+    })
+    // user send signup request
   socket.on('signup', function(msg) {
     //send play request to all clients
     io.emit('signupOnTV', msg);
@@ -112,6 +112,25 @@ app.route('/getImages')
     })
   })
 
+function getImageSlice(path, top, name, callback) {
+  var imageMagick = require('gm').subClass({
+    imageMagick: true
+  });
+
+  imageMagick(path)
+    .resize(980, 1200, "!")
+    .write(path, function(err) {
+      if (err) return callback(err);
+      imageMagick(path)
+        .crop(980, 400, 0, top)
+        .write(name, function(err) {
+          console.log(err);
+          if (err) callback(err);
+          callback(null);
+        });
+    })
+}
+
 function writeDBandAWS(_id, path, callback) {
   async.auto({
     getFileName: function(next) {
@@ -120,8 +139,36 @@ function writeDBandAWS(_id, path, callback) {
         next(null, name);
       });
     },
-    updateUser: ['getFileName', function(next, result) {
-      user.updateUser(_id, path, function(err, data) {
+    cutImage: function(next) {
+      async.auto({
+        getTopSlice: function(next) {
+          var name = 'store/uploads/' + _id + '_slice_top.jpg';
+          getImageSlice(path, 0, name, function(err) {
+            if (err) return next(err);
+            next(null, name);
+          });
+        },
+        getMiddleSlice: ['getTopSlice', function(next) {
+          var name = 'store/uploads/' + _id + '_slice_middle.jpg';
+          getImageSlice(path, 400, name, function(err) {
+            if (err) return next(err);
+            next(null, name);
+          });
+        }],
+        getBottomSlice: ['getMiddleSlice', function(next) {
+          var name = 'store/uploads/' + _id + '_slice_bottom.jpg';
+          getImageSlice(path, 800, name, function(err) {
+            if (err) return next(err);
+            next(null, name);
+          });
+        }]
+      }, function(err, results) {
+        if (err) return next(err);
+        next(null, results);
+      })
+    },
+    updateUser: ['cutImage', 'getFileName', function(next, result) {
+      user.updateUser(_id, path, result, function(err, data) {
         if (err) return next(err);
         next(null, 'done');
       });
@@ -188,7 +235,6 @@ function onChunkedUpload(fields, file, res, id) {
         if (index < totalParts - 1) {
           responseData.success = true;
           res.send(responseData);
-          console.log('totalParts')
         } else {
           combineChunks(file, uuid, id, function() {
               responseData.success = true;

@@ -17,7 +17,6 @@ module.exports = function(System) {
       var newUser = new User(user);
       newUser.save(function(err, savedUser) {
         if (err) return callback(err);
-        console.log(savedUser);
         callback(null, savedUser);
       });
     },
@@ -34,6 +33,9 @@ module.exports = function(System) {
       function getMeLuckyNumber(array) {
         var randomInd = Math.floor(Math.random() * array.length);
         return [array[randomInd], randomInd];
+      }
+      String.prototype.capitalizeFirstLetter = function() {
+          return this.charAt(0).toUpperCase() + this.slice(1);
       }
       User.findOne(searchObj)
         .exec(function(err, user) {
@@ -55,7 +57,7 @@ module.exports = function(System) {
               obj[item + '1'] = lucky1[0];
               obj[item + '2'] = lucky2[0];
               obj[item + '3'] = lucky3[0];
-              obj[item + '4'] = user.image.name;
+              obj[item + '4'] = user.image['slice' + item.capitalizeFirstLetter()];
               images.push(obj);
             });
 
@@ -99,19 +101,26 @@ module.exports = function(System) {
     /*
      * Update image path and url
      */
-    updateUser: function(_id, path, callback) {
-      var pth = path;
-      if (path.indexOf('store/') !== -1) pth = path.split('store/').join('');
+    updateUser: function(_id, path, result, callback) {
+      var pth = path,
+        top, middle, bottom;
+      console.log(result);
+      pth = path.split('store/').join('');
+      top = result.cutImage.getTopSlice.split('store/').join('');
+      middle = result.cutImage.getMiddleSlice.split('store/').join('');
+      bottom = result.cutImage.getBottomSlice.split('store/').join('');
       User.findOneAndUpdate({
           _id: _id
         }, {
           $set: {
             // 'image.url': 'https://faceflipper.s3.amazonaws.com/' + pth,
-            'image.name': pth
+            'image.name': pth,
+            'image.sliceTop': top,
+            'image.sliceMiddle': middle,
+            'image.sliceBottom': bottom
           }
         },
         function(err, saa) {
-          console.log(err, saa);
           if (err) return callback(err);
           callback(null, 'done');
         });
