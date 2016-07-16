@@ -60,7 +60,7 @@ angular.module('userApp')
     $rootScope.$on('listimages', function(event, args) {
       _.each(args.images, function(img) {
         _.each(_.keys(img), function(ky) {
-          self[ky] = img[ky];
+          $scope[ky] = img[ky];
         });
       });
       moveImage('left', 'top', function() {
@@ -122,10 +122,10 @@ angular.module('userApp')
       if (!result) {
         var luckyNo = _.random(2),
           list = ['top', 'middle', 'bottom'];
-        self[list[luckyNo] + '4'] = self[list[luckyNo] + '1'];
+        $scope[list[luckyNo] + '4'] = $scope[list[luckyNo] + '1'];
         $scope.$applyAsync(function() {
-          self[list[luckyNo] + '4'] = self[list[luckyNo] + '1'];
-          console.log(self);
+          $scope[list[luckyNo] + '4'] = $scope[list[luckyNo] + '1'];
+          console.log($scope[list[luckyNo] + '4'], $scope[list[luckyNo] + '1']);
         });
       }
       moveImage('left', 'top', function() {
