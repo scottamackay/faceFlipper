@@ -1,37 +1,35 @@
 <div id="main" ng-controller="tvController as tv" ng-init="tv.init()">
-<div class="content">
-  <!-- <p>Me got forms too:</p> -->
-  <div class="box-white image" ng-show="tv.screen">
-    <!-- <div ng-repeat="user in users">
+  <div class="content">
+    <!-- <p>Me got forms too:</p> -->
+    <div class="box-white" ng-show="tv.screen">
+      <!-- <div ng-repeat="user in users">
       <span ng-if="user.image.url"><img ng-src="{{ generateLink(user.image.url)}}" width="400" height="300" alt="{{ user.image.url }}"></span>
     </div> -->
-    <div class="original top">
-      <img ng-src="{{top1}}" id="top"  alt="">
+      <div class="overflow-image">
+        <div class="original top" id="top">
+          <!-- <img ng-src="{{top1}}"   alt="">
       <img ng-src="{{top2}}" id="top2"  alt="">
       <img ng-src="{{top3}}" id="top3"  alt="">
-      <img ng-src="{{top4}}" id="top4" class="top" alt="">
-
-    </div>
-    <div class="original middle">
-      <!-- <img ng-src="{{ generateLink(urlSecond)}}" class="middle" alt=""> -->
-      <img ng-src="{{middle1}}" id="middle"  alt="">
-      <img ng-src="{{middle2}}" id="middle2"  alt="">
-      <img ng-src="{{middle3}}" id="middle3"  alt="">
-      <img ng-src="{{middle4}}" id="middle4" class="top" alt="">
-    </div>
-    <div class="original bottom">
-      <!-- <img ng-src="{{ generateLink(urlSecond)}}" class="middle" alt=""> -->
-      <img ng-src="{{bottom1}}" id="bottom"  alt="">
-      <img ng-src="{{bottom2}}" id="bottom2"  alt="">
-      <img ng-src="{{bottom3}}" id="bottom3"  alt="">
-      <img ng-src="{{bottom4}}" id="bottom4" class="top" alt="">
-      <!-- <img ng-src="{{ generateLink(tv.urlThird)}}" class="bottom" alt=""> -->
+      <img ng-src="{{top4}}" id="top4" class="top" alt=""> -->
+          <img ng-src="{{url}}" alt="" ng-repeat="(key, url) in topUrls">
+        </div>
+      </div>
+      <div class="overflow-image">
+        <div class="original middle" id="middle">
+          <!-- <img ng-src="{{ generateLink(urlSecond)}}" class="middle" alt=""> -->
+          <img ng-src="{{url}}" alt="" ng-repeat="(key, url) in middleUrls">
+        </div>
+      </div>
+      <div class="overflow-image">
+        <div class="original bottom" id="bottom">
+          <img ng-src="{{url}}" alt="{{$index}}" ng-repeat="(key, url) in bottomUrls">
+        </div>
+      </div>
     </div>
   </div>
-</div>
-<div id="overlay"></div>
-<div id="tv-start" ng-show="tv.start" class="tv-states"></div>
-<div id="tv-take-photo" ng-show="tv.takephoto" class="tv-states"></div>
-<div id="tv-win" ng-show="win" class="tv-states"></div>
-<div id="tv-lose" ng-show="lose" class="tv-states"></div>
+  <div id="overlay"></div>
+  <div id="tv-start" ng-show="tv.start" class="tv-states"></div>
+  <div id="tv-take-photo" ng-show="tv.takephoto" class="tv-states"></div>
+  <div id="tv-win" ng-show="win" class="tv-states"></div>
+  <div id="tv-lose" ng-show="lose" class="tv-states"></div>
 </div>

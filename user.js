@@ -41,7 +41,7 @@ module.exports = function(System) {
 
       function getMeLuckyNumber(array) {
         var randomInd = Math.floor(Math.random() * array.length);
-        return [array[randomInd], randomInd];
+        return array[randomInd];
       }
       String.prototype.capitalizeFirstLetter = function() {
         return this.charAt(0).toUpperCase() + this.slice(1);
@@ -50,46 +50,21 @@ module.exports = function(System) {
         .exec(function(err, user) {
           if (err) return callback(err);
           if (user) {
-            defaultImages.push('images/slider_olg_980x400.jpg');
             _.each(['top', 'middle', 'bottom'], function(item) {
-              var obj = {},
-                copiedArray = defaultImages.slice();
-              var lucky1 = getMeLuckyNumber(copiedArray);
-              copiedArray.splice(lucky1[1], 1)
-              var lucky2 = getMeLuckyNumber(copiedArray);
-              // delete copiedArray[lucky2[1]];
-              copiedArray.splice(lucky2[1], 1)
-              var lucky3 = getMeLuckyNumber(copiedArray);
-              // delete copiedArray[lucky3[1]];
-              copiedArray.splice(lucky3[1], 1)
-              var lucky4 = getMeLuckyNumber(copiedArray);
-              obj[item + '1'] = lucky1[0];
-              obj[item + '2'] = lucky2[0];
-              obj[item + '3'] = lucky3[0];
-              obj[item + '4'] = user.image['slice' + item.capitalizeFirstLetter()];
+              var obj = {};
+              _.each(_.range(25), function(ind) {
+                obj[item + ind] = _.random(4) > 2 ? user.image['slice' + item.capitalizeFirstLetter()] : getMeLuckyNumber(defaultImages);
+              });
+              obj[item + '0'] = user.image['slice' + item.capitalizeFirstLetter()];
               images.push(obj);
             });
-            
           } else {
-            defaultImages.push('images/slider_olg_980x400.jpg');
-            var lastImage = null;
             _.each(['top', 'middle', 'bottom'], function(item) {
-              var obj = {},
-                copiedArray = defaultImages.slice();
-              var lucky1 = getMeLuckyNumber(copiedArray);
-              copiedArray.splice(lucky1[1], 1)
-              var lucky2 = getMeLuckyNumber(copiedArray);
-              // delete copiedArray[lucky2[1]];
-              copiedArray.splice(lucky2[1], 1)
-              var lucky3 = getMeLuckyNumber(copiedArray);
-              // delete copiedArray[lucky3[1]];
-              copiedArray.splice(lucky3[1], 1)
-              var lucky4 = getMeLuckyNumber(copiedArray);
-              if (!lastImage) lastImage = lucky4[0];
-              obj[item + '1'] = lucky1[0];
-              obj[item + '2'] = lucky2[0];
-              obj[item + '3'] = lucky3[0];
-              obj[item + '4'] = lastImage;
+              var obj = {};
+              _.each(_.range(24), function() {
+                obj[item + ind] = getMeLuckyNumber(defaultImages);
+              });
+              obj[item + '24'] = obj[item + '0'];
               images.push(obj);
             });
           }
