@@ -78,8 +78,12 @@ angular.module('userApp')
             var luckyNo = _.random(2),
               lukcyNoSecond = _.random(24),
               list = ['top', 'middle', 'bottom'];
-            $scope[list[luckyNo] + 'Urls'][list[luckyNo]+"0"] = $scope[list[luckyNo] + 'Urls'][list[luckyNo]+ lukcyNoSecond]
+            //   $scope[list[luckyNo] + 'Urls'][list[luckyNo]+"24"] = $scope[list[luckyNo] + 'Urls'][list[luckyNo]+"0"]
+            // $scope[list[luckyNo] + 'Urls'][list[luckyNo]+"0"] = $scope[list[luckyNo] + 'Urls'][list[luckyNo]+ lukcyNoSecond]
             $scope.$applyAsync(function() {
+              $scope['topUrls']["top24"] = $scope['topUrls']["top0"];
+              $scope['middleUrls']["middle24"] = $scope['middleUrls']["middle0"];
+              $scope['bottomUrls']["bottom24"] = $scope['middleUrls']["bottom0"];
               $scope[list[luckyNo] + 'Urls'][list[luckyNo]+"0"] = $scope[list[luckyNo] + 'Urls'][list[luckyNo]+ lukcyNoSecond]
             });
             repeat();
