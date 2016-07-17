@@ -75,6 +75,13 @@ angular.module('userApp')
 
           });
           moveImage('left', 'bottom', function() {
+            var luckyNo = _.random(2),
+              lukcyNoSecond = _.random(24),
+              list = ['top', 'middle', 'bottom'];
+            $scope[list[luckyNo] + 'Urls'][list[luckyNo]+"0"] = $scope[list[luckyNo] + 'Urls'][list[luckyNo]+ lukcyNoSecond]
+            $scope.$applyAsync(function() {
+              $scope[list[luckyNo] + 'Urls'][list[luckyNo]+"0"] = $scope[list[luckyNo] + 'Urls'][list[luckyNo]+ lukcyNoSecond]
+            });
             repeat();
           });
         }
