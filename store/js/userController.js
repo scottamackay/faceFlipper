@@ -18,7 +18,8 @@ angular.module('userApp')
   .controller('tvController', function($scope, $rootScope, User, $window, socket, $timeout) {
     var self = this;
     $scope.users = [];
-    User.uploaderId ? self.screen = true : self.start = true;
+    // User.uploaderId ? self.screen = true : self.start = true;
+    self.screen = true;
     $rootScope.$on('loggedin', function(event, args) {
       socket.emit('signup', 'Success');
       self.start = false;
@@ -47,9 +48,9 @@ angular.module('userApp')
       var d = new Date().getTime();
       return link + '?breakcache=' + d;
     }
-    // self.init = function() {
-    //   if(User.uploaderId)
-    // }
+    self.init = function() {
+      if(!User.uploaderId) User.getImages();
+    }
     $rootScope.$on('listimages', function(event, args) {
       var divWidth = 978 * _.keys(args.images[0]).length;
       $('#top').width(divWidth);
@@ -65,24 +66,27 @@ angular.module('userApp')
       console.log($scope)
       self.screen = true;
       self.takephoto = false;
-      // moveImage('left', 'top', function() {
-      //
-      // });
-      // moveImage('right', 'middle', function() {
-      //
-      // });
-      // moveImage('left', 'bottom', function() {
-        if (User.uploaderId) socket.emit('uploadfinish', 'upload is done');
-      // });
+      if(!User.uploaderId) {
+        moveImage('left', 'top', function() {
+
+        });
+        moveImage('right', 'middle', function() {
+
+        });
+        moveImage('left', 'bottom', function() {
+        });
+      }
+      if (User.uploaderId) socket.emit('uploadfinish', 'upload is done');
 
     }); // listimages
 
     function moveImage(direction, id, callback) {
       var box = $('#' + id),
-        box2 = $('#' + id + '2');
-
+        time = 9;
+      if (id === "middle") time = 10.5;
+      if (id === "bottom") time = 12;
       TweenLite
-        .fromTo(box, 12, {
+        .fromTo(box, time, {
           x: - box.width() + 978
         }, {
           x: 0,
@@ -91,34 +95,15 @@ angular.module('userApp')
             callback();
           }
         });
-      // TweenLite
-      //   .fromTo(box3, 3, {
-      //     x: direction === 'right' ? 970 : -970,
-      //   }, {
-      //     x: direction === 'right' ? -970 : +970,
-      //     ease: SteppedEase.easeInOut,
-      //     delay: 0.9
-      //   });
-      // TweenLite
-      //   .fromTo(box4, 3, {
-      //     x: direction === 'right' ? 1940 : -1940
-      //   }, {
-      //     x: 0,
-      //     ease: SteppedEase.easeInOut,
-      //     delay: 0.9,
-      //     onComplete: function() {
-      //       // callback();
-      //     }
-      //   });
     }
 
     socket.on('playgame', function(result) {
       if (!result) {
         var luckyNo = _.random(2),
           list = ['top', 'middle', 'bottom'];
-        $scope[list[luckyNo] + '4'] = $scope[list[luckyNo] + '1'];
+        $scope[list[luckyNo] + 'Urls'][list[luckyNo]+"0"] = $scope[list[luckyNo] + 'Urls'][list[luckyNo]+"24"]
         $scope.$applyAsync(function() {
-          $scope[list[luckyNo] + '4'] = $scope[list[luckyNo] + '1'];
+          $scope[list[luckyNo] + 'Urls'][list[luckyNo]+"0"] = $scope[list[luckyNo] + 'Urls'][list[luckyNo]+"24"]
         });
       }
       moveImage('left', 'top', function() {
@@ -132,7 +117,7 @@ angular.module('userApp')
           if (result) $scope.win = true;
           else $scope.lose = true;
           $scope.screen = false;
-          // socket.emit('playfinished', result);
+          socket.emit('playfinished', result);
         })
       });
     });
@@ -166,19 +151,20 @@ angular.module('userApp')
     };
   })
   .controller('goodluckController', function($scope, User, socket) {
-    $('.notifications').remove;
+    $('.notifications').remove();
     socket.on('playresult', function(result) {
+      console.log(result);
       result ? User.win() : User.lose();
     });
   })
   .controller('spinController', function($scope, User, socket) {
-    $('.notifications').remove;
+    $('.notifications').remove();
     $scope.play = function() {
       var isWin = User.user.winnerIndex === 3 ? false : true;
       socket.emit('play', isWin);
-      socket.on('playresult', function(result) {
-        result ? User.win() : User.lose();
-      });
+      // socket.on('playresult', function(result) {
+      //   result ? User.win() : User.lose();
+      // });
       User.goodluck();
     }
   })
