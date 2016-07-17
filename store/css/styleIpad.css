@@ -272,9 +272,9 @@ input[type=date]{
 }
 .ipad-add-photo .qq-uploader{
 	display:block;
-	width:370px;	
-	height:70px;
-	background-color:#6FF;
+	width:420px;	
+	height:410px;
+	/*background-color:#6FF;*/
 
 }
  /*-----------------------------------win page--------*/
@@ -293,7 +293,7 @@ input[type=date]{
 	background:url(../images/lose_1536x2048.jpg) no-repeat top left;
 	
 }
-.ipad-win .content, ipad-lose .content{
+.ipad-win .content, .ipad-lose .content{
 	display:block;
 	width:1536px;
 	height:2048px;

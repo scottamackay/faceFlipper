@@ -74,19 +74,24 @@
 ------------------------------------------ */
 .qq-upload-button {
     display: inline;
-    width: 105px;
+    width: 410px;
+	height:130px;
+	margin: 0 auto;
     margin-bottom: 10px;
-    padding: 7px 10px;
+    font-size:40px;
     text-align: center;
     float: left;
-    background: #00ABC7;
+    /*background: #00ABC7;*/
+	text-indent:-99999999px;
     color: #FFFFFF;
-    border-radius: 2px;
-    border: 1px solid #2dadc2;
-    box-shadow: 0 1px 1px rgba(255, 255, 255, 0.37) inset,
+    /*border-radius: 2px;*/
+    /*border: 1px solid #2dadc2;*/
+    /*box-shadow: 0 1px 1px rgba(255, 255, 255, 0.37) inset,
                 1px 0 1px rgba(255, 255, 255, 0.07) inset,
                 0 1px 0 rgba(0, 0, 0, 0.36),
-                0 -2px 12px rgba(0, 0, 0, 0.08) inset;
+                0 -2px 12px rgba(0, 0, 0, 0.08) inset;*/
+	-webkit-appearance: none;
+	opacity:0;
 }
 .qq-upload-button-hover {
     background: #33B6CC;
@@ -95,7 +100,9 @@
     outline: 1px dotted #000000;
 }
 
-
+.large-preview button{
+	display:none;	
+}
 /* Drop Zone
 ------------------------------------------ */
 .qq-uploader {
@@ -105,9 +112,9 @@
     overflow-y: hidden;
     width: inherit;
     border-radius: 6px;
-    background-color: #FDFDFD;
+    /*background-color: #FDFDFD;*/
     border: 1px dashed #CCCCCC;
-    padding: 20px;
+    /*padding: 20px;*/
 }
 .qq-uploader:before {
     content: attr(qq-drop-area-text) " ";
@@ -118,6 +125,7 @@
     text-align: center;
     top: 45%;
     opacity: 0.25;
+	text-indent:-9999999px;
 }
 .qq-upload-drop-area, .qq-upload-extra-drop-area {
     position: absolute;
