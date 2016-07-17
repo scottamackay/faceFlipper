@@ -83,7 +83,7 @@ angular.module('userApp')
             $scope.$applyAsync(function() {
               $scope['topUrls']["top24"] = $scope['topUrls']["top0"];
               $scope['middleUrls']["middle24"] = $scope['middleUrls']["middle0"];
-              $scope['bottomUrls']["bottom24"] = $scope['middleUrls']["bottom0"];
+              $scope['bottomUrls']["bottom24"] = $scope['bottomUrls']["bottom0"];
               $scope[list[luckyNo] + 'Urls'][list[luckyNo]+"0"] = $scope[list[luckyNo] + 'Urls'][list[luckyNo]+ lukcyNoSecond]
             });
             repeat();
