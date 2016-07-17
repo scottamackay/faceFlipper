@@ -65,8 +65,8 @@ module.exports = function(System) {
               _.each(_.range(25), function(ind) {
                 obj[item + ind] = getMeLuckyNumber(defaultImages);
               });
-              obj[item + '0'] = 'images/slider_olg_980x400.jpg';
-              obj[item + '24'] = 'images/slider_olg_980x400.jpg';
+              // obj[item + '0'] = 'images/slider_olg_980x400.jpg';
+              // obj[item + '24'] = 'images/slider_olg_980x400.jpg';
               images.push(obj);
             });
           }
