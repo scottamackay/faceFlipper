@@ -64,7 +64,7 @@ html, #wrap {
     display: block;
     width: 978px;
     overflow: hidden;
-    height: 1183px;
+    height: 1218px;
 }
 .image {
     max-height: 750px;
@@ -80,11 +80,16 @@ html, #wrap {
     /*display: inline;*/
     position: relative;
 }
-.original.middle {
+/*.overflow-image.middle {
     margin-top: 10px;
     margin-bottom: 10px;
+}*/
+.spacer{
+	display:block;
+	width:10px;
+	height:10px;
+	
 }
-
 .overflow-image {
   overflow: hidden;
 }

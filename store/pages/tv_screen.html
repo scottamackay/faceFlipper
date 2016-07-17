@@ -5,8 +5,8 @@
       <!-- <div ng-repeat="user in users">
       <span ng-if="user.image.url"><img ng-src="{{ generateLink(user.image.url)}}" width="400" height="300" alt="{{ user.image.url }}"></span>
     </div> -->
-      <div class="overflow-image">
-        <div class="original top" id="top">
+      <div class="overflow-image  top">
+        <div class="original" id="top">
           <!-- <img ng-src="{{top1}}"   alt="">
       <img ng-src="{{top2}}" id="top2"  alt="">
       <img ng-src="{{top3}}" id="top3"  alt="">
@@ -14,14 +14,16 @@
           <img ng-src="{{url}}" alt="" ng-repeat="(key, url) in topUrls">
         </div>
       </div>
-      <div class="overflow-image">
-        <div class="original middle" id="middle">
+      <div class="spacer"></div>
+      <div class="overflow-image  middle">
+        <div class="original" id="middle">
           <!-- <img ng-src="{{ generateLink(urlSecond)}}" class="middle" alt=""> -->
           <img ng-src="{{url}}" alt="" ng-repeat="(key, url) in middleUrls">
         </div>
       </div>
-      <div class="overflow-image">
-        <div class="original bottom" id="bottom">
+      <div class="spacer"></div>
+      <div class="overflow-image  bottom">
+        <div class="original" id="bottom">
           <img ng-src="{{url}}" alt="{{$index}}" ng-repeat="(key, url) in bottomUrls">
         </div>
       </div>
