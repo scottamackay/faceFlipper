@@ -36,7 +36,7 @@ module.exports = function(System) {
       var images = [],
         searchObj = query.id && query.id !== 'undefined' && query.id !== 'null' ? {
           _id: query.id
-        } : {},
+        } : {_id: null},
         defaultImages = ['images/slider_play_smart_980x400.jpg', 'images/slider_olg_980x400.jpg', 'images/slider_winners_980x400.jpg'];
 
       function getMeLuckyNumber(array) {
@@ -52,19 +52,20 @@ module.exports = function(System) {
           if (user) {
             _.each(['top', 'middle', 'bottom'], function(item) {
               var obj = {};
-              _.each(_.range(25), function(ind) {
+              _.each(_.range(24), function(ind) {
                 obj[item + ind] = _.random(4) > 2 ? user.image['slice' + item.capitalizeFirstLetter()] : getMeLuckyNumber(defaultImages);
               });
               obj[item + '0'] = user.image['slice' + item.capitalizeFirstLetter()];
+              obj[item + '24'] = 'images/slider_olg_980x400.jpg';
               images.push(obj);
             });
           } else {
             _.each(['top', 'middle', 'bottom'], function(item) {
               var obj = {};
-              _.each(_.range(24), function() {
+              _.each(_.range(25), function(ind) {
                 obj[item + ind] = getMeLuckyNumber(defaultImages);
               });
-              obj[item + '24'] = obj[item + '0'];
+              obj[item + '0'] = 'images/slider_olg_980x400.jpg';
               images.push(obj);
             });
           }
