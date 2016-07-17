@@ -51,12 +51,18 @@ angular.module('userApp')
     //   if(User.uploaderId)
     // }
     $rootScope.$on('listimages', function(event, args) {
-      console.log('here2');
-      _.each(args.images, function(img) {
-        _.each(_.keys(img), function(ky) {
-          $scope[ky] = img[ky];
-        });
+      var divWidth = 978 * _.keys(args.images[0]).length;
+      $('#top').width(divWidth);
+      $('#middle').width(divWidth);
+      $('#bottom').width(divWidth);
+      _.each(args.images, function(img, ind) {
+        var key;
+        if(ind === 0) key = 'topUrls';
+        if(ind === 1) key = 'middleUrls';
+        if(ind === 2) key = 'bottomUrls';
+        $scope[key] = img;
       });
+      console.log($scope)
       self.screen = true;
       self.takephoto = false;
       // moveImage('left', 'top', function() {
@@ -73,44 +79,37 @@ angular.module('userApp')
 
     function moveImage(direction, id, callback) {
       var box = $('#' + id),
-        box2 = $('#' + id + '2'),
-        box3 = $('#' + id + '3'),
-        box4 = $('#' + id + '4');
+        box2 = $('#' + id + '2');
 
       TweenLite
-        .fromTo(box, 3, {
-          x: 0
-        }, {
-          x: direction === 'right' ? -1940 : 1940,
-          ease: SteppedEase.easeInOut
-        });
-      TweenLite
-        .fromTo(box2, 3, {
-          x: direction === 'right' ? 970 : -970,
-        }, {
-          x: direction === 'right' ? -970 : 970,
-          ease: SteppedEase.easeInOut
-            // delay: 1
-        });
-      TweenLite
-        .fromTo(box3, 3, {
-          x: direction === 'right' ? 970 : -970,
-        }, {
-          x: direction === 'right' ? -970 : +970,
-          ease: SteppedEase.easeInOut,
-          delay: 0.9
-        });
-      TweenLite
-        .fromTo(box4, 3, {
-          x: direction === 'right' ? 1940 : -1940
+        .fromTo(box, 12, {
+          x: - box.width() + 978
         }, {
           x: 0,
-          ease: SteppedEase.easeInOut,
-          delay: 0.9,
+          ease: Expo.easeInOut,
           onComplete: function() {
             callback();
           }
         });
+      // TweenLite
+      //   .fromTo(box3, 3, {
+      //     x: direction === 'right' ? 970 : -970,
+      //   }, {
+      //     x: direction === 'right' ? -970 : +970,
+      //     ease: SteppedEase.easeInOut,
+      //     delay: 0.9
+      //   });
+      // TweenLite
+      //   .fromTo(box4, 3, {
+      //     x: direction === 'right' ? 1940 : -1940
+      //   }, {
+      //     x: 0,
+      //     ease: SteppedEase.easeInOut,
+      //     delay: 0.9,
+      //     onComplete: function() {
+      //       // callback();
+      //     }
+      //   });
     }
 
     socket.on('playgame', function(result) {
@@ -133,7 +132,7 @@ angular.module('userApp')
           if (result) $scope.win = true;
           else $scope.lose = true;
           $scope.screen = false;
-          socket.emit('playfinished', result);
+          // socket.emit('playfinished', result);
         })
       });
     });
@@ -167,6 +166,7 @@ angular.module('userApp')
     };
   })
   .controller('goodluckController', function($scope, User, socket) {
+    $('.notifications').remove;
     socket.on('playresult', function(result) {
       result ? User.win() : User.lose();
     });
