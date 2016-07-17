@@ -67,14 +67,18 @@ angular.module('userApp')
       self.screen = true;
       self.takephoto = false;
       if(!User.uploaderId) {
-        moveImage('left', 'top', function() {
+        function repeat() {
+          moveImage('left', 'top', function() {
 
-        });
-        moveImage('right', 'middle', function() {
+          });
+          moveImage('right', 'middle', function() {
 
-        });
-        moveImage('left', 'bottom', function() {
-        });
+          });
+          moveImage('left', 'bottom', function() {
+            repeat();
+          });
+        }
+        repeat();
       }
       if (User.uploaderId) socket.emit('uploadfinish', 'upload is done');
 
@@ -83,8 +87,8 @@ angular.module('userApp')
     function moveImage(direction, id, callback) {
       var box = $('#' + id),
         time = 9;
-      if (id === "middle") time = 10.5;
-      if (id === "bottom") time = 12;
+      if (id === "middle") time = 11;
+      if (id === "bottom") time = 13;
       TweenLite
         .fromTo(box, time, {
           x: - box.width() + 978

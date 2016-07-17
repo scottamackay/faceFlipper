@@ -66,6 +66,7 @@ module.exports = function(System) {
                 obj[item + ind] = getMeLuckyNumber(defaultImages);
               });
               obj[item + '0'] = 'images/slider_olg_980x400.jpg';
+              obj[item + '24'] = 'images/slider_olg_980x400.jpg';
               images.push(obj);
             });
           }
