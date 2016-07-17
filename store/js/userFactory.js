@@ -17,6 +17,8 @@ angular.module('userApp', ['ngRoute', 'ui.router', 'ngNotificationsBar', 'webcam
             lastname: user.lastname,
             date: user.date,
             postal: user.postal,
+            permission: user.permission,
+            overage: user.overage,
             email: user.email
           })
           .success(function(response) {
@@ -73,7 +75,7 @@ angular.module('userApp', ['ngRoute', 'ui.router', 'ngNotificationsBar', 'webcam
       UserClass.prototype.showNotification = function(type, msg) {
         notifications[type]({
           message: msg,
-          hideDelay: 1500, //ms
+          hideDelay: 2000, //ms
           hide: true //bool
         });
       }

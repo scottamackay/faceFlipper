@@ -88,8 +88,22 @@ app.route('/addUser')
     req.assert('email', 'You must enter a valid email address').isEmail();
     req.assert('date', 'You must enter your birthday').notEmpty();
     req.assert('postal', 'You must enter a postal code').notEmpty();
-
+    req.assert('overage', 'You have to be over 18 years old!').equals('true');
+    req.assert('permission', 'You have to approve our conditions!').equals('true');
     var errors = req.validationErrors();
+    // if (!req.body.overage) {
+    //   errors.push({
+    //     param: 'overage',
+    //     message: 'You have to be over 18 years old!'
+    //   })
+    // }
+    // if (!req.body.permission) {
+    //   errors.push({
+    //     param: 'permission',
+    //     message: 'You have to approve our conditions!'
+    //   })
+    // }
+
     if (errors) {
       return res.status(400).send(errors);
     }

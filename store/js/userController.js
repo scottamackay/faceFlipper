@@ -27,11 +27,11 @@ angular.module('userApp')
     });
     // $scope.uploaderId = null;
     socket.on('upload', function(userId) {
-      console.log('here');
+      User.uploaderId = userId;
       $timeout(function() {
-        User.uploaderId = userId;
+        console.log(userId)
         User.getImages();
-      }, 2000);
+      }, 1000);
     });
 
     socket.on('refresh', function(msg) {
@@ -49,7 +49,8 @@ angular.module('userApp')
       return link + '?breakcache=' + d;
     }
     self.init = function() {
-      if(!User.uploaderId) User.getImages();
+      console.log(User.uploaderId)
+      if (!User.uploaderId) User.getImages();
     }
     $rootScope.$on('listimages', function(event, args) {
       var divWidth = 978 * _.keys(args.images[0]).length;
@@ -58,39 +59,36 @@ angular.module('userApp')
       $('#bottom').width(divWidth);
       _.each(args.images, function(img, ind) {
         var key;
-        if(ind === 0) key = 'topUrls';
-        if(ind === 1) key = 'middleUrls';
-        if(ind === 2) key = 'bottomUrls';
+        if (ind === 0) key = 'topUrls';
+        if (ind === 1) key = 'middleUrls';
+        if (ind === 2) key = 'bottomUrls';
         $scope[key] = img;
       });
-      console.log($scope)
       self.screen = true;
       self.takephoto = false;
-      if(!User.uploaderId) {
+      if (!User.uploaderId) {
+
         function repeat() {
-          moveImage('left', 'top', function() {
-
-          });
-          moveImage('right', 'middle', function() {
-
-          });
+          moveImage('left', 'top', function() {});
+          moveImage('right', 'middle', function() {});
           moveImage('left', 'bottom', function() {
             var luckyNo = _.random(2),
               lukcyNoSecond = _.random(24),
               list = ['top', 'middle', 'bottom'];
-            //   $scope[list[luckyNo] + 'Urls'][list[luckyNo]+"24"] = $scope[list[luckyNo] + 'Urls'][list[luckyNo]+"0"]
-            // $scope[list[luckyNo] + 'Urls'][list[luckyNo]+"0"] = $scope[list[luckyNo] + 'Urls'][list[luckyNo]+ lukcyNoSecond]
             $scope.$applyAsync(function() {
               $scope['topUrls']["top24"] = $scope['topUrls']["top0"];
               $scope['middleUrls']["middle24"] = $scope['middleUrls']["middle0"];
               $scope['bottomUrls']["bottom24"] = $scope['bottomUrls']["bottom0"];
-              $scope[list[luckyNo] + 'Urls'][list[luckyNo]+"0"] = $scope[list[luckyNo] + 'Urls'][list[luckyNo]+ lukcyNoSecond]
+              $scope[list[luckyNo] + 'Urls'][list[luckyNo] + "0"] = $scope[list[luckyNo] + 'Urls'][list[luckyNo] + lukcyNoSecond]
             });
-            repeat();
+            if(!self.takephoto) {
+              repeat();
+            }
           });
         }
         repeat();
       }
+
       if (User.uploaderId) socket.emit('uploadfinish', 'upload is done');
 
     }); // listimages
@@ -102,7 +100,7 @@ angular.module('userApp')
       if (id === "bottom") time = 13;
       TweenLite
         .fromTo(box, time, {
-          x: - box.width() + 978
+          x: -box.width() + 978
         }, {
           x: 0,
           ease: Expo.easeInOut,
@@ -116,9 +114,9 @@ angular.module('userApp')
       if (!result) {
         var luckyNo = _.random(2),
           list = ['top', 'middle', 'bottom'];
-        $scope[list[luckyNo] + 'Urls'][list[luckyNo]+"0"] = $scope[list[luckyNo] + 'Urls'][list[luckyNo]+"24"]
+        $scope[list[luckyNo] + 'Urls'][list[luckyNo] + "0"] = $scope[list[luckyNo] + 'Urls'][list[luckyNo] + "24"]
         $scope.$applyAsync(function() {
-          $scope[list[luckyNo] + 'Urls'][list[luckyNo]+"0"] = $scope[list[luckyNo] + 'Urls'][list[luckyNo]+"24"]
+          $scope[list[luckyNo] + 'Urls'][list[luckyNo] + "0"] = $scope[list[luckyNo] + 'Urls'][list[luckyNo] + "24"]
         });
       }
       moveImage('left', 'top', function() {
@@ -166,14 +164,12 @@ angular.module('userApp')
     };
   })
   .controller('goodluckController', function($scope, User, socket) {
-    $('.notifications').remove();
     socket.on('playresult', function(result) {
       console.log(result);
       result ? User.win() : User.lose();
     });
   })
   .controller('spinController', function($scope, User, socket) {
-    $('.notifications').remove();
     $scope.play = function() {
       var isWin = User.user.winnerIndex === 3 ? false : true;
       socket.emit('play', isWin);
@@ -183,7 +179,7 @@ angular.module('userApp')
       User.goodluck();
     }
   })
-  .controller('registerController', function($scope, $rootScope, User) {
+  .controller('registerController', function($scope, $rootScope, User, $timeout) {
     var self = this;
     self.user = {
       firstname: null,
@@ -197,8 +193,8 @@ angular.module('userApp')
     }
 
     self.register = function() {
-      if (!self.user.overage) User.showNotification('showError', 'You have to be over the 18 years old!');
-      else if (!self.user.permission) User.showNotification('showError', 'You have to approve our conditions!');
-      else User.register(self.user);
+      // $('.notifications').remove();
+      User.register(self.user);
+
     }
   });
