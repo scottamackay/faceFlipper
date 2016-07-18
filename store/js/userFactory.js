@@ -1,7 +1,7 @@
 // create the module and name it userApp
-angular.module('userApp', ['ngRoute', 'ui.router', 'ngNotificationsBar', 'webcam', 'ngFileUpload'])
-  .factory('User', ['$rootScope', '$http', '$q', '$timeout', '$location', 'Upload', 'notifications', 'socket',
-    function($rootScope, $http, $q, $timeout, $location, Upload, notifications, socket) {
+angular.module('userApp', ['ngRoute', 'ui.router', 'ngToast'])
+  .factory('User', ['$rootScope', '$http', '$q', '$timeout', '$location', 'socket', 'ngToast',
+    function($rootScope, $http, $q, $timeout, $location, socket, ngToast) {
 
       function UserClass() {
         this.user = {};
@@ -73,10 +73,13 @@ angular.module('userApp', ['ngRoute', 'ui.router', 'ngNotificationsBar', 'webcam
       }
 
       UserClass.prototype.showNotification = function(type, msg) {
-        notifications[type]({
-          message: msg,
-          hideDelay: 2000, //ms
-          hide: true //bool
+        // notifications[type]({
+        //   message: msg,
+        //   hideDelay: 2000, //ms
+        //   hide: true //bool
+        // });
+        ngToast.warning({
+          content: msg
         });
       }
 
@@ -194,7 +197,12 @@ angular.module('userApp', ['ngRoute', 'ui.router', 'ngNotificationsBar', 'webcam
         bindToRenderedTemplate($compile, $scope, $interpolate, element);
       }
     }
-  });
+  })
+// .config(['ngToastProvider', function(ngToastProvider) {
+//   ngToastProvider.configure({
+//     animation: 'slide' // or 'fade'
+//   });
+// }]);
 
 function isTouchDevice() {
   return "ontouchstart" in window || navigator.msMaxTouchPoints > 0;

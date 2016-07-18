@@ -12,8 +12,8 @@
   <!-- end: Meta -->
   <!-- <link rel="icon" href="img/turkey.ico" type="image/x-icon"> -->
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular.min.js"></script>
-  <!-- <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-animate.min.js"></script> -->
-  <!-- <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-aria.min.js"></script> -->
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-animate.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-sanitize/1.5.7/angular-sanitize.min.js"></script>
   <!-- <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.0.0/css/font-awesome.css"/> -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.13.1/lodash.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
@@ -29,14 +29,16 @@
   <script src="js/userController.js"></script>
   <script src="js/userConfig.js"></script>
   <script src="js/ngNotificationsBar.min.js"></script>
-  <script src="js/webcam.min.js"></script>
   <script src="js/fine-uploader.js"></script>
+    <script src="js/ngToast.min.js"></script>
   <script src="/socket.io/socket.io.js"></script>
   <!-- shim is needed to support non-HTML5 FormData browsers (IE8-9)-->
-  <script src="js/ng-file-upload-shim.min.js"></script>
-  <script src="js/ng-file-upload.min.js"></script>
+  <!-- <script src="js/ng-file-upload-shim.min.js"></script> -->
+  <!-- <script src="js/ng-file-upload.min.js"></script> -->
   <script src="js/dialog-polyfill.js"></script>
   <link rel="stylesheet" type="text/css" href="css/ngNotificationsBar.min.css" />
+  <link rel="stylesheet" type="text/css" href="css/ngToast.min.css" />
+  <link rel="stylesheet" type="text/css" href="css/ngToast-animations.min.css" />
   <link rel="stylesheet" type="text/css" href="css/fine-uploader-new.css" />
   <!-- <link rel="stylesheet" type="text/css" href="css/bootstrap.css" /> -->
   <link rel="stylesheet" type="text/css" ng-href="{{responsiveCSS}}" />
@@ -123,7 +125,8 @@
 <!-- define angular controller -->
 
 <body>
-  <notifications-bar class="notifications"></notifications-bar>
+  <toast></toast>
+  <!-- <notifications-bar class="notifications"></notifications-bar> -->
   <div id="wrap">
     <!--header-->
 
