@@ -100,7 +100,7 @@ angular.module('userApp')
           x: -box.width() + 978
         }, {
           x: 0,
-          ease: Expo.easeInOut,
+          ease: Expo.easeOut,
           onComplete: function() {
             callback();
           }
