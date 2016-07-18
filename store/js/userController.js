@@ -29,9 +29,8 @@ angular.module('userApp')
     socket.on('upload', function(userId) {
       User.uploaderId = userId;
       $timeout(function() {
-        console.log(userId)
         User.getImages();
-      }, 1000);
+      }, 3000);
     });
 
     socket.on('refresh', function(msg) {
