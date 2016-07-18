@@ -71,16 +71,16 @@ angular.module('userApp')
           moveImage('left', 'top', function() {});
           moveImage('right', 'middle', function() {});
           moveImage('left', 'bottom', function() {
-            var luckyNo = _.random(2),
-              lukcyNoSecond = _.random(24),
-              list = ['top', 'middle', 'bottom'];
-            $scope.$applyAsync(function() {
-              $scope['topUrls']["top24"] = $scope['topUrls']["top0"];
-              $scope['middleUrls']["middle24"] = $scope['middleUrls']["middle0"];
-              $scope['bottomUrls']["bottom24"] = $scope['bottomUrls']["bottom0"];
-              $scope[list[luckyNo] + 'Urls'][list[luckyNo] + "0"] = $scope[list[luckyNo] + 'Urls'][list[luckyNo] + lukcyNoSecond]
-            });
-            if(!self.takephoto && !User.uploaderId) {
+            if (!self.takephoto && !User.uploaderId) {
+              var luckyNo = _.random(2),
+                lukcyNoSecond = _.random(24),
+                list = ['top', 'middle', 'bottom'];
+              $scope.$applyAsync(function() {
+                $scope['topUrls']["top24"] = $scope['topUrls']["top0"];
+                $scope['middleUrls']["middle24"] = $scope['middleUrls']["middle0"];
+                $scope['bottomUrls']["bottom24"] = $scope['bottomUrls']["bottom0"];
+                $scope[list[luckyNo] + 'Urls'][list[luckyNo] + "0"] = $scope[list[luckyNo] + 'Urls'][list[luckyNo] + lukcyNoSecond]
+              });
               repeat();
             }
           });
