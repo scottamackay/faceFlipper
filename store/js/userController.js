@@ -123,12 +123,14 @@ angular.module('userApp')
 
       });
       moveImage('left', 'bottom', function() {
-        $scope.$applyAsync(function() {
-          if (result) $scope.win = true;
-          else $scope.lose = true;
-          $scope.screen = false;
-          socket.emit('playfinished', result);
-        })
+        $timeout(function() {
+          $scope.$applyAsync(function() {
+            if (result) $scope.win = true;
+            else $scope.lose = true;
+            $scope.screen = false;
+            socket.emit('playfinished', result);
+          });
+        }, 3000);
       });
     });
   })
@@ -151,7 +153,7 @@ angular.module('userApp')
     ngToast.dismiss();
     $scope.userplayed = false;
     socket.on('uploaddone', function() {
-      if($state.current.name !== 'goodluck') $state.transitionTo("spin");
+      if ($state.current.name !== 'goodluck') $state.transitionTo("spin");
     })
     self.user = {
       _id: User.user._id,
