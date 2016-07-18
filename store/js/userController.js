@@ -150,8 +150,9 @@ angular.module('userApp')
       $state.transitionTo("home");
     }
   })
-  .controller('ipadController', function($scope, $rootScope, User, $state, socket) {
+  .controller('ipadController', function($scope, $rootScope, User, $state, socket, ngToast) {
     var self = this;
+    ngToast.dismiss();
     $scope.userplayed = false;
     socket.on('uploaddone', function() {
       $state.transitionTo("spin");
@@ -169,7 +170,8 @@ angular.module('userApp')
       result ? User.win() : User.lose();
     });
   })
-  .controller('spinController', function($scope, User, socket) {
+  .controller('spinController', function($scope, User, socket, ngToast) {
+    ngToast.dismiss();
     $scope.play = function() {
       var isWin = User.user.winnerIndex === 3 ? false : true;
       socket.emit('play', isWin);
@@ -179,7 +181,7 @@ angular.module('userApp')
       User.goodluck();
     }
   })
-  .controller('registerController', function($scope, $rootScope, User, $timeout) {
+  .controller('registerController', function($scope, $rootScope, User, $timeout, ngToast) {
     var self = this;
     self.user = {
       firstname: null,
@@ -194,6 +196,7 @@ angular.module('userApp')
 
     self.register = function() {
       // $('.notifications').remove();
+      ngToast.dismiss();
       User.register(self.user);
 
     }
