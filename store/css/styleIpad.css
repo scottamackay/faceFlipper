@@ -105,6 +105,7 @@ button, input, select, textarea {
 }
 .ng-toast.ng-toast--right .ng-toast__list{
 	left:0;	
+	margin-left: 20px;
 }
 .ng-toast.ng-toast--right .ng-toast__message{
 	text-align:center;	
