@@ -93,7 +93,26 @@ button, input, select, textarea {
 .notifications .error{
 	    font-size: 33px;	
 }
+.ng-toast{
+	
+}
 
+.ng-toast__list{
+	left:0;
+	background:#F30;
+	color:#FFF;
+	float:left;	
+}
+.ng-toast.ng-toast--right .ng-toast__list{
+	left:0;	
+}
+.ng-toast.ng-toast--right .ng-toast__message{
+	text-align:center;	
+}
+.ng-toast__list li{
+	font-size:50px;
+	padding:10px;	
+}
  /*-----------------------------------this pulls up the image because there is a 20px stripe on ipads------*/
 .content{
 	margin-top:-20px;	
