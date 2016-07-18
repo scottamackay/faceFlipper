@@ -67,7 +67,6 @@ angular.module('userApp')
       self.screen = true;
       self.takephoto = false;
       if (!User.uploaderId) {
-
         function repeat() {
           moveImage('left', 'top', function() {});
           moveImage('right', 'middle', function() {});
@@ -81,7 +80,7 @@ angular.module('userApp')
               $scope['bottomUrls']["bottom24"] = $scope['bottomUrls']["bottom0"];
               $scope[list[luckyNo] + 'Urls'][list[luckyNo] + "0"] = $scope[list[luckyNo] + 'Urls'][list[luckyNo] + lukcyNoSecond]
             });
-            if(!self.takephoto) {
+            if(!self.takephoto && !User.uploaderId) {
               repeat();
             }
           });
