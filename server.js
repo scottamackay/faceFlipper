@@ -83,12 +83,12 @@ mongoose.connection.on('connected', function() {
 app.route('/addUser')
   .post(function(req, res) {
     // entiries validations
-    req.assert('firstname', 'You must enter a firstname').notEmpty();
-    req.assert('lastname', 'You must enter a lastname').notEmpty();
+    req.assert('firstname', 'You must enter a first name').notEmpty();
+    req.assert('lastname', 'You must enter a last name').notEmpty();
     req.assert('email', 'You must enter a valid email address').isEmail();
     req.assert('date', 'You must enter your birthday').notEmpty();
     req.assert('postal', 'You must enter a postal code').notEmpty();
-    req.assert('overage', 'You have to be over 18 years old!').equals('true');
+    req.assert('overage', 'you have to indicate that you are over 18 years old.').equals('true');
     req.assert('permission', 'You have to approve our conditions!').equals('true');
     var errors = req.validationErrors();
     // if (!req.body.overage) {
