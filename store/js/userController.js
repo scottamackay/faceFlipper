@@ -153,6 +153,7 @@ angular.module('userApp')
     ngToast.dismiss();
     $scope.userplayed = false;
     socket.on('uploaddone', function() {
+      console.log($state);
       $state.transitionTo("spin");
     })
     self.user = {
@@ -164,7 +165,6 @@ angular.module('userApp')
   })
   .controller('goodluckController', function($scope, User, socket) {
     socket.on('playresult', function(result) {
-      console.log(result);
       result ? User.win() : User.lose();
     });
   })
