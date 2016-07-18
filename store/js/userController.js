@@ -48,7 +48,6 @@ angular.module('userApp')
       return link + '?breakcache=' + d;
     }
     self.init = function() {
-      console.log(User.uploaderId)
       if (!User.uploaderId) User.getImages();
     }
     $rootScope.$on('listimages', function(event, args) {
@@ -143,7 +142,6 @@ angular.module('userApp')
   .controller('winController', function($scope, $state, socket) {
     var self = this;
     self.reload = function() {
-      console.log('wiiin');
       socket.emit('reloadTV', 'reload');
       $state.transitionTo("home");
     }
@@ -153,7 +151,6 @@ angular.module('userApp')
     ngToast.dismiss();
     $scope.userplayed = false;
     socket.on('uploaddone', function() {
-      console.log($state);
       if($state.current.name !== 'goodluck') $state.transitionTo("spin");
     })
     self.user = {
