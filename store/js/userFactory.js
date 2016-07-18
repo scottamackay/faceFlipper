@@ -198,11 +198,12 @@ angular.module('userApp', ['ngRoute', 'ui.router', 'ngToast'])
       }
     }
   })
-// .config(['ngToastProvider', function(ngToastProvider) {
-//   ngToastProvider.configure({
-//     animation: 'slide' // or 'fade'
-//   });
-// }]);
+.config(['ngToastProvider', function(ngToastProvider) {
+  ngToastProvider.configure({
+    animation: 'slide', // or 'fade'
+    dismissOnTimeout: false
+  });
+}]);
 
 function isTouchDevice() {
   return "ontouchstart" in window || navigator.msMaxTouchPoints > 0;
