@@ -154,7 +154,7 @@ angular.module('userApp')
     $scope.userplayed = false;
     socket.on('uploaddone', function() {
       console.log($state);
-      if($state.current.name !=== 'goodluck') $state.transitionTo("spin");
+      if($state.current.name !== 'goodluck') $state.transitionTo("spin");
     })
     self.user = {
       _id: User.user._id,
