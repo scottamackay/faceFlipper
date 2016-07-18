@@ -200,7 +200,8 @@ angular.module('userApp', ['ngRoute', 'ui.router', 'ngToast'])
 .config(['ngToastProvider', function(ngToastProvider) {
   ngToastProvider.configure({
     animation: 'slide', // or 'fade'
-    dismissOnTimeout: false
+    dismissOnTimeout: true,
+    timeout: 10000
   });
 }]);
 
