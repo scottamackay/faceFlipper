@@ -83,8 +83,8 @@ mongoose.connection.on('connected', function() {
 app.route('/addUser')
   .post(function(req, res) {
     // entiries validations
-    req.assert('firstname', 'Please enter a first name').notEmpty();
-    req.assert('lastname', 'Please enter a last name').notEmpty();
+    req.assert('firstname', 'Please enter a valid first name').notEmpty();
+    req.assert('lastname', 'Please enter a valid last name').notEmpty();
     req.assert('email', 'Please enter a valid email address').isEmail();
     req.assert('date', 'Please enter a valid date of birth').notEmpty();
     req.assert('postal', 'Please enter a valid postal code').notEmpty();
