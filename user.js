@@ -51,9 +51,23 @@ module.exports = function(System) {
           if (err) return callback(err);
           if (user) {
             _.each(['top', 'middle', 'bottom'], function(item) {
-              var obj = {};
+              var obj = {}, image;
               _.each(_.range(24), function(ind) {
                 obj[item + ind] = _.random(4) > 2 ? user.image['slice' + item.capitalizeFirstLetter()] : getMeLuckyNumber(defaultImages);
+                if (image === obj[item + ind]) {
+                  if(obj[item + ind].indexOf('slice') !== -1) {
+                    obj[item + ind] = getMeLuckyNumber(defaultImages);
+                  } else {
+                    var copiedArr = defaultImages.slice();
+                    copiedArr.splice(_.findIndex(copiedArr, function(it) { return it === image }), 1);
+                    copiedArr.push(user.image['slice' + item.capitalizeFirstLetter()]);
+                    obj[item + ind] = getMeLuckyNumber(copiedArr);
+                  }
+                }
+                if(ind === 23) {
+                  obj[item + ind] = getMeLuckyNumber(defaultImages);
+                }
+                image = obj[item + ind];
               });
               obj[item + '0'] = user.image['slice' + item.capitalizeFirstLetter()];
               obj[item + '24'] = 'images/slider_olg_980x400.jpg';
@@ -61,9 +75,15 @@ module.exports = function(System) {
             });
           } else {
             _.each(['top', 'middle', 'bottom'], function(item) {
-              var obj = {};
+              var obj = {}, image;
               _.each(_.range(25), function(ind) {
                 obj[item + ind] = getMeLuckyNumber(defaultImages);
+                if (image === obj[item + ind]) {
+                    var copiedArr = defaultImages.slice();
+                    copiedArr.splice(_.findIndex(copiedArr, function(it) { return it === image }), 1);
+                    obj[item + ind] = getMeLuckyNumber(copiedArr);
+                }
+                image = obj[item + ind];
               });
               // obj[item + '0'] = 'images/slider_olg_980x400.jpg';
               // obj[item + '24'] = 'images/slider_olg_980x400.jpg';
