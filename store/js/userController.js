@@ -193,13 +193,7 @@ angular.module('userApp')
       subscription: false
     }
 
-    $("#notice-link").fancybox({
-      maxWidth: 800,
-      maxHeight: 600,
-      fitToView: false,
-      width: '70%',
-      height: '70%'
-    });
+    $("#notice-link").fancybox();
 
     self.register = function() {
       // $('.notifications').remove();
