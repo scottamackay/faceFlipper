@@ -180,7 +180,10 @@ button, input, select, textarea {
 	margin-bottom:75px;
 	
 }
-
+.ipad-sign-up .sign-up-form .form_row_checkbox{
+	
+	margin-bottom:30px;	
+}
 .ipad-sign-up .sign-up-form .form_label{
 	display:block;
 	height:65px;
@@ -214,12 +217,12 @@ button, input, select, textarea {
 .ipad-sign-up .sign-up-form .form_row_checkbox input{
 	display:block;
 	width:66px;
-	height:65px;
+	/*height:65px;*/
 	border:solid thin #999;
 	float:left;
 	font-size:33px;
 	line-height:30px;
-	margin-left:160px;
+	margin-left:60px;
 	margin-right:40px;
 	vertical-align:bottom;
 	
@@ -254,7 +257,7 @@ input[type=date]{
 	display:block;
 	width:	423px;
 	height:140px;
-	margin: 90px auto 30px auto;
+	margin: 0 auto;
 	
 	background:url(../images/sign_me_up_button_423x140.png) no-repeat top left;
 }
@@ -263,7 +266,7 @@ input[type=date]{
 	display:block;
 	width:	423px;
 	height:140px;
-	margin: 90px auto 30px auto;
+	margin: 70px auto 0px auto;
 	text-indent:-9999999px;
 	opacity:0;
 	
@@ -275,6 +278,19 @@ input[type=date]{
 	height:276px;
 	background:url(../images/form_footer_1536x276.jpg) no-repeat top left;
 	bakground-size: 1536px 276px;
+}
+
+#notice-of-collection{
+	
+	font-size:28px;
+	padding-left:40px;
+	padding-top:70px;
+		
+}
+#notice-link{
+	color:#CCC;
+	font-weight:bold;
+	text-decoration:none;
 }
  /*-----------------------------------third page--------*/
 .ipad-add-photo {
