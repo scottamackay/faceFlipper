@@ -188,8 +188,18 @@ angular.module('userApp')
       postal: null,
       overage: false,
       permission: false,
+      notselfexcluded: false,
+      termsandconditions: false,
       subscription: false
     }
+
+    $("#notice-link").fancybox({
+      maxWidth: 800,
+      maxHeight: 600,
+      fitToView: false,
+      width: '70%',
+      height: '70%'
+    });
 
     self.register = function() {
       // $('.notifications').remove();

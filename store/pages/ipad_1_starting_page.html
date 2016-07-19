@@ -2,14 +2,11 @@
   <div class="content" ng-controller="registerController as register">
   <div class="sign-up-header">
   <div class="dev-only">
-    <!-- <p>Me got forms too:</p> -->
     <button ui-sref='addphoto'>addphoto</button>
     </div>
   </div>
 
   <div class="sign-up-form">
-
-    <!-- <p>Me got forms too:</p> -->
 
     <form ng-submit="register.register();">
     <h2 class="title2">GIVE US A LITTLE INFO TO GET STARTED.</h2>
@@ -26,18 +23,6 @@
         </div>
         <div class="form_row">
           <input id="startdate" ng-model="register.user.date"  name="startdate" min="1950-01-01" max="2015-01-01" type="date">
-          <!--<select id="field3">
-            <option></option>
-            <option ng-repeat="day in register.days">{{day}}</option>
-          </select>
-          <select id="field4">
-            <option></option>
-            <option ng-repeat="month in register.months">{{month}}</option>
-          </select>
-          <select id="field5">
-            <option></option>
-            <option ng-repeat="year in register.years">{{year}}</option>
-          </select>-->
           <span class="form_label"><label>DATE OF BIRTH</label></span>
         </div>
         <div class="form_row">
@@ -66,7 +51,6 @@
           <input type="checkbox" ng-model="register.user.subscription" name="subscription"><span class="checkbox_label">I consent to receive future communications from OLG Slots & Casinos</span>
         </div>
 
-
       <div class="form_row_button">
         <input type="submit" class="button" value="SIGN ME UP" />
       </div>
@@ -76,9 +60,14 @@
 
     <div class="sign-up-footer">
     <div id="notice-of-collection">
-    <a href="#" id="notice-link">NOTICE OF COLLECTION</a>
+    <a ng-click="register.popup()" href="#notice-template" id="notice-link">NOTICE OF COLLECTION</a>
     </div>
   </div>
+  <div style="display: none;">
+     <div id="notice-template" style="width:400px;height:100px;overflow:auto;">
+       Personal information is collected by OLG pursuant to the Ontario Lottery and Gaming Corporation Act, 1999 and is intended to be used to conduct and administer the Brand Activation by OLG or through an Event Manager and/or Event Administrator, including providing you with the photograph you have opted in to receive. By participating in the Brand Activation, you further consent to OLG or the Event Manager and/or Event Administrator destroying your photograph on or about 2 months after the email with a link to your photograph has been sent to you. For more information please contact OLG’s Customer Support Centre at 1-800-387-0098.
+     </div>
+ </div>
 
   </div>
 </div>

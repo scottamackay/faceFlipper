@@ -83,13 +83,15 @@ mongoose.connection.on('connected', function() {
 app.route('/addUser')
   .post(function(req, res) {
     // entiries validations
-    req.assert('firstname', 'You must enter a first name').notEmpty();
-    req.assert('lastname', 'You must enter a last name').notEmpty();
-    req.assert('email', 'You must enter a valid email address').isEmail();
-    req.assert('date', 'You must enter your birthday').notEmpty();
-    req.assert('postal', 'You must enter a postal code').notEmpty();
-    req.assert('overage', 'you have to indicate that you are over 18 years old.').equals('true');
-    req.assert('permission', 'You have to approve our conditions!').equals('true');
+    req.assert('firstname', 'Please enter a first name').notEmpty();
+    req.assert('lastname', 'Please enter a last name').notEmpty();
+    req.assert('email', 'Please enter a valid email address').isEmail();
+    req.assert('date', 'Please enter a valid date of birth').notEmpty();
+    req.assert('postal', 'Please enter a valid postal code').notEmpty();
+    req.assert('overage', 'Please agree that you are 19 years of age or older.').equals('true');
+    req.assert('notselfexcluded', 'Please indicate that you are not self excluded with OLG Slots & Casinos.').equals('true');
+    req.assert('termsandconditions', 'Please agree to the terms and conditions.').equals('true');
+
     var errors = req.validationErrors();
     // if (!req.body.overage) {
     //   errors.push({

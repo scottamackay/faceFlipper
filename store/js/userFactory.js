@@ -18,6 +18,9 @@ angular.module('userApp', ['ngRoute', 'ui.router', 'ngToast'])
             date: user.date,
             postal: user.postal,
             permission: user.permission,
+            notselfexcluded: user.notselfexcluded,
+            termsandconditions: user.termsandconditions,
+            subscription: user.subscription,
             overage: user.overage,
             email: user.email
           })

@@ -57,6 +57,14 @@ var UserSchema = new Schema({
     type: Number,
     default: 0
   },
+  subscription: {
+    type: Boolean,
+    default: false
+  },
+  permission: {
+    type: Boolean,
+    default: false
+  },
   postal: String,
   date: Date,
   createdAt: Date,
