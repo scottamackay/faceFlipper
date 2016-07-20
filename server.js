@@ -9,6 +9,9 @@ var express = require('express'),
   path = require('path'),
   db = require('./db'),
   _ = require('lodash'),
+  config = require('./config'),
+  crypto = require('crypto'),
+  request = require('request'),
   mongoose = require('mongoose'),
   expressValidator = require('express-validator'),
   bodyParser = require('body-parser'),
@@ -80,6 +83,11 @@ mongoose.connection.on('connected', function() {
   user = require('./user')(app);
 });
 
+app.route('/sendjson')
+  .get(function(req, res) {
+
+  });
+
 app.route('/addUser')
   .post(function(req, res) {
     // entiries validations
@@ -93,27 +101,74 @@ app.route('/addUser')
     req.assert('termsandconditions', 'Please agree to the terms and conditions.').equals('true');
 
     var errors = req.validationErrors();
-    // if (!req.body.overage) {
-    //   errors.push({
-    //     param: 'overage',
-    //     message: 'You have to be over 18 years old!'
-    //   })
-    // }
-    // if (!req.body.permission) {
-    //   errors.push({
-    //     param: 'permission',
-    //     message: 'You have to approve our conditions!'
-    //   })
-    // }
 
     if (errors) {
       return res.status(400).send(errors);
     }
+    async.auto({
+      addUser: function(next) {
+        user.addUser(req.body, function(err, user) {
+          if (err) return res.status(500).send(err);
+          next(null, user);
+        });
+      },
+      sendApi: function(next) {
+        var publicKey = config.api.publicKey;
+        var privateKey = config.api.privateKey;
 
-    user.addUser(req.body, function(err, user) {
-      if (err) return res.status(500).send(err);
+        var exampleData = [{
+          'data_type': 'utf8text',
+          'data_label': 'firstname',
+          'data': req.body.firstname
+        }, {
+          'data_type': 'utf8text',
+          'data_label': 'lastname',
+          'data': req.body.lastname
+        }, {
+          'data_type': 'email',
+          'data_label': 'email',
+          'data': req.body.email
+        }, {
+          'data_type': 'text',
+          'data_label': 'phone',
+          'data': null
+        }, {
+          'data_type': 'integer',
+          'data_label': 'optin',
+          'data': req.body.subscription ? '1' : '0'
+        }, {
+          'data_type': 'utf8text',
+          'data_label': 'address',
+          'data': req.body.postal
+        }, {
+          'data_type': 'timestamp',
+          'data_label': 'timestamp',
+          'data': new Date()
+        }];
+
+        var hash = crypto.createHmac('sha256', privateKey).update(JSON.stringify(exampleData)).digest('hex');
+        request({
+          url: 'https://remote.wondermakr.com/wondersync/', //URL to hit
+          method: 'POST',
+          headers: {
+            'X-Public': publicKey,
+            'X-Hash': hash
+          },
+          form: {
+            data: (encodeURIComponent(JSON.stringify(exampleData)))
+          }
+        }, function(error, response, body) {
+          if (error) {
+            console.log(error);
+          } else {
+            console.log(response.statusCode, body);
+          }
+        });
+        next(null, 'sent');
+      }
+    }, function(err, results) {
       res.send({
-        user: user
+        user: results.addUser
       });
     });
   });

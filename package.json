@@ -13,6 +13,7 @@
   "dependencies": {
     "async": "^1.5.2",
     "body-parser": "^1.15.0",
+    "crypto": "0.0.3",
     "express": "latest",
     "express-validator": "^2.20.8",
     "fine-uploader-server": "^0.1.0",
@@ -20,6 +21,7 @@
     "lodash": "^4.13.1",
     "mongoose": "^4.5.3",
     "multiparty": "^4.1.2",
+    "require": "^2.4.20",
     "socket.io": "^1.4.8"
   },
   "description": "faceflipper",
