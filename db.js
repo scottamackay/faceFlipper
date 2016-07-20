@@ -77,7 +77,7 @@ var UserSchema = new Schema({
 });
 
 mongoose.model('User', UserSchema);
-mongoose.connect('localhost', 'faceflipper', function(err) {
+mongoose.connect('localhost', 'faceflipper',  function(err) {
   if (err) {
     console.log('Could not connect to database: ' + err);
     process.exit(1);
