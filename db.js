@@ -67,7 +67,7 @@ var UserSchema = new Schema({
     default: false
   },
   postal: String,
-  date: Date,
+  date: String,
   createdAt: Date,
   image: {
     name: String,

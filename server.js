@@ -105,6 +105,7 @@ app.route('/addUser')
     if (errors) {
       return res.status(400).send(errors);
     }
+
     async.auto({
       addUser: function(next) {
         user.addUser(req.body, function(err, user) {
@@ -129,21 +130,37 @@ app.route('/addUser')
           'data_label': 'email',
           'data': req.body.email
         }, {
-          'data_type': 'text',
-          'data_label': 'phone',
-          'data': null
-        }, {
-          'data_type': 'integer',
-          'data_label': 'optin',
-          'data': req.body.subscription ? '1' : '0'
+          'data_type': 'utf8text',
+          'data_label': 'postalcode',
+          'data': req.body.postal
         }, {
           'data_type': 'utf8text',
-          'data_label': 'address',
-          'data': req.body.postal
+          'data_label': 'dob',
+          'data': req.body.date
+        }, {
+          'data_type': 'integer',
+          'data_label': 'checkbox1',
+          'data': req.body.overage ? '1' : '0'
+        }, {
+          'data_type': 'integer',
+          'data_label': 'checkbox2',
+          'data': req.body.permission ? '1' : '0'
+        }, {
+          'data_type': 'integer',
+          'data_label': 'checkbox3',
+          'data': req.body.notselfexcluded ? '1' : '0'
+        }, {
+          'data_type': 'integer',
+          'data_label': 'checkbox4',
+          'data': req.body.termsandconditions ? '1' : '0'
+        }, {
+          'data_type': 'integer',
+          'data_label': 'checkbox5',
+          'data': req.body.subscription ? '1' : '0'
         }, {
           'data_type': 'timestamp',
           'data_label': 'timestamp',
-          'data': new Date()
+          'data': Math.round((new Date()).getTime() / 1000)
         }];
 
         var hash = crypto.createHmac('sha256', privateKey).update(JSON.stringify(exampleData)).digest('hex');
