@@ -15,7 +15,6 @@ angular.module('userApp')
       User.logout();
     }
 
-    User.exp();
   })
   .controller('tvController', function($scope, $rootScope, User, $window, socket, $timeout) {
     var self = this;

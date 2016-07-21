@@ -83,11 +83,6 @@ mongoose.connection.on('connected', function() {
   user = require('./user')(app);
 });
 
-app.route('/sendjson')
-  .get(function(req, res) {
-
-  });
-
 app.route('/addUser')
   .post(function(req, res) {
     // entiries validations
@@ -109,7 +104,7 @@ app.route('/addUser')
     async.auto({
       addUser: function(next) {
         user.addUser(req.body, function(err, user) {
-          if (err) return res.status(500).send(err);
+          if (err) return next(err);
           next(null, user);
         });
       },
@@ -184,6 +179,7 @@ app.route('/addUser')
         next(null, 'sent');
       }
     }, function(err, results) {
+      if (err) return res.status(500).send(err);
       res.send({
         user: results.addUser
       });

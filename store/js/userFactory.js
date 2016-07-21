@@ -10,12 +10,6 @@ angular.module('userApp', ['ngRoute', 'ui.router', 'ngToast'])
 
       var User = new UserClass();
 
-      UserClass.prototype.exp = function() {
-        $http.get('/sendjson')
-          .success(function(response) {
-            console.log(response);
-          })
-      }
 
       UserClass.prototype.register = function(user) {
         var self = this;
