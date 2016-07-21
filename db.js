@@ -67,7 +67,7 @@ var UserSchema = new Schema({
     default: false
   },
   postal: String,
-  date: String,
+  date: Date,
   createdAt: Date,
   image: {
     name: String,
@@ -78,8 +78,7 @@ var UserSchema = new Schema({
 });
 
 mongoose.model('User', UserSchema);
-
-mongoose.connect(config.herokuHost, function(err) {
+mongoose.connect(config.database.host, config.database.name, function(err) {
   if (err) {
     console.log('Could not connect to database: ' + err);
     process.exit(1);
