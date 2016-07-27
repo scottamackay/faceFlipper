@@ -22,7 +22,7 @@
           <span class="form_label"><label for="field2">LAST NAME</label></span>
         </div>
         <div class="form_row">
-          <input id="startdate" ng-model="register.user.date"  name="startdate" min="1950-01-01" max="2015-01-01" type="date">
+          <input id="startdate" ng-model="register.user.date"  name="startdate" min="1916-01-01" max="2015-01-01" type="date">
           <span class="form_label"><label>DATE OF BIRTH</label></span>
         </div>
         <div class="form_row">
@@ -45,7 +45,7 @@
           <input type="checkbox" ng-model="register.user.notselfexcluded" name="notselfexcluded"><span class="checkbox_label">I consent to OLG that I am not Self Excluded with OLG Slots and Casinos.</span>
         </div>
         <div class="form_row form_row_checkbox">
-          <input type="checkbox" ng-model="register.user.termsandconditions" name="termsandconditions"><span class="checkbox_label">I agree to be legally bound by the Terms and Conditions.</span>
+          <input type="checkbox" ng-model="register.user.termsandconditions" name="termsandconditions"><span class="checkbox_label">I agree to be legally bound by the <a ng-click="register.popup()" href="#terms-template" id="terms-link" style="color: #015135;">Terms and Conditions</a>.</span>
         </div>
         <div class="form_row form_row_checkbox last_checkbox">
           <input type="checkbox" ng-model="register.user.subscription" name="subscription"><span class="checkbox_label">I consent to receive future communications from OLG Slots & Casinos</span>
@@ -65,10 +65,94 @@
 
   </div>
   <div style="display: none;">
-     <div id="notice-template" style="width:1200px;height:500px;overflow:auto;">
-       Personal information is collected by OLG pursuant to the Ontario Lottery and Gaming Corporation Act, 1999 and is intended to be used to conduct and administer the Brand Activation by OLG or through an Event Manager and/or Event Administrator, including providing you with the photograph you have opted in to receive. By participating in the Brand Activation, you further consent to OLG or the Event Manager and/or Event Administrator destroying your photograph on or about 2 months after the email with a link to your photograph has been sent to you. For more information please contact OLG’s Customer Support Centre at 1-800-387-0098.
+     <div id="notice-template" style="overflow:auto;">
+       <h2>NOTICE OF COLLECTION</h2>
+       <p>Personal information is collected by OLG pursuant to the Ontario Lottery and Gaming Corporation Act, 1999 and is intended to be used to conduct and administer the Brand Activation by OLG or through an Event Manager and/or Event Administrator, including providing you with the photograph you have opted in to receive. By participating in the Brand Activation, you further consent to OLG or the Event Manager and/or Event Administrator destroying your photograph on or about 2 months after the email with a link to your photograph has been sent to you. For more information please contact OLG's Customer Support Centre at 1-800-387-0098.</p>
+       <p>You may withdraw your consent at any time.</p>
+       <p>Ontario Lottery and Gaming Corporation (OLG), 4120 Yonge Street, Suite 500, Toronto, ON M2P 2B8 / 1-800-387-0098.</p>
      </div>
  </div>
+ 
+   <div style="display: none;">
+     <div id="terms-template" style="overflow:auto;">
+		<h1 style="text-align: center;"><u>Official Rules and Regulations</u></h1>
+		<h1 style="margin-top: .75em; text-align: center;">The Selfie Slot Machine Brand Activation</h1>
+
+		<p style="text-align: center;">Ontario Lottery and Gaming Corporation<br />
+		July 21, 2016 - March 31, 2017</p>
+
+		<ol>
+			<h2>PROMOTION ELIGIBILITY:</h2>
+			<li><p>The Selfie Slot Machine Brand Activation (the "<b>Promotion</b>") is sponsored by Ontario Lottery and Gaming Corporation ("<b>OLG</b>") and is open to residents of Canada and the United States of America, who (at the time of participation) are: (i) valid Winner's Circle Rewards ("<b>WCR</b>") or Player Plus ("<b>PP</b>") members; (ii) nineteen (19) years of age or older; and (iii) not inactive, self-excluded, archived or trespassed, all as determined by OLG in its sole discretion. Volunteers, employees, officers and directors (and those with whom such persons are living, whether related or not) of OLG, the Alcohol and Gaming Commission of Ontario ("<b>AGCO</b>"), or an employee of an OLG operator, service provider or any other designate operating lottery schemes on OLG's behalf or any affiliate thereof or any of OLG's advertising, promotion and contest management agencies are not eligible to participate.</p></li>
+			<li><p>In the event that a participant does not meet the above requirements, the OLG has no obligation to award any prize to that selected entrant.</p></li>
+			<li><p>Prizes are available while supplies last on a first come first served basis.</p></li>
+			<li><p>This Promotion takes place at the OLG sponsored promotional booths (the "<b>Booth</b>") at OLG sponsored local community events (each, an "<b>Event</b>" and collectively the "<b>Events</b>") and the following OLG Casinos and OLG Slots locations (each, a "<b>Site</b>" and collectively the "<b>Sites</b>") are participating in this Promotion: OLG Casino Brantford; OLG Slots at Georgian Downs; OLG Casino Point Edward; OLG Casino Sault Ste. Marie; OLG Casino Thunder Bay; OLG Slots at Ajax Downs; OLG Slots at Clinton Raceway; OLG Slots at Dresden Raceway; OLG Slots at Flamboro Downs; OLG Slots at Grand River Raceway; OLG Slots at Hanover Raceway; OLG Slots at Mohawk Racetrack; OLG Slots at Rideau Carleton Raceway; OLG Slots at Sudbury Downs; OLG Slots at Western Fair District; OLG Slots at Woodbine Racetrack; and OLG Slots at Woodstock Raceway.</p></li>
+
+			<h2>HOW TO ENTER (NO PURCHASE NECESSARY):</h2>
+			<li><p>From July 21, 2016 to March 31, 2017 (the "<b>Promotional Period</b>") eligible WCR or PP members that have met the criteria set by OLG in its sole and absolute discretion ("<b>Eligible Members</b>") who visit the Booth at an Event during Event hours will have one (1) chance to participate in the Promotion per day. You can find a list of Events and Event hours at any participating Site.</p></li>
+			<li><p>Eligible Members must provide consent for their photo to be used within the The Selfie Slot Machine Application (the "<b>Application</b>") in order to participate in this Promotion. Participants must complete and sign the Audio and Visual Consent Form that will be provided to the participant at the Booth during the Event.</p></li>
+
+			<h2>THE SELFIE SLOT MACHINEAPPLICATION:</h2>
+			<li><p>A brand ambassador will take the Eligible Member's photo and load it into the Application after consent has been obtained (as outlined in Rule 6). The photo will appear on a publicly displayed television screen at the Event. The photo will then be split into three (3) sections horizontally each of which capture the Eligible Member's eyes, nose and mouth respectively.</p></li>
+			<li><p>The Application will begin to spin the three (3) sections and scramble the Eligible Member's photo among various OLG logos. Once the Application finishes spinning, the Eligible Member will be provided with a coupon for free play (each, a "<b>Coupon</b>" and collectively the "<b>Coupons</b>") in accordance with Rule 10. Coupons may be redeemed at any of the participating Sites during the Promotional Period. All Coupons expire on the dates and times as noted on the Coupon. Only one (1) Coupon per Eligible Member, per day, per Promotional Period may be redeemed.</p></li>
+
+			<h2>PRIZE STRUCTURE AND ODDS OF WINNING</h2>
+			<li><p>After the Application finishes spinning, if the three (3) sections of an Eligible Member's photo is lined up in the following order, they will receive one (1) Coupon for $10.00 (CAD): from top to bottom, the section of the Eligible Member's photo that captures the Eligible Member's eyes must appear at the top, followed by the sections of the Eligible Member's photo that capture the Eligible Member's nose and mouth respectively. If the Eligible Member's photo does not line up in this way, the Eligible Member will receive one Coupon for $5.00 (CAD).</p></li>
+			<li><p>Prizing will be as follows:</p>
+			<table style="border-collapse: collapse" cellspacing="0">
+				<tr style="height:20pt">
+					<td style="border: 1px #000 solid;"><p>Outcome</p></td>
+					<td style="border: 1px #000 solid;"><p>Prize Type</p></td>
+					<td style="border: 1px #000 solid;"><p>Prize Value</p></td>
+					<td style="border: 1px #000 solid;"><p>Odds of Winning</p></td>
+				</tr>
+				<tr style="height:45pt">
+					<td style="border: 1px #000 solid;"><p>Photo does not line up as outlined in Rule 10</p></td>
+					<td style="border: 1px #000 solid;"><p>Free Play Offer</p></td>
+					<td style="border: 1px #000 solid;"><p>Five Dollars ($5.00 CAD)</p></td>
+					<td style="border: 1px #000 solid;"><p>25%</p></td>
+				</tr>
+				<tr style="height:45pt">
+					<td style="border: 1px #000 solid;"><p>Photo lines up as outlined in Rule 10</p></td>
+					<td style="border: 1px #000 solid;"><p>Free Play Offer</p></td>
+					<td style="border: 1px #000 solid;"><p>Ten Dollars ($10.00 CAD)</p></td>
+					<td style="border: 1px #000 solid;"><p>75%</p></td>
+				</tr>
+			</table>
+
+			<p>** OLG has the right to substitute prizes listed above for prizes of equal or greater value.</p></li>
+
+			<li><p>Prizing Coupons will be available on a first come, first served basis, while quantities last.</p></li>
+			<li><p>Only one (1) Coupon is available to be awarded per Eligible Member, per day, per Promotional Period.</p></li>
+			<li><p>From 9:00 a.m. on July 21, 2016 until 11:59 p.m. on March 31, 2017 all eligible patrons with a Selfie Slot Machine Coupon may redeem their coupon at the WCR or PP desk at the Site as noted on the coupon. All coupons expire on the dates and times as noted on the coupon (October 31, 2016). Limit: One (1) redemption per person, per day, per promotion.</p></li>
+			<li><p>Slot Play prizing may only be redeemed by eligible WCR members. If the patron(s) is not a WCR member and sign up to become a WCR member or reactivates an Inactive account on the spot, then he or she will be eligible to participate in the Promotion and receive the prize outlined in Rule 10. Slot Play offers will expire twenty four (24) hours from the time of issue.</p></li>
+			<li><p>Promo Dollars may only be redeemed at OLG Slots at Georgian Downs by eligible PP members. If the patron(s) is not a PP member and sign up to become a PP member or reactivates an Inactive account on the spot, then he or she will be eligible to participate in the Promotion and receive the prize outlined in Rule 10. Promo Dollar offers will expire ninety (90) days from the date of issue.</p></li>
+
+			<h2>GENERAL RULES</h2>
+			<li><p>It is expressly understood and agreed by all Eligible Members participating in this Promotion that OLG is the donor of the Coupons/prizes and administrator of the Promotion and that OLG does not accept responsibility, in whole or in part, for loss, damage or injury, howsoever caused in connection with the Coupon/prize or the conduct of the Promotion.</p></li>
+			<li><p>Once received by OLG, Coupons will be at all times the property of OLG and none will be returned. Coupons which have been obtained or made through fraudulent means or which are illegible, altered, reproduced, damaged, or irregular (all as determined by OLG in its sole discretion), are subject to disqualification. OLG, the AGCO, OLG's advertising, promotion and contest management agencies, and each of their respective parent companies, subsidiaries, affiliates, prize suppliers, advertising/promotion agencies and any entity involved in the development, production, administration, or fulfillment of the Promotion, and each of their respective officers, directors, agents, representatives, successors and assigns (collectively, the "<b>Released Parties</b>") will not be responsible for Coupons which are lost, destroyed, misdirected, or delayed for any reason whatsoever, or for the Site's capacity constraints or for the removal or the non-removal of any patrons, or for any incorrect or inaccurate data in the WCR/PP database, any incorrect or inaccurate capture of entry or other information, technical malfunctions, human or technical error, visual or printing errors, or garbled data or transmissions, omission, interruption, deletion, defect or failures of any telephone, computer line or network, computer equipment, software or any combination thereof. All decisions of OLG with respect to this Promotion are final and binding, without right of appeal.</p></li>
+			<li><p>All participants must present valid government-issued photo identification upon request.</p></li>
+			<li><p>No Coupon substitutions will be made, save for OLG's right, at its sole discretion, to make prize substitution of similar kind and value. Except as specifically provided herein, unclaimed Coupons/prizes will not be awarded.</p></li>
+			<li><p>The Released Parties are not responsible for commencing, continuing or completing the Promotion in the event of circumstances beyond OLG's control and OLG may, at its sole discretion, change or alter this Promotion, as OLG deems necessary.</p></li>
+			<li><p>OLG reserves the right to suspend the operation of the Promotion including the awarding of Coupons/prizes.</p></li>
+			<li><p>Any personal information provided to OLG, including but not limited to entrants' contact information, is collected pursuant to the Ontario Lottery and Gaming Corporation Act, 1999 and is intended to conduct and administer the contests by OLG. For further information see the WCR desk, PP desk or call the OLG at 1-800-387-0098.</p></li>
+			<li><p>Patrons with self-excluded or trespassed status as determined by OLG, will not be eligible for any Coupons/prizes associated with this or any other OLG contest, promotion, tournament or giveaway.</p></li>
+			<li>
+				<p>Any reference to "Slot Play" requires that the patron redeem the Slot Play offer at the Winner's Circle Rewards desk for a Promotion Ticket. Promotion Tickets (Slot Play) do not</p>
+				<p>have cash value, and cannot be redeemed or exchanged for cash. The patron will be required to play the full value of the Promotion Ticket at the first eligible slot machine (valid slot machines are clearly marked). If a patron has more than one (1) Promotion Ticket, each individual Promotion Ticket can be used at a number of eligible slot machine(s) equivalent to the number of Promotion Ticket(s) the patron has in hand. Promotion Tickets expire as indicated on the ticket expiry date and/or time. The patron will be eligible to receive winnings or credits (if any) generated by this Promotion Ticket.</p>
+			</li>
+			<li><p>Any Reference to Promo Dollars (each a "Promo Dollar" and collectively, the "Promo Dollars") refers to points normally awarded through the PP promotional offers open to PP members. Once validly earned, Promo Dollars can only be redeemed towards slot play at OLG Slots at Georgian Downs. The PP Member will be required to play the full value of the Promotion Ticket within 90 days of receiving the offer. The PP Member will be eligible to receive winnings or credits (if any) generated by this Promotion Prize.</p></li>
+			<li><p>Members with a valid WCR/PP account that has been designated as ‘Inactive Status' may, in the discretion of OLG, claim their Coupon/prize at the time of reactivation, but are not eligible to receive the ‘New Member Program' offers. See Official WCR Terms and Conditions/PP Terms and Conditions for details.</p></li>
+			<li><p>These Official Rules and Regulations govern this Promotion and must be followed, and by agreeing to participate in the Promotion, all entrants agree to comply with, and be bound by these Official Rules and Regulations.</p></li>
+			<li><p>OLG reserves the right to change or alter a promotion, as it deems appropriate, including making changes or alterations to these rules and regulations relating to the accommodation of participants in accordance with the Accessibility for Ontarians with Disabilities Act, 2005 (AODA).</p></li>
+			<li><p>OLG reserves the right to deny an entrant or reject an entrant once accepted, for any reason which, in its sole judgment and discretion, it deems proper.</p></li>
+			<li><p>All references to times and dates reflect Eastern Time.</p></li>
+			<li><p>This promotion is subject to the laws of the province of Ontario and the federal laws of Canada as applicable.</p></li>
+		</ol>
+
+		<p>Any questions relating to this promotion please visit the Winner's Circle Rewards or Player Plus Desk or contact the OLG Support Centre at 1-800-387-0098.</p>
+		<p>Pour renseignements en français, adressez-vous à un des représentants du Cercle des gagnants.</p>     </div>
+	</div>
 
   </div>
 </div>

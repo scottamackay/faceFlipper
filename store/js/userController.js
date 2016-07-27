@@ -14,7 +14,6 @@ angular.module('userApp')
     self.logout = function() {
       User.logout();
     }
-
   })
   .controller('tvController', function($scope, $rootScope, User, $window, socket, $timeout) {
     var self = this;
@@ -194,7 +193,17 @@ angular.module('userApp')
       subscription: false
     }
 
-    $("#notice-link").fancybox();
+    $("#notice-link").fancybox({
+    	autoSize: false,
+    	height: '950px',
+    	width: '1000px'
+    });
+    
+    $("#terms-link").fancybox({
+    	autoSize: false,
+    	height: '950px',
+    	width: '1000px'
+    });
 
     self.register = function() {
       // $('.notifications').remove();

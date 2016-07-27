@@ -309,13 +309,39 @@ input[type=date]{
 	width:100% !important;	
 	background-color:#f2f6f5 !important;
 }
-#notice-template{
+#notice-template, terms-template{
 	padding:20px;
 	background-color:#f2f6f5 !important;
 	font-size:35px !important;	
 	line-height:50px !important;
 	
 }
+#notice-template p, #terms-template p {
+	margin: 1em 0;
+}
+
+#terms-template p, #terms-template li {
+	font-size: 28px;
+	line-height: 50px !important;
+}
+
+#terms-template h1 {
+	font-size: 48px;
+	font-weight: 700;
+	line-height: 60px;
+}
+
+#terms-template h2 {
+	font-size: 36px;
+	font-weight: 700;
+	line-height: auto;
+}
+
+#terms-template ol li {
+	list-style-type: decimal;
+	list-style-position: inside;
+}
+
  /*-----------------------------------third page--------*/
 .ipad-add-photo {
 	display:block;

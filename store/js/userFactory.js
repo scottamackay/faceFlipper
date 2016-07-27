@@ -1,7 +1,7 @@
 // create the module and name it userApp
 angular.module('userApp', ['ngRoute', 'ui.router', 'ngToast'])
-  .factory('User', ['$rootScope', '$http', '$q', '$timeout', '$location', 'socket', 'ngToast', '$filter',
-    function($rootScope, $http, $q, $timeout, $location, socket, ngToast, $filter) {
+  .factory('User', ['$rootScope', '$http', '$q', '$timeout', '$location', 'socket', 'ngToast',
+    function($rootScope, $http, $q, $timeout, $location, socket, ngToast) {
 
       function UserClass() {
         this.user = {};
@@ -10,13 +10,12 @@ angular.module('userApp', ['ngRoute', 'ui.router', 'ngToast'])
 
       var User = new UserClass();
 
-
       UserClass.prototype.register = function(user) {
         var self = this;
         $http.post('/addUser', {
             firstname: user.firstname,
             lastname: user.lastname,
-            date: $filter('date')(user.date, 'mediumDate') ,
+            date: user.date,
             postal: user.postal,
             permission: user.permission,
             notselfexcluded: user.notselfexcluded,
