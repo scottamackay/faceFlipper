@@ -3,7 +3,6 @@
 
 module.exports = exports = {
   port: 3000,
-  herokuHost: 'mongodb://heroku_7x2sg2z1:67tfm2r7goa7oflvvnakjmh6r9@ds017165.mlab.com:17165/heroku_7x2sg2z1',
   database: {
     host: 'localhost',
     name: 'faceflipper'
